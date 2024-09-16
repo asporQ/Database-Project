@@ -1,10 +1,12 @@
 setup:
-	./vendor/bin/sail up -d
+	./vendor/bin/sail up --build -d
 	./vendor/bin/sail npm install
-	./vendor/bin/sail npm audit fix
+
+artisan-migrate:
 	./vendor/bin/sail artisan migrate
+
+artisan-seed:
 	./vendor/bin/sail artisan db:seed
-	./vendor/bin/sail npm run dev
 
 run:
 	./vendor/bin/sail up -d
