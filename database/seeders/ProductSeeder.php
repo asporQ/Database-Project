@@ -18,34 +18,83 @@ class ProductSeeder extends Seeder
         // Find the categories
         $beer = Category::where('name', 'Beer')->first();
         $wine = Category::where('name', 'Wine')->first();
-        $liquor = Category::where('name', 'Liquor')->first();
+        $whiskey = Category::where('name', 'Whiskey')->first();
+        $vodka = Category::where('name', 'Vodka')->first();
+        $rum = Category::where('name', 'Rum')->first();
+        $tequila = Category::where('name', 'Tequila')->first();
+        $gin = Category::where('name', 'Gin')->first();
 
         // Seed products for each category
         Product::create([
-            'name' => 'test1',
-            'price' => 699.99,
-            'stock' => 50,
-            'description' => 'test1 discription.',
+            'name' => 'Heineken',
+            'price' => 3.99,
+            'stock' => 100,
+            'description' => 'A pale lager beer brewed by Heineken.',
             'category_id' => $beer->id,
-            'product_photo' => 'test1.jpg'
+            // 'product_photo' => 'heineken.jpg'
         ]);
 
         Product::create([
-            'name' => 'test2',
-            'price' => 899.99,
-            'stock' => 10,
-            'description' => 'test2 discription.',
+            'name' => 'Corona Extra',
+            'price' => 4.50,
+            'stock' => 80,
+            'description' => 'A pale lager produced by Cervecería Modelo in Mexico.',
+            'category_id' => $beer->id,
+            // 'product_photo' => 'corona_extra.jpg'
+        ]);
+
+        Product::create([
+            'name' => 'Château Margaux',
+            'price' => 299.99,
+            'stock' => 5,
+            'description' => 'A famous Bordeaux wine from France.',
             'category_id' => $wine->id,
-            'product_photo' => 'test2.jpg'
+            // 'product_photo' => 'chateau_margaux.jpg'
         ]);
 
         Product::create([
-            'name' => 'test3',
+            'name' => 'Jack Daniel\'s',
+            'price' => 29.99,
+            'stock' => 50,
+            'description' => 'Tennessee whiskey with a smooth flavor.',
+            'category_id' => $whiskey->id,
+            // 'product_photo' => 'jack_daniels.jpg'
+        ]);
+
+        Product::create([
+            'name' => 'Smirnoff Vodka',
             'price' => 19.99,
-            'stock' => 200,
-            'description' => 'test3 discription.',
-            'category_id' => $liquor->id,
-            'product_photo' => 'test3.jpg'
+            'stock' => 75,
+            'description' => 'Triple distilled vodka, known for its purity.',
+            'category_id' => $vodka->id,
+            // 'product_photo' => 'smirnoff.jpg'
+        ]);
+
+        Product::create([
+            'name' => 'Captain Morgan',
+            'price' => 25.99,
+            'stock' => 40,
+            'description' => 'Spiced rum with a smooth, rich taste.',
+            'category_id' => $rum->id,
+            // 'product_photo' => 'captain_morgan.jpg'
+        ]);
+
+        Product::create([
+            'name' => 'Jose Cuervo',
+            'price' => 34.99,
+            'stock' => 60,
+            'description' => 'Tequila made from blue agave plants.',
+            'category_id' => $tequila->id,
+            // 'product_photo' => 'jose_cuervo.jpg'
+        ]);
+
+        Product::create([
+            'name' => 'Bombay Sapphire',
+            'price' => 31.99,
+            'stock' => 50,
+            'description' => 'Premium gin with a balanced blend of botanicals.',
+            'category_id' => $gin->id,
+            // 'product_photo' => 'bombay_sapphire.jpg'
         ]);
     }
 }

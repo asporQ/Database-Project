@@ -14,9 +14,13 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        // Seed some example categories
+        // Seed categories for different types of alcohol
         Category::create(['name' => 'Beer']);
         Category::create(['name' => 'Wine']);
-        Category::create(['name' => 'Liquor']);
+        Category::create(['name' => 'Whiskey']);
+        Category::create(['name' => 'Vodka']);
+        Category::create(['name' => 'Rum']);
+        Category::create(['name' => 'Tequila']);
+        Category::create(['name' => 'Gin']);
     }
 }
