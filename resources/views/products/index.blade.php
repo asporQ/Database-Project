@@ -6,16 +6,15 @@
     <title>Product List</title>
 </head>
 <body>
-    <h1>Product List</h1>
-    
-    @if(empty($products))
-        <p>No products found.</p>
-    @else
-        <ul>
-            @foreach($products as $product)
-                <li>{{ $product['name'] }} - ${{ $product['price'] }}</li>
-            @endforeach
-        </ul>
-    @endif
+<ul>
+    @foreach($products as $product)
+        <li>
+            {{ $product->name }} - ${{ $product->price }} 
+            <br>
+            Category: {{ $product->category->name }}
+        </li>
+    @endforeach
+</ul>
+
 </body>
 </html>
