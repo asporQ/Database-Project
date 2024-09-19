@@ -11,7 +11,9 @@ export default {
     darkMode: "false",
     theme: {
         colors: {
-            black40: "#474543",
+            blacky: "#474543",
+            yellowy: "#F3B917",
+            ye: "#F4C612",
         },
         extend: {
             fontFamily: {

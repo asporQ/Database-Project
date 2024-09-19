@@ -10,7 +10,7 @@
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-6 text-center">Create Product</h1>
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#F3B917]">Create Product</h1>
 
         @if (session('success'))
         <p class="text-green-600 mb-4">{{ session('success') }}</p>
@@ -73,7 +73,7 @@
             </div>
 
             <button type="submit"
-                class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create
+                class="w-full bg-[#474543] text-white py-2 px-4 rounded-md hover:bg-[#F3B917] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create
                 Product</button>
         </form>
     </div>
