@@ -42,6 +42,17 @@
         text-decoration: none;
         color: #000;
     }
+
+    .centered-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
     </style>
 </head>
 
@@ -64,18 +75,20 @@
 
         <main class="content-center justify-center flex items-center fixed">
 
-
-
-            <div class="star-wars fixed">
-                @for ($i = 0; $i < 300; $i++) <div class="message"
-                    style="font-size: 3rem; font-weight: bold; animation: slide-up 10s linear infinite;">
-                    THIS WEBSITE IS FOR 20 AND OVER
+            <div>
+                <div class="star-wars fixed">
+                    @for ($i = 0; $i < 300; $i++) <div class="message"
+                        style="font-size: 3rem; font-weight: bold; animation: slide-up 10s linear infinite;">
+                        THIS WEBSITE IS FOR 20 AND OVER
+                </div>
+                @endfor
+                <div class="centered-content">
+                    <img src="{{ asset('logobig.png') }}" alt="logo" class=" w-fit" />
+                </div>
 
             </div>
-            @endfor
-
-
     </div>
+
 
     <style>
     @keyframes slide-up {
