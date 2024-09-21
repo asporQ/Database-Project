@@ -15,4 +15,14 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItems::class);
+    }
 }
