@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItems;
+use App\Models\Order;
+use App\Models\OrderItems;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +18,14 @@ class CartController extends Controller
         $user = Auth::id();
         $cart = Cart::where('user_id', $user)->first();
 
-        $cartItems = CartItems::with('Cart', 'Product')->get();
+        $cartItems = CartItems::with('Product')->get();
 
-        return view('cart.index', compact('cartItems'));
+        $totalPrice = 0;
+        foreach ($cartItems as $item) {
+            $totalPrice += $item->product->price * $item->quantity;
+        }
+
+        return view('cart.index', compact('cartItems', 'cart', 'totalPrice'));
     }
 
     public function add(Request $request)
@@ -47,4 +55,45 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Item removed from cart successfully!');
     }
+
+
+    public function placeOrder(Request $request)
+    {
+        $user = Auth::id();
+        $cart = Cart::where('user_id', $user)->first();
+
+        $cartItems = CartItems::with('Cart', 'Product')->get();
+
+        $totalPrice = 0;
+        foreach ($cartItems as $item) {
+            $totalPrice += $item->product->price * $item->quantity;
+        }
+
+        if (!$cart) {
+            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+        }
+
+
+        $order = Order::firstOrCreate([
+            'user_id' => Auth::id(),
+            'order_date' => now(),
+            'total_price' => $totalPrice,
+            'status' => 'Awaiting payment',
+        ]);
+
+        foreach ($cartItems as $item) {
+            $product = Product::find($item->product_id);
+            $product->stock -= $item->quantity;
+            $product->save();
+            $orderItems = OrderItems::firstOrCreate([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+            ]);
+        }
+
+        $cart->delete();
+        return redirect()->route('cart.index')->with('success', 'Your order has been placed successfully!');
+    }
+
 }

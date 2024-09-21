@@ -8,29 +8,42 @@
     </head>
 
     <body>
-        <ul>
+        @auth
 
-            @foreach ($cartItems as $item)
-                <li>
+            <ul>
 
-                    {{ $item->product->name }} - ${{ $item->product->price }}
+                @foreach ($cartItems as $item)
+                    <div>{{ $item }}</div>
                     <br>
-                    Quantity: {{ $item->quantity }}
-                    <br>
-                    Category: {{ $item->product->category->name }}
-                    <br>
-                    ${{ $item->product->product_photo }}
-                    <img alt="Product Photo" height="200px" src="storage/{{ $item->product->product_photo }}">
-                    <br>
-                    <form action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: inline;">
+                    <li>
+                        {{ $item->product->name }} - ${{ $item->product->price }}
+                        <br>
+                        Quantity: {{ $item->quantity }}
+                        <br>
+                        Category: {{ $item->product->category->name }}
+                        <br>
+                        ${{ $item->product->product_photo }}
+                        <img alt="Product Photo" height="200px" src="storage/{{ $item->product->product_photo }}">
+                        <br>
+                        <form action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        </form>
+                    </li>
+                @endforeach
+
+                <div>{{ $totalPrice }}</div>
+                @if ($cartItems->isNotEmpty())
+                    <form action="{{ route('cart.placeOrder') }}" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Remove</button>
+                        <button class="btn btn-primary" type="submit">Place Order</button>
                     </form>
-                </li>
-            @endforeach
-        </ul>
-
+                @else
+                    <p>Your cart is empty.</p>
+                @endif
+            </ul>
+        @endauth
     </body>
 
 </html>

@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->dateTime('order_date');
-            $table->decimal('total_price', 10, 2);
-            $table->enum('status', ['Completed', 'Awaiting payment', 'Canceled', 'Shipping']);
+            $table->decimal('total_price', 10, 2)->default(0.00);
+            $table->enum('status', ['Awaiting payment', 'Completed', 'Canceled', 'Shipping']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
