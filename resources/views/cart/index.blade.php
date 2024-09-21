@@ -16,7 +16,13 @@
                     <div>{{ $item }}</div>
                     <br>
                     <li>
-                        {{ $item->product->name }} - ${{ $item->product->price }}
+                        <span>{{ $item->product->name }} - ${{ $item->product->price }} </span>
+                        @foreach ($discounts as $discount)
+                            @if ($discount->product_id == $item->product->id)
+                                <span>(discount:{{ $discount->discount_percentage }}%)</span>
+                            @endif
+                        @endforeach
+
                         <br>
                         Quantity: {{ $item->quantity }}
                         <br>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Discount;
 
 class ProductController extends Controller
 {
@@ -13,8 +14,9 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->get();
 
+        $discounts = Discount::all();
 
-        return view('products.index', ['products' => $products]);
+        return view('products.index', compact('products', 'discounts'));
     }
 
     public function create()
@@ -22,6 +24,23 @@ class ProductController extends Controller
         $categories = Category::all();
 
         return view('products.create', compact('categories'));
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        $discount = Discount::find($product->id);
+
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        if ($discount) {
+            $discount->delete();
+        }
+
+        $product->delete();
+        return redirect()->route('products.manage')->with('success', 'Product removed successfully.');
     }
 
     public function store(Request $request)
@@ -57,7 +76,8 @@ class ProductController extends Controller
     public function manageProducts()
     {
         $products = Product::all();
-        return view('products.manage_products', compact('products'));
+        $discounts = Discount::all();
+        return view('products.manage_products', compact('products', 'discounts'));
     }
 
     public function showUpdateStockForm($id)
@@ -116,5 +136,52 @@ class ProductController extends Controller
         return redirect()->route('products.manage')->with('success', 'Price updated successfully.');
     }
 
+    public function showDiscountForm($id)
+    {
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return view('products.discount', compact('product'));
+    }
+
+    public function setDiscount(Request $request, $id)
+    {
+        $request->validate([
+            'discount_percentage' => 'required|numeric|min:0|max:100',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $product = Product::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $discount = Discount::firstOrCreate([
+            'product_id' => $id,
+            'discount_percentage' => $request->discount_percentage,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect()->route('products.manage')->with('success', 'Discount set successfully.');
+    }
+
+    public function destroyDiscount($id)
+    {
+        $discount = Discount::find($id);
+
+        if (!$discount) {
+            return response()->json(['message' => 'Discount not found'], 404);
+        }
+
+        $discount->delete();
+
+        return redirect()->route('products.manage')->with('success', 'Discount removed successfully.');
+    }
 
 }

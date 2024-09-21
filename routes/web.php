@@ -12,12 +12,18 @@ Route::resource('orders', OrderController::class);
 // Product
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
 Route::get('/products/{id}/stock', [ProductController::class, 'showUpdateStockForm'])->name('products.showUpdateStockForm');
 Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
 Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
 Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
+// Discount
+Route::get('/products/{id}/discount', [ProductController::class, 'showDiscountForm'])->name('products.showDiscountForm');
+Route::post('/products/{id}/discount', [ProductController::class, 'setDiscount'])->name('products.setDiscount');
+Route::delete('/discounts/{id}', [ProductController::class, 'destroyDiscount'])->name('discounts.destroy');
+
 
 // order
 Route::post('orders/{order}/make-payment', [OrderController::class, 'makePayment'])->name('orders.makePayment');

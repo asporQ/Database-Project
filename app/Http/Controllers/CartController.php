@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItems;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\Product;
@@ -20,12 +21,20 @@ class CartController extends Controller
 
         $cartItems = CartItems::with('Product')->get();
 
+        $discounts = Discount::all();
+
         $totalPrice = 0;
         foreach ($cartItems as $item) {
-            $totalPrice += $item->product->price * $item->quantity;
+            $discountValue = 0;
+            foreach ($discounts as $discount) {
+                if ($discount->product_id == $item->product->id) {
+                    $discountValue += $item->product->price * ($discount->discount_percentage / 100);
+                }
+            }
+            $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
         }
 
-        return view('cart.index', compact('cartItems', 'cart', 'totalPrice'));
+        return view('cart.index', compact('cartItems', 'cart', 'totalPrice', 'discounts'));
     }
 
     public function add(Request $request)
@@ -64,9 +73,17 @@ class CartController extends Controller
 
         $cartItems = CartItems::with('Cart', 'Product')->get();
 
+        $discounts = Discount::all();
+
         $totalPrice = 0;
         foreach ($cartItems as $item) {
-            $totalPrice += $item->product->price * $item->quantity;
+            $discountValue = 0;
+            foreach ($discounts as $discount) {
+                if ($discount->product_id == $item->product->id) {
+                    $discountValue += $item->product->price * ($discount->discount_percentage / 100);
+                }
+            }
+            $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
         }
 
         if (!$cart) {

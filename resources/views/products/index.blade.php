@@ -14,6 +14,13 @@
                 <li>
                     {{ $product->name }} - ${{ $product->price }}
                     <br>
+                    @foreach ($discounts as $discount)
+                        @if ($discount->product_id == $product->id)
+                            <div>Discount: {{ $discount->discount_percentage }} {{ $discount->start_date }} to
+                                {{ $discount->end_date }}</div>
+                        @endif
+                    @endforeach
+
                     Category: {{ $product->category->name }}
                     <br>
                     <img alt="Product Photo" height="200px" src="storage/{{ $product->product_photo }}">
@@ -27,7 +34,9 @@
                     @else
                         <p><em>Please log in to add products to your cart.</em></p>
                     @endauth
+
                 </li>
+                <br>
             @endforeach
         </ul>
 
