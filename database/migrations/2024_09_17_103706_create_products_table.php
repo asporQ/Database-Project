@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,11 +16,10 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->integer('stock');
             $table->text('description');
-            $table->unsignedBigInteger('category_id'); // Foreign key field
-            $table->string('product_photo')->nullable(); // Assuming product photo is a string (path or URL)
+            $table->unsignedBigInteger('category_id');
+            $table->string('product_photo')->nullable();
             $table->timestamps();
-        
-            // Foreign key constraint
+
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
