@@ -6,10 +6,16 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 
-
+// Product
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
+Route::get('/products/{id}/stock', [ProductController::class, 'showUpdateStockForm'])->name('products.showUpdateStockForm');
+Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
+Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
+Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
+
 
 
 Route::get('/', function () {
