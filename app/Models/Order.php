@@ -16,7 +16,6 @@ class Order extends Model
         return $this->hasMany(OrderItems::class);
     }
 
-
     public function transcript()
     {
         return $this->hasOne(Transcript::class);
