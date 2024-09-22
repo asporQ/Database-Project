@@ -14,10 +14,12 @@ export default {
             blacky: "#474543",
             yellowy: "#F3B917",
             ye: "#F4C612",
+            white: "#ffffff",
         },
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                inter: ["Inter", ...defaultTheme.fontFamily.sans],
             },
         },
     },
