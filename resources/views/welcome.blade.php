@@ -53,6 +53,36 @@
         align-items: center;
         text-align: center;
     }
+
+    .custom-buttonYes {
+        background-color: #f3b917;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .custom-buttonNo {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        background: #ABABAB;
+        opacity: 32%;
+    }
     </style>
 </head>
 
@@ -73,61 +103,16 @@
             @endif
         </header>
 
-        <main class="content-center justify-center flex items-center fixed">
-
-            <div>
-                <div class="star-wars fixed">
-                    @for ($i = 0; $i < 300; $i++) <div class="message"
-                        style="font-size: 3rem; font-weight: bold; animation: slide-up 10s linear infinite;">
-                        THIS WEBSITE IS FOR 20 AND OVER
+        <main class="content">
+            <div class="centered-content">
+                <div>
+                    <h1 class="message">This website is for 20 and over</h1>
+                    <h2 class="message">Are you 20 or over yet?</h2>
+                    <button class="custom-buttonNo">No</button>
+                    <a href="{{ url('/guest-content') }}" class="custom-buttonYes">Yes</a>
                 </div>
-                @endfor
-                <div class="centered-content">
-                    <img src="{{ asset('logobig.png') }}" alt="logo" class=" w-fit" />
-                </div>
-
             </div>
-    </div>
-
-
-    <style>
-    @keyframes slide-up {
-        0% {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-
-        10% {
-            opacity: 1;
-        }
-
-        90% {
-            opacity: 1;
-        }
-
-        100% {
-            transform: translateY(-900%);
-            opacity: 0;
-        }
-    }
-
-    .star-wars {
-        overflow: hidden;
-        height: 90vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .message {
-        white-space: nowrap;
-    }
-    </style>
-    </div>
-    </main>
-    </div>
-    </main>
+        </main>
     </div>
 
 </body>
