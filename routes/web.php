@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DiscountController;
 
 
 Route::resource('orders', OrderController::class);
@@ -19,11 +20,11 @@ Route::get('/products/{id}/stock', [ProductController::class, 'showUpdateStockFo
 Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
 Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
 Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
-// Discount
-Route::get('/products/{id}/discount', [ProductController::class, 'showDiscountForm'])->name('products.showDiscountForm');
-Route::post('/products/{id}/discount', [ProductController::class, 'setDiscount'])->name('products.setDiscount');
-Route::delete('/discounts/{id}', [ProductController::class, 'destroyDiscount'])->name('discounts.destroy');
 
+// Discount
+Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
+Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
+Route::post('/products/update-discount', [ProductController::class, 'updateDiscount'])->name('products.updateDiscount');
 
 // order
 Route::post('orders/{order}/make-payment', [OrderController::class, 'makePayment'])->name('orders.makePayment');

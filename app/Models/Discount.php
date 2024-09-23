@@ -9,10 +9,10 @@ class Discount extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'discount_percentage', 'start_date', 'end_date'];
+    protected $fillable = ['discount_percentage', 'start_date', 'end_date'];
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

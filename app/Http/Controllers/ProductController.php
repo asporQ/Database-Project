@@ -22,8 +22,9 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $discounts = Discount::all();
 
-        return view('products.create', compact('categories'));
+        return view('products.create', compact('categories', 'discounts'));
     }
 
     public function destroy($id)
@@ -52,6 +53,7 @@ class ProductController extends Controller
             'stock' => 'required|integer',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
+            'discount_id' => 'nullable|exists:discounts,id',
             'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -67,6 +69,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'description' => $request->description,
             'category_id' => $request->category_id,
+            'discount_id' => $request->discount_id,
             'product_photo' => $productPhoto
         ]);
 
@@ -75,7 +78,7 @@ class ProductController extends Controller
 
     public function manageProducts()
     {
-        $products = Product::all();
+        $products = Product::with('discount')->get();
         $discounts = Discount::all();
         return view('products.manage_products', compact('products', 'discounts'));
     }
@@ -136,52 +139,17 @@ class ProductController extends Controller
         return redirect()->route('products.manage')->with('success', 'Price updated successfully.');
     }
 
-    public function showDiscountForm($id)
-    {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
-
-        return view('products.discount', compact('product'));
-    }
-
-    public function setDiscount(Request $request, $id)
+    public function updateDiscount(Request $request)
     {
         $request->validate([
-            'discount_percentage' => 'required|numeric|min:0|max:100',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'product_id' => 'required|exists:products,id',
+            'discount_id' => 'nullable|exists:discounts,id',
         ]);
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($request->product_id);
+        $product->discount_id = $request->discount_id;
+        $product->save();
 
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
-
-        $discount = Discount::firstOrCreate([
-            'product_id' => $id,
-            'discount_percentage' => $request->discount_percentage,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-        ]);
-
-        return redirect()->route('products.manage')->with('success', 'Discount set successfully.');
+        return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
     }
-
-    public function destroyDiscount($id)
-    {
-        $discount = Discount::find($id);
-
-        if (!$discount) {
-            return response()->json(['message' => 'Discount not found'], 404);
-        }
-
-        $discount->delete();
-
-        return redirect()->route('products.manage')->with('success', 'Discount removed successfully.');
-    }
-
 }
