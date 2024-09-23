@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Product List</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Product List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-    <body>
-        <ul>
-            @foreach ($products as $product)
-                <li>
-                    {{ $product->name }} - ${{ $product->price }}
-                    <br>
-                    @foreach ($discounts as $discount)
-                        @if ($discount->product_id == $product->id)
-                            <div>Discount: {{ $discount->discount_percentage }} {{ $discount->start_date }} to
-                                {{ $discount->end_date }}</div>
-                        @endif
-                    @endforeach
+<body>
+    <ul>
+        @foreach ($products as $product)
+        <li>
+            {{ $product->name }} - ${{ $product->price }}
+            <br>
 
-                    Category: {{ $product->category->name }}
-                    <br>
-                    <img alt="Product Photo" height="200px" src="storage/{{ $product->product_photo }}">
-                    <br>
-                    @auth
-                        <form class="add-to-cart-form" data-product-id="{{ $product->id }}" style="display: inline;">
-                            @csrf
-                            <input min="1" name="quantity" style="width: 50px;" type="number" value="1">
-                            <button class="btn btn-primary" type="submit">Add to Cart</button>
-                        </form>
-                    @else
-                        <p><em>Please log in to add products to your cart.</em></p>
-                    @endauth
+            @if ($product->discount) {
+            <div>Discount: {{$product->discount->discount_percentage}}% {{$product->discount->start_date}} -
+                {{$product->discount->end_date}}</div>
+            }
+            @endif
 
-                </li>
-                <br>
-            @endforeach
-        </ul>
+            Category: {{ $product->category->name }}
+            <br>
+            <img alt="Product Photo" height="200px" src="storage/{{ $product->product_photo }}">
+            <br>
+            @auth
+            <form class="add-to-cart-form" data-product-id="{{ $product->id }}" style="display: inline;">
+                @csrf
+                <input min="1" name="quantity" style="width: 50px;" type="number" value="1">
+                <button class="btn btn-primary" type="submit">Add to Cart</button>
+            </form>
+            @else
+            <p><em>Please log in to add products to your cart.</em></p>
+            @endauth
 
-        <script>
-            $(document).ready(function() {
+        </li>
+        <br>
+        @endforeach
+    </ul>
+
+    <script>
+        $(document).ready(function() {
                 $('.add-to-cart-form').on('submit', function(e) {
                     e.preventDefault();
 
@@ -66,7 +66,7 @@
                     });
                 });
             });
-        </script>
-    </body>
+    </script>
+</body>
 
 </html>
