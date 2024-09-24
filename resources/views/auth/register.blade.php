@@ -1,20 +1,55 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form action="{{ route('register') }}" method="POST">
         @csrf
 
-        <!-- Name -->
+        <!-- First Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+            <x-input-label :value="__('First Name')" for="first_name" />
+            <x-text-input :value="old('first_name')" autocomplete="given-name" autofocus class="block mt-1 w-full" id="first_name"
+                name="first_name" required type="text" />
+            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+        </div>
+
+        <!-- Last Name -->
+        <div class="mt-4">
+            <x-input-label :value="__('Last Name')" for="last_name" />
+            <x-text-input :value="old('last_name')" autocomplete="family-name" class="block mt-1 w-full" id="last_name"
+                name="last_name" required type="text" />
+            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+        </div>
+
+        <!-- Username -->
+        <div class="mt-4">
+            <x-input-label :value="__('Username')" for="username" />
+            <x-text-input :value="old('username')" class="block mt-1 w-full" id="username" name="username" required
+                type="text" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+        </div>
+
+        <!-- Birthdate -->
+        <div class="mt-4">
+            <x-input-label :value="__('Birthdate')" for="birthdate" />
+            <x-text-input :value="old('birthdate')" class="block mt-1 w-full" id="birthdate" name="birthdate" required
+                type="date" />
+            <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mt-4">
+            <x-input-label :value="__('Phone Number')" for="phone" />
+            <x-text-input :value="old('phone')" class="block mt-1 w-full" id="phone" name="phone" required
+                type="tel" />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                autocomplete="username" />
+
+            <x-input-label :value="__('Email')" for="email" />
+            <x-text-input :value="old('email')" autocomplete="username" class="block mt-1 w-full" id="email"
+                name="email" required type="email" />
+
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -34,6 +69,7 @@
 
         <!-- Password -->
         <div class="mt-4">
+        
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
@@ -44,10 +80,12 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
+
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
                 name="password_confirmation" required autocomplete="new-password" />
+
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>

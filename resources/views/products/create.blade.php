@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Create Product</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -71,12 +72,23 @@
                 <input id="product_photo" name="product_photo" type="file"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
+            
+            <label for="discount_id">Discount (Optional):</label><br>
+        <select id="discount_id" name="discount_id">
+            <option value="">No Discount</option>
+            @foreach($discounts as $discount)
+            <option value="{{ $discount->id }}" {{ old('discount_id')==$discount->id ? 'selected' : '' }}>
+                {{ $discount->discount_percentage }}% ({{ $discount->start_date }} to {{ $discount->end_date }})
+            </option>
+            @endforeach
+        </select><br><br>
 
             <button type="submit"
                 class="w-full bg-[#474543] text-white py-2 px-4 rounded-md hover:bg-[#F3B917] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create
                 Product</button>
         </form>
     </div>
+
 </body>
 
 </html>
