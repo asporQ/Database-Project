@@ -70,8 +70,6 @@
                         {{ __('Login') }}
                     </x-nav-link>
                 </div>
-
-
                 @endguest
 
                 <!-- Hamburger -->
@@ -95,7 +93,8 @@
         <div class="text-white">
             <div class="flex justify-between">
                 <div class="flex items gap-x-40 my-4">
-                    <a class="text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917]">PRODUCT</a>
+                    <a href="{{ url('products') }}"
+                        class="text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917]">PRODUCT</a>
                     <a
                         class="ms-4 text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917]">CATEGORY</a>
                     <a
