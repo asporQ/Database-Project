@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset=" UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Product List</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 </head>
+
 @include('layouts.navigation')
 
 <body class="h-full bg-[#FCF7EC]">
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-
-        <style>
-        select {
-            outline: none;
-            border: none;
-        }
-        </style>
 
         <!-- Dropdown filters -->
         <div class="py-2 px-3">
