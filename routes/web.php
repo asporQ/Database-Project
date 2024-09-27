@@ -10,27 +10,21 @@ use App\Http\Controllers\DiscountController;
 
 Route::resource('orders', OrderController::class);
 
-Route::get('/products', [ProductController::class, 'index']);
-
 // Product
-Route::middleware('admin')->group(function () {
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{id}/stock', [ProductController::class, 'showUpdateStockForm'])->name('products.showUpdateStockForm');
-    Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
-    Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
-    Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
-    Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
-
-});
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
+Route::get('/products/{id}/stock', [ProductController::class, 'showUpdateStockForm'])->name('products.showUpdateStockForm');
+Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
+Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
+Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
 
 // Discount
-Route::middleware('admin')->group(function () {
-    Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
-    Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
-    Route::post('/products/update-discount', [ProductController::class, 'updateDiscount'])->name('products.updateDiscount');
-});
+Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
+Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
+Route::post('/products/update-discount', [ProductController::class, 'updateDiscount'])->name('products.updateDiscount');
 
 // order
 Route::post('orders/{order}/make-payment', [OrderController::class, 'makePayment'])->name('orders.makePayment');
@@ -51,7 +45,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::middleware(['auth','admin'])->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -61,6 +55,8 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/place-order', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
+
+
 
 });
 
