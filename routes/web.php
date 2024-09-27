@@ -32,8 +32,7 @@ Route::middleware('admin')->group(function () {
 });
 
 // order
-Route::post('orders/{order}/make-payment', [OrderController::class, 'makePayment'])->name('orders.makePayment');
-Route::get('orders/{order}/transcript', [OrderController::class, 'viewTranscript'])->name('orders.viewTranscript');
+
 
 
 Route::get('/', function () {
@@ -50,7 +49,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -61,7 +60,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/place-order', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
 
-
+    // Order
+    Route::post('orders/{order}/make-payment', [OrderController::class, 'makePayment'])->name('orders.makePayment');
+    Route::get('orders/{order}/transcript', [OrderController::class, 'viewTranscript'])->name('orders.viewTranscript');
 
 });
 
