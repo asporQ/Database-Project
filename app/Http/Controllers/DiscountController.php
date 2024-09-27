@@ -11,6 +11,7 @@ class DiscountController extends Controller
     public function create()
     {
         return view('discounts.create');
+
     }
 
     public function store(Request $request)

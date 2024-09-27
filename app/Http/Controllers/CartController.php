@@ -20,8 +20,6 @@ class CartController extends Controller
         $cart = Cart::where('user_id', $user)->first();
 
         $cartItems = CartItems::with('Product')->get();
-
-
         $totalPrice = 0;
         foreach ($cartItems as $item) {
             $discountValue = 0;

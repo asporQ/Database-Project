@@ -11,7 +11,7 @@ use App\Http\Controllers\DiscountController;
 Route::resource('orders', OrderController::class);
 
 // Product
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
