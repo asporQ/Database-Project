@@ -107,4 +107,16 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Your order has been placed successfully!');
     }
 
+    public function getCartItemCount()
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $cart = Cart::where('user_id', $userId)->first();
+            if ($cart) {
+                $cartItemCount = $cart->items()->count();
+                return $cartItemCount;
+            }
+        }
+        return 0;
+    }
 }
