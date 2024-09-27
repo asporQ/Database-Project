@@ -24,6 +24,7 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($cartItems as $item) {
+
             $discountValue = 0;
             if ($item->product->discount) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
@@ -43,6 +44,11 @@ class CartController extends Controller
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
 
+        $product = Product::where('id', $request->product_id)->first();
+        if ($product->stock < $request->quantity) {
+            return back()->with('success', 'Product added to cart successfully!');
+        }
+
         $cartItem = CartItems::updateOrCreate(
             [
                 'cart_id' => $cart->id,
@@ -51,7 +57,7 @@ class CartController extends Controller
             ['quantity' => DB::raw('quantity + ' . $request->quantity)]
         );
 
-        return redirect()->route('cart.index')->with('success', 'Product added to cart successfully!');
+        return back()->with('success', 'Product added to cart successfully!');
     }
 
     public function remove($id)
@@ -73,6 +79,9 @@ class CartController extends Controller
 
         $totalPrice = 0;
         foreach ($cartItems as $item) {
+            if ($item->product->stock < $item->quantity) {
+                return redirect()->route('cart.index')->with('error', $item->product->name . ' out of stock!');
+            }
             $discountValue = 0;
             if ($item->product->discount) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
