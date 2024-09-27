@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Product List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
+<<<<<<< HEAD
 <body class="bg-gray-100">
     <x-app-layout>
         <x-slot name="header">
@@ -30,6 +32,60 @@
                             alt="{{ $product->name }}">
 
                         <span class="text-black">${{ number_format($product->price, 2) }}</span>
+=======
+
+<body>
+<body class="h-full bg-gray-100">
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Product List</h1>
+
+        <div class="bg-white shadow overflow-y-auto h-[968px] sm:rounded-md">
+    <ul role="list" class="divide-y divide-gray-200">
+        @foreach ($products as $product)
+        <li>
+        -----------
+        <div class="px-4 py-4 sm:px-6 flex items-center">
+                        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-semibold text-[#474543] truncate">{{ $product->name }}</h2>
+                            <p class="mt-1 text-sm text-gray-600">
+                                Price: <span class=" font-bold text-[#F3B917] text-2xl">${{ $product->price }}</span>
+                            </p>
+            <br>
+             <-- discount -->
+            @if ($product->discount) {
+            <div>Discount: {{$product->discount->discount_percentage}}% {{$product->discount->start_date}} -
+                {{$product->discount->end_date}}</div>
+            }
+            @endif
+
+            <p class="mt-1 text-sm text-gray-500">Category: {{ $product->category->name }}</p>
+
+            <img alt="Product Photo" height="200px" src="storage/{{ $product->product_photo }}">
+
+            <p class="mt-1 text-sm text-gray-500 font-bold">Stock: <span
+                                    class="font-bold text-2xl">{{ $product->stock }}</span></p>
+            <!-- <p class="mt-1 text-sm text-gray-500">description : {{ $product->description }}</p> -->
+            
+            @auth
+            <form class="add-to-cart-form" data-product-id="{{ $product->id }}" style="display: inline;">
+                @csrf
+                <input min="1" name="quantity" style="width: 50px;" type="number" value="1">
+                <button class="btn btn-primary" type="submit">Add to Cart</button>
+            </form>
+            @else
+            <p><em>Please log in to add products to your cart.</em></p>
+            @endauth
+            </div>
+            <div class="ml-4 flex-shrink-0">
+                            <img alt="{{ $product->name }}" class=" h-44 w-36 object-cover rounded-md"
+                                src="{{ asset('storage/' . $product->product_photo) }}">
+                        </div>
+                        </div>
+        </li>
+        <br>
+        @endforeach
+    </ul>
+>>>>>>> 6eea3ad702e96cf192e3e619707cb706f5266c96
 
                         <!-- Show Discount if available -->
                         @if ($product->discount)
@@ -137,6 +193,7 @@
         });
 
     </script>
+
 </body>
 
 </html>
