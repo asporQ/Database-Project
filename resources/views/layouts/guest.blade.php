@@ -25,6 +25,9 @@
 
             </a>
         </div>
+<<<<<<< HEAD
+    </body>
+=======
 
         <div
             class="w-full sm:max-w-md mt-6 px-6 py-4 bg-[#FCF7EC] dark:bg-[#FCF7EC] shadow-md overflow-hidden sm:rounded-lg">
@@ -33,4 +36,5 @@
     </div>
 </body>
 
+>>>>>>> 6eea3ad702e96cf192e3e619707cb706f5266c96
 </html>

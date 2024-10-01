@@ -28,7 +28,6 @@
                 <ul role="list" class="divide-y divide-gray-200">
                     @foreach ($products as $product)
                     <li>
-                        -----------
                         <div class="px-4 py-4 sm:px-6 flex items-center">
                             <div class="min-w-0 flex-1">
                                 <h2 class="text-2xl font-semibold text-[#474543] truncate">{{ $product->name }}</h2>
@@ -37,7 +36,6 @@
                                         }}</span>
                                 </p>
                                 <br>
-                                <-- discount -->
                                     @if ($product->discount) {
                                     <div>Discount: {{$product->discount->discount_percentage}}%
                                         {{$product->discount->start_date}} -
