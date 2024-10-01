@@ -134,6 +134,7 @@
                 removeItem(id) {
                     this.cartItems = this.cartItems.filter(item => item.id !== id);
                 }
+
             }
         }
         </script>
