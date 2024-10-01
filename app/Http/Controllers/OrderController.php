@@ -17,6 +17,10 @@ class OrderController extends Controller
 
         $orderItems = OrderItems::with('Product')->get();
 
+        $orders = Order::with(['items.product']) 
+        ->where('user_id', $user)
+        ->orderBy('order_date', 'desc')
+        ->get();
 
         return view('orders.index', compact('user', 'orders', 'orderItems'));
     }
