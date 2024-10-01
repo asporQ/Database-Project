@@ -24,6 +24,7 @@ Route::middleware('admin')->group(function () {
     Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
 });
 
+
 // Discount
 Route::middleware('admin')->group(function () {
     Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');

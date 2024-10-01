@@ -16,6 +16,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
+<<<<<<< HEAD
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
+=======
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-[#FCF7EC] dark:bg-gray-900">
         @include('layouts.navigation')
@@ -36,4 +44,5 @@
     </div>
 </body>
 
+>>>>>>> 6eea3ad702e96cf192e3e619707cb706f5266c96
 </html>
