@@ -18,12 +18,12 @@ class AdminSeeder extends Seeder
     {
         User::create([
             'username' => 'Admin',
-            'first_name' => 'A',
-            'last_name' => '1',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'birthdate' => Carbon::parse(1970-1-1),
             'phone_number' => '0000000000',
-            'email' => 'admin@sfs.good',
-            'password' => (Hash::make('sofarsogood')),
+            'email' => 'admin@sofarso.good', // Emain admin@sofarso.good
+            'password' => (Hash::make('Admin1234')), // Password Admin1234
             'status'=> 'admin',
             ]);
     }
