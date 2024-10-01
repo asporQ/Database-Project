@@ -31,14 +31,10 @@
             @endif
 
             <!-- Display Orders Table -->
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="bg-white shadow-md rounded-lg overflow-fixed">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gray-50 text-center">
                         <tr>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Order ID
-                            </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Order Date
@@ -56,15 +52,14 @@
                                 Total Price
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Actions
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
                             </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($orders as $order)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $order->id }}</td>
 
                             <!-- Order Date -->
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
@@ -95,7 +90,7 @@
                             </td>
 
                             <!-- Actions -->
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 @if ($order->status === 'Awaiting payment')
                                 <form action="{{ route('orders.makePayment', $order) }}" method="POST"
                                     class="inline-block">
@@ -105,13 +100,16 @@
                                         Make Payment
                                     </button>
                                 </form>
+                                @else
+                                <div>
+                                    <p> Completed</p>
+                                    <a href="{{ route('orders.viewTranscript', $order) }}"
+                                        class="text-blue-600 hover:text-blue-900">View Transcript
+                                    </a>
+                                </div>
                                 @endif
-
-                                <a href="{{ route('orders.viewTranscript', $order) }}"
-                                    class="text-blue-600 hover:text-blue-900 ml-4">
-                                    View Transcript
-                                </a>
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
