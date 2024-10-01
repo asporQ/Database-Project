@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
             'stock' => 100,
             'description' => 'A pale lager beer brewed by Heineken.',
             'category_id' => $beer->id,
-            //'product_photo' => 'heineken.jpg'
+            // 'product_photo' => 'heineken.jpg'
         ]);
 
         Product::create([

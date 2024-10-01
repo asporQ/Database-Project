@@ -1,21 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-<<<<<<< HEAD
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Home') }}
-=======
         <h2 class="font-black font-inter text-4xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('PRODUCTS') }}
->>>>>>> 6eea3ad702e96cf192e3e619707cb706f5266c96
         </h2>
     </x-slot>
     <style>
     select {
 
-<<<<<<< HEAD
-</x-app-layout>
-
-=======
         outline: none;
         border: none;
     }
@@ -66,4 +57,3 @@
         </div>
     </div>
 </x-app-layout>
->>>>>>> 6eea3ad702e96cf192e3e619707cb706f5266c96
