@@ -15,6 +15,7 @@
 
 @include('layouts.navigation')
 
+
 <body class="h-full bg-[#FCF7EC]">
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -139,6 +140,8 @@
         $(document).ready(function() {
             $('.add-to-cart-form').on('submit', function(e) {
                 e.preventDefault();
+
+
 
                 var form = $(this);
                 var productId = form.data('product-id');

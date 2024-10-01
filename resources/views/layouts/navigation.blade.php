@@ -111,9 +111,11 @@
         <div class="text-white">
             <div class="flex justify-between">
                 <div class="flex items gap-x-40 my-4">
+
                     <a href="{{ url('products') }}" class="text-white hover:text-[#F3B917]">PRODUCT</a>
                     <a class="ms-4 text-white hover:text-[#F3B917]">CATEGORY</a>
                     <a class="ms-4 text-white hover:text-[#F3B917]">SALES</a>
+
                 </div>
                 <a class="me-2 text-white hover:text-[#F3B917] my-4">CONTACT</a>
             </div>
