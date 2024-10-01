@@ -37,17 +37,13 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+        $product = Product::where('id', $request->product_id)->first();
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-
-        $product = Product::where('id', $request->product_id)->first();
-        if ($product->stock < $request->quantity) {
-            return back()->with('success', 'Product added to cart successfully!');
-        }
 
         $cartItem = CartItems::updateOrCreate(
             [
@@ -59,6 +55,25 @@ class CartController extends Controller
 
         return back()->with('success', 'Product added to cart successfully!');
     }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|numeric|min:1',
+        ]);
+
+        $cartItem = CartItems::find($id);
+
+        if (!$cartItem) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        return response()->json(['message' => 'Updated successfully.']);
+    }
+
 
     public function remove($id)
     {
