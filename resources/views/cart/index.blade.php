@@ -4,106 +4,129 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Cart</title>
+    <title>Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100">
-    @auth
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Cart') }}
+                {{ __('Your orders') }}
             </h2>
         </x-slot>
 
-        <div class="container mx-auto px-[10%] py-6">
-            @if ($cartItems->isNotEmpty())
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Cart Items Section -->
-                <div class="lg:col-span-2">
-                    <ul class="space-y-4">
-                        @foreach ($cartItems as $item)
-                        <li class="bg-white p-4 rounded-lg shadow-md">
-                            <div class="flex items-center space-x-4">
-                                <!-- Product Image -->
-                                <div class="w-24 h-24">
-                                    <img alt="{{ $item->product->name }}" class="w-full h-full object-cover rounded-md"
-                                        src="{{ asset('storage/' . $item->product->product_photo) }}">
-                                </div>
+        @auth
+        <div class="container mx-auto px-[10%] py-8">
 
-                                <!-- Product Details -->
-                                <div class="flex-1">
-                                    <h3 class="text-lg font-semibold">{{ $item->product->name }}</h3>
-                                    <p class="text-sm text-gray-500">Category: {{ $item->product->category->name }}</p>
+            <!-- Check if any order has the status 'Awaiting payment' -->
+            @php
+            $hasAwaitingPayment = $orders->contains('status', 'Awaiting payment');
+            @endphp
 
-                                    <!-- Product Price -->
-                                    <div class="mt-2">
-                                        <span class="text-gray-800 font-bold">${{ number_format($item->product->price, 2) }}</span>
-                                        @if ($item->product->discount)
-                                        <div class="text-sm text-red-500">Discount: {{ $item->product->discount->discount_percentage }}% ({{ $item->product->discount->start_date }} - {{ $item->product->discount->end_date }})
-                                        </div>
-                                        @endif
-                                    </div>
-
-                                    <!-- Quantity and Remove Button -->
-                                    <div class="mt-4 flex items-center space-x-4">
-                                        <span class="text-sm">Quantity: {{ $item->quantity }}</span>
-
-                                        <form action="{{ route('cart.remove', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="text-red-600 hover:text-red-800 text-sm" type="submit">Remove</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <!-- Order Summary Section -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-lg font-semibold text-gray-800">Order Summary</h3>
-                    <div class="mt-4 space-y-2">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Subtotal</span>
-                            <span class="font-bold text-gray-800">${{ number_format($totalPrice, 2) }}</span>
-                        </div>
-                        <!-- Add more details if necessary, e.g., shipping costs, taxes -->
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Shipping</span>
-                            <span class="font-bold text-gray-800">Free</span>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="flex justify-between text-lg font-bold text-gray-800">
-                        <span>Total</span>
-                        <span>${{ number_format($totalPrice, 2) }}</span>
-                    </div>
-
-                    <form action="{{ route('cart.placeOrder') }}" method="POST" class="mt-6">
-                        @csrf
-                        <button class="w-full bg-black text-white py-3 rounded-md hover:bg-yellow-500" >
-                            Place Order
-                        </button>
-                    </form>
-                </div>
+            @if (!$hasAwaitingPayment)
+            <div class="mb-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
+                <p class="font-semibold">All your orders have been processed. No pending payments!</p>
             </div>
-            
-            @else
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <p class="text-gray-600">Your cart is empty.</p>
-                <a href="{{ route('orders.index') }}" class="mt-4 text-blue-500 hover:underline">See your order</a>
-            </div>
-            
             @endif
-        </>
+
+            <!-- Display Orders Table -->
+            <div class="bg-white shadow-md rounded-lg overflow-fixed">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Order ID
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Order Date
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Items
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total Price
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($orders as $order)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ $order->id }}</td>
+
+                            <!-- Order Date -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                {{ \Carbon\Carbon::parse($order->order_date)->format('F j, Y') }}
+                            </td>
+
+                            <!-- List of Items -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                <ul class="list-disc pl-4">
+                                    @foreach($order->items as $item)
+                                    <div>{{ '-'}} {{$item->product->name }} (x{{ $item->quantity }})</div>
+                                    @endforeach
+                                </ul>
+                            </td>
+
+                            <!-- Order Status -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                <span
+                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                {{ $order->status === 'Completed' ? 'bg-green-100 text-green-800' : ($order->status === 'Awaiting payment' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
+                                    {{ $order->status }}
+                                </span>
+                            </td>
+
+                            <!-- Total Price -->
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                ${{ number_format($order->total_price, 2) }}
+                            </td>
+
+                            <!-- Actions -->
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                @if ($order->status === 'Awaiting payment')
+                                <form action="{{ route('orders.makePayment', $order) }}" method="POST"
+                                    class="inline-block">
+                                    @csrf
+                                    <button type="submit"
+                                        class="text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md px-4 py-2">
+                                        Make Payment
+                                    </button>
+                                </form>
+                                @endif
+
+                                <a href="{{ route('orders.viewTranscript', $order) }}"
+                                    class="text-blue-600 hover:text-blue-900 ml-4">
+                                    View Transcript
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            @if($orders->isEmpty())
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">You have no orders yet.</p>
+                <a href="{{ route('products') }}" class="text-blue-600 hover:underline">Continue Shopping</a>
+            </div>
+            @endif
+        </div>
+        @endauth
     </x-app-layout>
-    @endauth
 </body>
 
 </html>

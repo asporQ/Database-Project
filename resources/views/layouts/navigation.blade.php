@@ -124,6 +124,9 @@
                         class="ms-4 text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917]">CATEGORY</a>
                     <a
                         class="ms-4 text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917]">SALES</a>
+                    <span class="ml-2 bg-red-500 text-white px-2 py-1 rounded-full">
+                        {{ $cartItemCount }}
+                    </span>
                 </div>
                 <a
                     class="me-2 text-white hover:text-[#F3B917] dark:text-gray-200 dark:hover:text-[#F3B917] my-4">CONTACT</a>
