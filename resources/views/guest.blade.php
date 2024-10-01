@@ -1,15 +1,46 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Product') }}
-        </h2>
+        <!-- <h2 class="font-black font-inter text-4xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('PRODUCTS') }}
+        </h2> -->
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="dark:bg-gray-800 overflow-hidden sm:rounded-lg animate__animated animate__fadeIn animate__delay-1s"
+                id="intro1">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+                    <p class="mb-4 text-lg font-semibold">
+                        <span class="text-yellow-500">{{ __("So far, so good!") }}</span>
+                        {{ __("At Beer History Inc., we pride ourselves on delivering the finest selection of beers from around the world. Our commitment to quality and excellence ensures that every bottle you purchase is a testament to our passion for beer.") }}
+                    </p>
+                </div>
+            </div>
+            <div class="dark:bg-gray-800 overflow-hidden sm:rounded-lg mt-4 animate__animated animate__fadeIn animate__delay-2s"
+                id="intro2">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <p class="mb-4 text-lg font-semibold">
+                        <span class="text-yellow-500">{{ __("Why buy beer with us?") }}</span>
+                        {{ __("We offer a curated selection of beers that cater to all tastes and preferences. From classic lagers to innovative craft brews, our collection is designed to satisfy even the most discerning beer enthusiasts.") }}
+                    </p>
+                </div>
+            </div>
+            <div class="dark:bg-gray-800 overflow-hidden sm:rounded-lg mt-4 animate__animated animate__fadeIn animate__delay-3s"
+                id="intro3">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <p class="mb-4 text-lg font-semibold">
+                        <span class="text-yellow-500">{{ __("Exceptional Quality") }}</span>
+                        {{ __("Our beers are sourced from the best breweries around the globe, ensuring that you receive only the highest quality products. We believe that great beer starts with great ingredients and meticulous brewing processes.") }}
+                    </p>
+                </div>
+            </div>
+            <div class="dark:bg-gray-800 overflow-hidden sm:rounded-lg mt-4 animate__animated animate__fadeIn animate__delay-4s"
+                id="intro4">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <p class="mb-4 text-lg font-semibold">
+                        <span class="text-yellow-500">{{ __("Join Our Community") }}</span>
+                        {{ __("When you buy beer with us, you're not just making a purchase; you're joining a community of beer lovers who appreciate the rich history and diverse flavors of this beloved beverage. Cheers to great beer!") }}
+                    </p>
                 </div>
             </div>
         </div>
