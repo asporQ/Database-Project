@@ -83,6 +83,10 @@
 
     <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
         href="{{ route('products.create') }}">Add Product</a>
+    <div class=" flex justify-end">
+        <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold"
+            href="{{ route('dashboard') }}">Back to Dashboard</a>
+    </div>
 </body>
 
 </html>
