@@ -30,17 +30,17 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $discount = Discount::active()->get();
-
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
-        if ($discount) {
-            $discount->delete();
-        }
 
+        if ($product->product_photo && \Storage::disk('public')->exists($product->product_photo)) {
+            \Storage::disk('public')->delete($product->product_photo);
+        }
+        
         $product->delete();
+
         return redirect()->route('products.manage')->with('success', 'Product removed successfully.');
     }
 
