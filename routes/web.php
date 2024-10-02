@@ -45,8 +45,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/content', function () {
-    return view('content');
+Route::get('/contact', function () {
+    return view('contact');
 });
 
 Route::middleware(['auth'])->group(function () {
