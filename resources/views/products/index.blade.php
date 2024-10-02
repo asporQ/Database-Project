@@ -21,7 +21,7 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 
         <!-- Dropdown filters -->
-        <div class="py-2 px-3">
+        <!-- <div class="py-2 px-3">
             <h2 class="font-bold font-inter text-4xl pl-3">FILTER</h2>
 
             <div class="py-4 mx-auto">
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
         <div class="h-[968px] sm:rounded-md mt-24">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gap-x-6 p-4">
