@@ -73,6 +73,9 @@
                             <x-dropdown-link class="hover:bg-white">
                                 {{ __('Checkout') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="'/products/manage'" class="hover:bg-white">
+                                {{ __('Manage product') }}
+                            </x-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
