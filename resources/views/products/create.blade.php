@@ -60,7 +60,7 @@
                 <select id="category_id" name="category_id"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @foreach ($categories as $category)
-                    <option {{ old('category_id') == $category->id ? 'selected' : '' }} value="{{ $category->id }}">
+                    <option {{ old('category_id')==$category->id ? 'selected' : '' }} value="{{ $category->id }}">
                         {{ $category->name }}
                     </option>
                     @endforeach
@@ -72,21 +72,36 @@
                 <input id="product_photo" name="product_photo" type="file"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
-            
-            <label for="discount_id">Discount (Optional):</label><br>
-        <select id="discount_id" name="discount_id">
-            <option value="">No Discount</option>
-            @foreach($discounts as $discount)
-            <option value="{{ $discount->id }}" {{ old('discount_id')==$discount->id ? 'selected' : '' }}>
-                {{ $discount->discount_percentage }}% ({{ $discount->start_date }} to {{ $discount->end_date }})
-            </option>
-            @endforeach
-        </select><br><br>
 
-            <button type="submit"
-                class="w-full bg-[#474543] text-white py-2 px-4 rounded-md hover:bg-[#F3B917] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create
-                Product</button>
+            <label for="discount_id">Discount (Optional):</label><br>
+            <select id="discount_id" name="discount_id">
+                <option value="">No Discount</option>
+                @foreach($discounts as $discount)
+                <option value="{{ $discount->id }}" {{ old('discount_id')==$discount->id ? 'selected' : '' }}>
+                    {{ $discount->discount_percentage }}% ({{ $discount->start_date }} to {{ $discount->end_date }})
+                </option>
+                @endforeach
+            </select><br><br>
+            <div>
+                <span>
+                    <button type="submit"
+                        class="bg-[#474543] text-white py-2 px-4 rounded-md hover:bg-[#282727] focus:outline-none font-bold focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Create
+                        Product</button>
+                </span>
+                <span>
+                    <a href="{{ route('products.manage') }}"
+                        class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-700 mt-4 inline-block font-bold">
+                        Back to Manage
+
+                    </a>
+                </span>
+            </div>
+
+
         </form>
+        <br>
+
+
     </div>
 
 </body>
