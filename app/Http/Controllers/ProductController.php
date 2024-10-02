@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->get();
 
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
 
         return view('products.index', compact('products', 'discounts'));
     }
@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
 
         return view('products.create', compact('categories', 'discounts'));
     }
@@ -30,17 +30,17 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $discount = Discount::find($product->id);
-
 
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
-        if ($discount) {
-            $discount->delete();
-        }
 
+        if ($product->product_photo && \Storage::disk('public')->exists($product->product_photo)) {
+            \Storage::disk('public')->delete($product->product_photo);
+        }
+        
         $product->delete();
+
         return redirect()->route('products.manage')->with('success', 'Product removed successfully.');
     }
 
@@ -49,8 +49,8 @@ class ProductController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'discount_id' => 'nullable|exists:discounts,id',
@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function manageProducts()
     {
         $products = Product::with('discount')->get();
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
         return view('products.manage_products', compact('products', 'discounts'));
     }
 

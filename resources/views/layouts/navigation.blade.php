@@ -8,7 +8,7 @@
                     <x-application-logo class=" h-14 w-auto fill-current text-gray-800 " />
                 </a>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center gap-4">
                 <!-- Navigation Links -->
                 <!-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -16,7 +16,7 @@
                     </x-nav-link>
                 </div> -->
 
-
+                <!-- cart -->
                 @auth
                 <div class="hidden sm:flex sm:items-center sm:ms-6 ml-auto">
                     <a href="{{ route('cart.index') }}" class="text-white hover:text-[#F3B917]">
@@ -30,7 +30,7 @@
                 @endauth
 
                 @guest
-                <div class="hidden sm:flex sm:items-center sm:ms-6 ml-auto">
+                <div class="hidden sm:flex sm:items-center sm:ms-6 ml-auto mr-auto">
                     <a href="{{ route('login') }}" class="text-white hover:text-[#F3B917]"
                         onclick="alert('Please login before proceeding to the login page.')">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -44,13 +44,16 @@
 
                 <!-- Settings Dropdown -->
                 @auth
-                <div class="hidden sm:flex sm:items-center sm:ms-6 ml-auto">
+                <div class="hidden sm:flex sm:items-center sm:ml-6 ml-auto">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500  bg-white  hover:text-gray-700  focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
-                                <div class="ms-1">
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-white focus:outline-none transition ease-in-out duration-150">
+                                <div title="{{ Auth::user()->username }}">
+                                    {{ strlen(Auth::user()->username) > 6 ? substr(Auth::user()->username, 0, 3) . '...'
+                                    : Auth::user()->username }}
+                                </div>
+                                <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -61,19 +64,22 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('profile.edit')" class="hover:bg-white">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                            <x-dropdown-link>
+                            <x-dropdown-link :href="'/orders'" class="hover:bg-white">
                                 {{ __('Order') }}
                             </x-dropdown-link>
-                            <x-dropdown-link>
+                            <x-dropdown-link class="hover:bg-white">
                                 {{ __('Checkout') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="'/products/manage'" class="hover:bg-white">
+                                {{ __('Manage product') }}
                             </x-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')" class="hover:bg-white"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
@@ -84,7 +90,7 @@
                 @endauth
 
                 @guest
-                <div class="hidden sm:flex sm:items-center sm:ms-6 ml-auto text-white">
+                <div class="hidden sm:flex sm:items-center sm:ml-6 ml-auto text-white">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
@@ -137,13 +143,13 @@
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                     </div>
                     <div class="mt-3 space-y-1">
-                        <x-responsive-nav-link :href="route('profile.edit')">
+                        <x-responsive-nav-link :href="route('profile.edit')" class="hover:bg-[#F3B917]">
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-responsive-nav-link :href="route('logout')"
+                            <x-responsive-nav-link :href="route('logout')" class="hover:bg-[#F3B917]"
                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-responsive-nav-link>

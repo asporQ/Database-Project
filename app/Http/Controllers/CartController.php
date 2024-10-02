@@ -8,6 +8,7 @@ use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class CartController extends Controller
         foreach ($cartItems as $item) {
 
             $discountValue = 0;
-            if ($item->product->discount) {
+            if ($item->product->discount && $item->product->discount->enddate >= Carbon::today()) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
             }
             $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
@@ -37,17 +38,13 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+        $product = Product::where('id', $request->product_id)->first();
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ]);
 
         $cart = Cart::firstOrCreate(['user_id' => Auth::id()]);
-
-        $product = Product::where('id', $request->product_id)->first();
-        if ($product->stock < $request->quantity) {
-            return back()->with('success', 'Product added to cart successfully!');
-        }
 
         $cartItem = CartItems::updateOrCreate(
             [
@@ -59,6 +56,25 @@ class CartController extends Controller
 
         return back()->with('success', 'Product added to cart successfully!');
     }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $request->validate([
+            'quantity' => 'required|numeric|min:1',
+        ]);
+
+        $cartItem = CartItems::find($id);
+
+        if (!$cartItem) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        return response()->json(['message' => 'Updated successfully.']);
+    }
+
 
     public function remove($id)
     {
@@ -74,24 +90,25 @@ class CartController extends Controller
         $user = Auth::id();
         $cart = Cart::where('user_id', $user)->first();
 
-        $cartItems = CartItems::with('Product')->get();
+        if (!$cart) {
+            return response()->json(['message' => 'No product in cart.'], 400);
+        }
 
+        $cartItems = CartItems::with('Product')->get();
 
         $totalPrice = 0;
         foreach ($cartItems as $item) {
             if ($item->product->stock < $item->quantity) {
-                return redirect()->route('cart.index')->with('error', $item->product->name . ' out of stock!');
+                return response()->json(['message' => 'Product out of stock.'], 400);
             }
             $discountValue = 0;
-            if ($item->product->discount) {
+            if ($item->product->discount && $item->product->discount->enddate >= Carbon::today()) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
             }
             $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
         }
 
-        if (!$cart) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
-        }
+
 
 
         $order = Order::firstOrCreate([
@@ -113,7 +130,11 @@ class CartController extends Controller
         }
 
         $cart->delete();
-        return redirect()->route('cart.index')->with('success', 'Your order has been placed successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Your order has been placed successfully!',
+            'order_id' => $order->id,
+        ]);
     }
 
     public function getCartItemCount()

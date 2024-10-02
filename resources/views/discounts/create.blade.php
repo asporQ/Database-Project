@@ -38,6 +38,41 @@
 
         <button type="submit">Add Discount</button>
     </form>
+
+
+    <h3>Available Discounts:</h3>
+    @if($activeDiscounts->isNotEmpty())
+    <ul>
+        @foreach($activeDiscounts as $discount)
+        <li>{{ $discount->discount_percentage }}% valid until {{ $discount->end_date }}</li>
+        <form action="{{ route('discounts.destroy', $discount->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                onclick="return confirm('Are you sure you want to delete this discount?')">Delete</button>
+        </form>
+        @endforeach
+    </ul>
+    @else
+    <li>No active discounts available.</li>
+    @endif
+
+    <h3>Expired Discounts:</h3>
+    @if($expiredDiscounts->isNotEmpty())
+    <ul>
+        @foreach($expiredDiscounts as $discount)
+        <li>{{ $discount->discount_percentage }}% expired on {{ $discount->end_date }}</li>
+        <form action="{{ route('discounts.destroy', $discount->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                onclick="return confirm('Are you sure you want to delete this discount?')">Delete</button>
+        </form>
+        @endforeach
+    </ul>
+    @else
+    <li>No expired discounts available.</li>
+    @endif
 </body>
 
 </html>

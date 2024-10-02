@@ -12,34 +12,34 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <style>
-    .cart-item {
-        transition: transform 0.2s;
-    }
+        .cart-item {
+            transition: transform 0.2s;
+        }
 
-    .cart-item:hover {
-        transform: scale(1.02);
-    }
+        .cart-item:hover {
+            transform: scale(1.02);
+        }
 
-    .cart-item img {
-        transition: opacity 0.2s;
-    }
+        .cart-item img {
+            transition: opacity 0.2s;
+        }
 
-    .cart-item img:hover {
-        opacity: 0.8;
-    }
+        .cart-item img:hover {
+            opacity: 0.8;
+        }
 
-    .btn {
-        transition: background-color 0.2s, transform 0.2s;
-    }
+        .btn {
+            transition: background-color 0.2s, transform 0.2s;
+        }
 
-    .btn:hover {
-        background-color: #2563eb;
-        transform: scale(1.05);
-    }
+        .btn:hover {
+            background-color: #2563eb;
+            transform: scale(1.05);
+        }
 
-    .btn-danger:hover {
-        background-color: #dc2626;
-    }
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
     </style>
 </head>
 
@@ -50,6 +50,9 @@
         <h2 class="font-black font-inter text-4xl text-gray-800 leading-tight">
             {{ __('Carts') }}
         </h2>
+
+        @auth
+        @if($cartItems == [])
         <div class="  rounded-lg overflow-hidden mb-4">
             <div class="flex items-center p-4 ">
                 <!-- <div class="w-24 h-24"></div> -->
@@ -64,12 +67,11 @@
                 </div>
             </div>
         </div>
-
-        @auth
-
+        @endif
         <div x-data="cartHandler()">
             <ul>
                 <template x-for="item in cartItems" :key="item.id">
+
                     <li class="cart-item shadow-md rounded-lg overflow-hidden mb-4">
                         <a class="block">
                             <div class="flex items-center p-4">
@@ -92,13 +94,25 @@
                                 </div>
                                 <div class="w-24 text-center">
                                     <input min="1" :max="item.product.stock" type="number" x-model="item.quantity"
+                                        @change="updateQuantity(item.id, item.quantity)"
                                         style="width: 60px; border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 0.25rem 0.5rem;">
                                 </div>
                             </div>
                             <div class="w-24 text-center mb-1 flex ml-1">
-                                <button @click="removeItem(item.id)"
-                                    class="text-gray-500 px-4 py-2 rounded-md text-xs transition-transform transform hover:scale-105">Remove</button>
+                                <form :action="'{{ route('cart.remove', '') }}' + '/' + item.id" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="text-gray-500 px-4 py-2 rounded-md text-xs transition-transform transform hover:scale-105"
+                                        type="submit">Remove</button>
+                                </form>
                             </div>
+
+                            {{-- <div class="w-24 text-center mb-1 flex ml-1">
+                                <button @click="removeItem(item.product_id)"
+                                    class="text-gray-500 px-4 py-2 rounded-md text-xs transition-transform transform hover:scale-105">Remove</button>
+                            </div> --}}
                         </a>
                     </li>
                 </template>
@@ -109,32 +123,68 @@
                             <div class="text-xl font-bold">Total Price: $<span x-text="totalPrice"></span></div>
                         </div>
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
-                            <form action="{{ route('cart.placeOrder') }}" method="POST" class="inline-block">
+                            <form class="inline-block">
                                 @csrf
-                                <button class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded-md"
+                                <button @click.prevent="alertMessage($event)"
+                                    class=" btn btn-primary bg-blue-500 text-white px-4 py-2 rounded-md"
                                     type="submit">Place Order</button>
                             </form>
+
                         </div>
                     </div>
                 </template>
                 <template x-if="cartItems.length === 0">
-                    <p class="text-gray-600 mt-4">Your cart is empty.</p>
+                    <div class="flex items-center p-4">
+                        <p class="text-gray-800 mt-4 text-bold">Your cart is empty.</p>
+                    </div>
                 </template>
             </ul>
         </div>
 
         <script>
-        function cartHandler() {
+            function cartHandler() {
             return {
                 cartItems: @json($cartItems),
                 get totalPrice() {
-                    return this.cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0)
-                        .toFixed(2);
+                    return this.cartItems.reduce((total, item) => total + (item.product.price * (1 - (item.product.discount.discount_percentage / 100))  * item.quantity), 0)
+                    .toFixed(2);
                 },
-                removeItem(id) {
-                    this.cartItems = this.cartItems.filter(item => item.id !== id);
-                }
+                alertMessage() {
+                    $.ajax({
+                        url: '{{ route('cart.placeOrder') }}', 
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
 
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                alert(response.message);
+                                window.location.href = '/orders'; 
+                            }
+                        },
+                        error: function(response) {
+                            alert(response.responseJSON.message);
+                        }
+                    });
+                },
+                updateQuantity(itemId, newQuantity) {
+                    $.ajax({
+                    url: `{{ url('cart/update') }}/${itemId}`,
+                    method: 'PUT',
+                    data: {
+                        quantity: newQuantity,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: (response) => {
+                        // console.log(response);
+                    },
+                    error: (xhr) => {
+                        console.error(xhr.responseText);
+                        alert('Error updating quantity: ' + xhr.responseJSON.message);
+                    }
+                });
+                }
             }
         }
         </script>

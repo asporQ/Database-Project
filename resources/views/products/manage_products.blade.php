@@ -21,16 +21,14 @@
 
     <div class="overflow-auto" style="max-height: 800px;">
 
-        <table class="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="text-left table-auto w-full bg-white shadow-md rounded-lg overflow-auto">
             <thead class="bg-gray-200 sticky top-0">
                 <tr>
                     <th class="px-4 py-2">Name</th>
                     <th class="px-4 py-2">Price</th>
                     <th class="px-4 py-2">Stock</th>
-                    <th class="px-4 py-2">Current Discount</th>
-                    <th class="px-4 py-2">Assign New Discount</th>
-                    <th class="px-4 py-2">Remove Product</th>
-                    <th class="px-4 py-2">Discounts</th>
+                    <th class="px-4 py-2">Discount</th>
+                    <th class="text-right px-4 py-2">Remove Product</th>
                 </tr>
             </thead>
 
@@ -39,43 +37,32 @@
                 <tr class="border-b">
                     <td class="px-4 py-2">{{ $product->name }}</td>
                     <td class="px-4 py-2">
-                        {{ $product->price }}
-                        <a class="text-blue-500 hover:text-blue-700 ml-2"
-                            href="{{ route('products.showUpdatePriceForm', $product->id) }}">Adjust Price</a>
+                        <p>{{ $product->price }}</p>
+                        <a class="text-blue-500 hover:text-blue-700"
+                            href="{{ route('products.showUpdatePriceForm', $product->id) }}">Update Price</a>
                     </td>
                     <td class="px-4 py-2">
-                        {{ $product->stock }}
-                        <a class="text-yellow-500 hover:text-yellow-700 ml-2"
-                            href="{{ route('products.showUpdateStockForm', $product->id) }}">Fill Stock</a>
-                    </td>
-                    <td class="px-4 py-2">
-                        @if($product->discount)
-                        {{ $product->discount->discount_percentage }}% (Valid from {{ $product->discount->start_date }}
-                        to
-                        {{ $product->discount->end_date }})
-                        @else
-                        No Discount
-                        @endif
+                        <p>{{ $product->stock }}</p>
+                        <a class="text-yellow-500 hover:text-yellow-700"
+                            href="{{ route('products.showUpdateStockForm', $product->id) }}">Update Stock</a>
                     </td>
                     <td class="px-4 py-2">
                         <form action="{{ route('products.updateDiscount') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <select name="discount_id" class="border rounded px-2 py-1">
+                            <select name="discount_id" class="border rounded px-2 py-1" onchange="this.form.submit()">
                                 <option value="">No Discount</option>
                                 @foreach($discounts as $discount)
-                                <option value="{{ $discount->id }}"
-                                    {{ $product->discount_id == $discount->id ? 'selected' : '' }}>
+                                <option value="{{ $discount->id }}" {{ $product->discount_id == $discount->id ?
+                                    'selected' : '' }}>
                                     {{ $discount->discount_percentage }}% ({{ $discount->start_date }} -
                                     {{ $discount->end_date }})
                                 </option>
                                 @endforeach
                             </select>
-                            <button type="submit"
-                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 ml-2">Update</button>
                         </form>
                     </td>
-                    <td class="px-4 py-2">
+                    <td class="text-right px-4 py-2">
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
@@ -85,25 +72,7 @@
                                 type="submit">Remove</button>
                         </form>
                     </td>
-                    <td class="px-4 py-2">
-                        <ul>
-                            @foreach ($discounts as $discount)
-                            @if ($discount->product_id == $product->id)
-                            <li class="flex items-center justify-between">
-                                {{ $discount->discount_percentage }}% ({{ $discount->start_date }} to
-                                {{ $discount->end_date }})
-                                <form action="{{ route('discounts.destroy', $discount->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700 ml-2"
-                                        type="submit">Remove</button>
-                                </form>
-                            </li>
-                            @endif
-                            @endforeach
-                        </ul>
-                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
@@ -112,6 +81,12 @@
 
     <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
         href="{{ route('products.create') }}">Add Product</a>
+    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
+        href="{{ route('discounts.create') }}">Add Discount</a>
+    <div class=" flex justify-end">
+        <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold"
+            href="{{ '/products' }}">Back to Products</a>
+    </div>
 </body>
 
 </html>
