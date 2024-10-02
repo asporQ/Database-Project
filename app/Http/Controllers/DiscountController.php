@@ -10,7 +10,9 @@ class DiscountController extends Controller
 {
     public function create()
     {
-        return view('discounts.create');
+        $activeDiscounts = Discount::active()->get();
+        $expiredDiscounts = Discount::deactivated()->get();
+        return view('discounts.create', compact('activeDiscounts', 'expiredDiscounts'));
     }
 
     public function store(Request $request)
@@ -28,5 +30,13 @@ class DiscountController extends Controller
         ]);
 
         return redirect()->route('discounts.create')->with('success', 'Discount created successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $discount = Discount::findOrFail($id);
+        $discount->delete();
+
+        return redirect()->route('discounts.create')->with('success', 'Discount deleted successfully!');
     }
 }
