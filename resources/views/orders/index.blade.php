@@ -119,7 +119,7 @@
             @if($orders->isEmpty())
             <div class="mt-6 text-center">
                 <p class="text-gray-600">You have no orders yet.</p>
-                <a href="{{ route('products') }}" class="text-blue-600 hover:underline">Continue Shopping</a>
+                <a href="{{ url('products') }}" class="text-blue-600 hover:underline">Continue Shopping</a>
             </div>
             @endif
         </div>
