@@ -90,13 +90,16 @@ class CartController extends Controller
         $user = Auth::id();
         $cart = Cart::where('user_id', $user)->first();
 
-        $cartItems = CartItems::with('Product')->get();
+        if (!$cart) {
+            return response()->json(['message' => 'No product in cart.'], 400);
+        }
 
+        $cartItems = CartItems::with('Product')->get();
 
         $totalPrice = 0;
         foreach ($cartItems as $item) {
             if ($item->product->stock < $item->quantity) {
-                return redirect()->route('cart.index')->with('error', $item->product->name . ' out of stock!');
+                return response()->json(['message' => 'Product out of stock.'], 400);
             }
             $discountValue = 0;
             if ($item->product->discount && $item->product->discount->enddate >= Carbon::today()) {
@@ -105,9 +108,7 @@ class CartController extends Controller
             $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
         }
 
-        if (!$cart) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
-        }
+
 
 
         $order = Order::firstOrCreate([
@@ -129,7 +130,11 @@ class CartController extends Controller
         }
 
         $cart->delete();
-        return redirect()->route('cart.index')->with('success', 'Your order has been placed successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Your order has been placed successfully!',
+            'order_id' => $order->id,
+        ]);
     }
 
     public function getCartItemCount()

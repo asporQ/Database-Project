@@ -49,8 +49,8 @@ class ProductController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'description' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'discount_id' => 'nullable|exists:discounts,id',
