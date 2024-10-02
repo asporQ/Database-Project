@@ -70,9 +70,6 @@
                             <x-dropdown-link :href="'/orders'" class="hover:bg-white">
                                 {{ __('Order') }}
                             </x-dropdown-link>
-                            <x-dropdown-link class="hover:bg-white">
-                                {{ __('Checkout') }}
-                            </x-dropdown-link>
                             <x-dropdown-link :href="'/products/manage'" class="hover:bg-white">
                                 {{ __('Manage product') }}
                             </x-dropdown-link>

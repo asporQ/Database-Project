@@ -1,9 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <!-- <h2 class="font-black font-inter text-4xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('PRODUCTS') }}
-        </h2> -->
-    </x-slot>
+    <div class="relative">
+            <img src="{{ asset('bg.png') }}" alt="Background Image" class="w-full h-auto object-cover">
+            <div class="absolute inset-0 flex items-center justify-center">
+            <h1 class="text-white text-4xl md:text-6xl font-bold drop-shadow-lg animate__animated animate__fadeInDown">
+                Welcome to <span class=" text-ye font-black">SO FAR SO GOOD</span>
+            </h1>
+            </div>
+        </div>
 
 
 
