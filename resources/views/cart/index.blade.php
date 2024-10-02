@@ -50,6 +50,9 @@
         <h2 class="font-black font-inter text-4xl text-gray-800 leading-tight">
             {{ __('Carts') }}
         </h2>
+
+        @auth
+        @if($cartItems == [])
         <div class="  rounded-lg overflow-hidden mb-4">
             <div class="flex items-center p-4 ">
                 <!-- <div class="w-24 h-24"></div> -->
@@ -64,9 +67,7 @@
                 </div>
             </div>
         </div>
-
-        @auth
-
+        @endif
         <div x-data="cartHandler()">
             <ul>
                 <template x-for="item in cartItems" :key="item.id">
@@ -122,9 +123,9 @@
                             <div class="text-xl font-bold">Total Price: $<span x-text="totalPrice"></span></div>
                         </div>
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
-                            <form action="{{ route('cart.placeOrder') }}" method="POST" class="inline-block">
+                            <form class="inline-block">
                                 @csrf
-                                <button @click.prevent="alertMessage()"
+                                <button @click.prevent="alertMessage($event)"
                                     class=" btn btn-primary bg-blue-500 text-white px-4 py-2 rounded-md"
                                     type="submit">Place Order</button>
                             </form>
@@ -133,7 +134,9 @@
                     </div>
                 </template>
                 <template x-if="cartItems.length === 0">
-                    <p class="text-gray-600 mt-4">Your cart is empty.</p>
+                    <div class="flex items-center p-4">
+                        <p class="text-gray-800 mt-4 text-bold">Your cart is empty.</p>
+                    </div>
                 </template>
             </ul>
         </div>
@@ -147,12 +150,23 @@
                     .toFixed(2);
                 },
                 alertMessage() {
-                    const form = event.target.closest('form');
-                    setTimeout(() => {
-                        form.submit();
-                    }, 100);
+                    $.ajax({
+                        url: '{{ route('cart.placeOrder') }}', 
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
 
-                    alert('Order placed successfully!');
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                alert(response.message);
+                                window.location.href = '/orders'; 
+                            }
+                        },
+                        error: function(response) {
+                            alert(response.responseJSON.message);
+                        }
+                    });
                 },
                 updateQuantity(itemId, newQuantity) {
                     $.ajax({
