@@ -73,7 +73,7 @@ class ProductController extends Controller
             'product_photo' => $productPhoto
         ]);
 
-        return redirect()->route('products.create')->with('success', 'Product created successfully!');
+        return redirect()->route('products.manage')->with('success', $request->name . ' created successfully!');
     }
 
     public function manageProducts()
@@ -149,6 +149,37 @@ class ProductController extends Controller
         $product = Product::findOrFail($request->product_id);
         $product->discount_id = $request->discount_id;
         $product->save();
+
+        return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
+    }
+
+    public function updateProductPhoto(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'discount_id' => 'nullable|exists:discounts,id',
+            'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $productPhoto = null;
+        if ($request->hasFile('product_photo')) {
+            $fileName = time() . '_' . $request->file('product_photo')->getClientOriginalName();
+            $productPhoto = $request->file('product_photo')->storeAs('uploads/product_photos', $fileName, 'public');
+        }
+
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'discount_id' => $request->discount_id,
+            'product_photo' => $productPhoto
+        ]);
 
         return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
     }
