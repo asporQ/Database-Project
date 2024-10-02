@@ -50,7 +50,8 @@
                             <button
                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-white focus:outline-none transition ease-in-out duration-150">
                                 <div title="{{ Auth::user()->username }}">
-                                    {{ strlen(Auth::user()->username) > 6 ? substr(Auth::user()->username, 0, 3) . '...' : Auth::user()->username }}
+                                    {{ strlen(Auth::user()->username) > 6 ? substr(Auth::user()->username, 0, 3) . '...'
+                                    : Auth::user()->username }}
                                 </div>
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +67,7 @@
                             <x-dropdown-link :href="route('profile.edit')" class="hover:bg-white">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="'/order'" class="hover:bg-white">
+                            <x-dropdown-link :href="'/orders'" class="hover:bg-white">
                                 {{ __('Order') }}
                             </x-dropdown-link>
                             <x-dropdown-link class="hover:bg-white">
