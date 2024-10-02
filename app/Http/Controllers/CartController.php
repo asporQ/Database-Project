@@ -8,6 +8,7 @@ use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class CartController extends Controller
         foreach ($cartItems as $item) {
 
             $discountValue = 0;
-            if ($item->product->discount) {
+            if ($item->product->discount && $item->product->discount->enddate >= Carbon::today()) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
             }
             $totalPrice += ($item->product->price - $discountValue) * $item->quantity;
@@ -98,7 +99,7 @@ class CartController extends Controller
                 return redirect()->route('cart.index')->with('error', $item->product->name . ' out of stock!');
             }
             $discountValue = 0;
-            if ($item->product->discount) {
+            if ($item->product->discount && $item->product->discount->enddate >= Carbon::today()) {
                 $discountValue = $item->product->price * $item->product->discount->discount_percentage / 100;
             }
             $totalPrice += ($item->product->price - $discountValue) * $item->quantity;

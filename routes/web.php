@@ -29,6 +29,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/discounts/create', [DiscountController::class, 'create'])->name('discounts.create');
     Route::post('/discounts', [DiscountController::class, 'store'])->name('discounts.store');
     Route::post('/products/update-discount', [ProductController::class, 'updateDiscount'])->name('products.updateDiscount');
+    Route::delete('discounts/{id}', [DiscountController::class, 'destroy'])->name('discounts.destroy');
+
 });
 
 // order

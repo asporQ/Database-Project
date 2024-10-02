@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->get();
 
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
 
         return view('products.index', compact('products', 'discounts'));
     }
@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
 
         return view('products.create', compact('categories', 'discounts'));
     }
@@ -30,7 +30,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $discount = Discount::find($product->id);
+        $discount = Discount::active()->get();
 
 
         if (!$product) {
@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function manageProducts()
     {
         $products = Product::with('discount')->get();
-        $discounts = Discount::all();
+        $discounts = Discount::active()->get();
         return view('products.manage_products', compact('products', 'discounts'));
     }
 
