@@ -50,7 +50,7 @@
                         <form action="{{ route('products.updateDiscount') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <select name="discount_id" class="border rounded px-2 py-1">
+                            <select name="discount_id" class="border rounded px-2 py-1" onchange="this.form.submit()">
                                 <option value="">No Discount</option>
                                 @foreach($discounts as $discount)
                                 <option value="{{ $discount->id }}" {{ $product->discount_id == $discount->id ?
@@ -60,8 +60,6 @@
                                 </option>
                                 @endforeach
                             </select>
-                            <button type="submit"
-                                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 ml-2">Update</button>
                         </form>
                     </td>
                     <td class="text-right px-4 py-2">
@@ -87,7 +85,7 @@
         href="{{ route('discounts.create') }}">Add Discount</a>
     <div class=" flex justify-end">
         <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold"
-            href="{{ route('dashboard') }}">Back to Dashboard</a>
+            href="{{ '/products' }}">Back to Products</a>
     </div>
 </body>
 
