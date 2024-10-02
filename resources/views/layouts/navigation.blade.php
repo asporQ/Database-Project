@@ -120,7 +120,7 @@
                     <a class="ms-4 text-white hover:text-[#F3B917]">SALES</a>
 
                 </div>
-                <a href="{{ url('products') }}" class="me-2 text-white hover:text-[#F3B917] my-4">CONTACT</a>
+                <a href="{{ url('contact') }}" class="me-2 text-white hover:text-[#F3B917] my-4">CONTACT</a>
             </div>
 
             <!-- Responsive Navigation Menu -->
