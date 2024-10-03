@@ -1,13 +1,13 @@
 <x-app-layout>
-    <div class="relative main">
-        <img src="{{ asset('bg.png') }}" alt="Background Image" class="h-screen w-full object-cover">
+    <div class="relative main sample-header-section">
+        <img src="{{ asset('bg.png') }}" alt="Background Image" class="h-screen w-full object-cover sample-header">
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center space-y-4">
             <h1 class="text-white text-4xl md:text-6xl font-bold drop-shadow-lg animate__animated animate__fadeInDown">
                 Cheers to the Good Times!
             </h1>
             <span class="text-ye text-xl font-light animate__animated animate__fadeInUp animate__delay-1s">SO FAR SO
                 GOOD</span>
-            <a href="#discover" class="mt-8 animate__animated animate__bounce animate__infinite">
+            <a href="#discover" class="mt-8 animate__animated animate__bounce animate__infinite smooth-scroll">
                 <svg class="w-8 h-8 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Section 1: Discover Our Selection -->
-    <div id="discover" class="py-16 bg-gray-100">
+    <div id="discover" class="py-16 bg-gray-100 sample-section">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 animate__animated animate__fadeIn">Discover Our Selection
             </h2>
@@ -52,7 +52,8 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 animate__animated animate__fadeIn">Featured Products</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div
+                    class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
                     <img src="{{ asset('Heineken-Lager.png') }}" alt="Heineken"
                         class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
                     <h3 class="text-lg font-semibold mb-2">Heineken Lager</h3>
@@ -61,7 +62,8 @@
                         class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
                         to Product</a>
                 </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div
+                    class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-1s">
                     <img src="{{ asset('pngtree-jack-daniels-bottle-png-image_10751958.png') }}" alt="pngtree-jack"
                         class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
                     <h3 class="text-lg font-semibold mb-2">Jack Daniel's</h3>
@@ -70,7 +72,8 @@
                         class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
                         to Product</a>
                 </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div
+                    class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
                     <img src="{{ asset('Jose Cuervo Gold Tequila.png') }}" alt="Jose Cuervo Gold Tequila"
                         class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
                     <h3 class="text-lg font-semibold mb-2">Jose Cuervo Gold Tequila</h3>
@@ -79,7 +82,8 @@
                         class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
                         to Product</a>
                 </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
+                <div
+                    class="bg-gray-100 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-3s">
                     <img src="{{ asset('CloudConvert 4211 4.png') }}" alt="CloudConvert 4211"
                         class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
                     <h3 class="text-lg font-semibold mb-2">CloudConvert 4211</h3>
@@ -97,11 +101,11 @@
     <div class="py-16 bg-gray-800 text-black">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
+                <div class="md:w-1/2 mb-8 md:mb-0 animate__animated animate__fadeInLeft">
                     <img src="{{ asset('OIP.png') }}" alt="Our Story" class="rounded-lg shadow-lg">
                 </div>
-                <div class="md:w-1/2 md:pl-12">
-                    <h2 class="text-3xl font-bold mb-6 animate__animated animate__fadeIn">Our Story</h2>
+                <div class="md:w-1/2 md:pl-12 animate__animated animate__fadeInRight">
+                    <h2 class="text-3xl font-bold mb-6">Our Story</h2>
                     <p class="text-lg mb-6 animate__animated animate__fadeIn animate__delay-1s">
                         Founded in 1995, our passion for quality drinks has driven us to curate the finest selection of
                         beers, wines, and spirits. We've traveled the world to bring you the best flavors and
@@ -121,7 +125,7 @@
             <h2 class="text-3xl font-bold text-center mb-12 animate__animated animate__fadeIn">What Our Customers Say
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInLeft">
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('R.png') }}" alt="Customer 1" class="w-12 h-12 rounded-full mr-4">
                         <div>
@@ -132,7 +136,7 @@
                     <p class="text-gray-600">"Amazing selection of craft beers. The staff is incredibly knowledgeable
                         and helped me find the perfect IPA!"</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInUp animate__delay-1s">
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('R.png') }}" alt="Customer 2" class="w-12 h-12 rounded-full mr-4">
                         <div>
@@ -143,7 +147,7 @@
                     <p class="text-gray-600">"The wine selection is top-notch. I found some rare bottles that I couldn't
                         find anywhere else."</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md animate__animated animate__fadeInRight animate__delay-2s">
                     <div class="flex items-center mb-4">
                         <img src="{{ asset('R.png') }}" alt="Customer 3" class="w-12 h-12 rounded-full mr-4">
                         <div>
@@ -163,11 +167,11 @@
     <footer class="bg-gray-900 text-black py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
+                <div class="animate__animated animate__fadeInLeft">
                     <h3 class="text-lg font-semibold mb-4">About Us</h3>
                     <p class="text-gray-400">Your premier destination for fine alcoholic beverages.</p>
                 </div>
-                <div>
+                <div class="animate__animated animate__fadeInUp animate__delay-1s">
                     <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="text-gray-400">
                         <li class="mb-2"><a href="#" class="hover:text-black transition duration-300">Home</a></li>
@@ -176,12 +180,13 @@
                         <li class="mb-2"><a href="#" class="hover:text-black transition duration-300">Contact</a></li>
                     </ul>
                 </div>
-                <div>
+                <div class="animate__animated animate__fadeInRight animate__delay-2s">
                     <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                    <p class="text-gray-400">123 Brewery Lane<br>Winevillage, BV 12345<br>Phone: (123)
-                        456-7890<br>Email: info@example.com</p>
+                    <p class="text-gray-400">123 Beer Street, Alcohol City, Cirrhosis<br>Winevillage, BV
+                        12345<br>Phone:+123-456-7890<br>Email:
+                        info@alcoholic.com</p>
                 </div>
-                <div>
+                <div class="animate__animated animate__fadeInUp animate__delay-3s">
                     <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
                     <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
                     <form class="flex">
@@ -192,9 +197,46 @@
                     </form>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 animate__animated animate__fadeIn">
                 <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.animate__animated').forEach(element => {
+            observer.observe(element);
+        });
+
+        function parallax_height() {
+            var scroll_top = $(this).scrollTop();
+            var sample_section_top = $(".sample-section").offset().top;
+            var header_height = $(".sample-header-section").outerHeight();
+            $(".sample-section").css({
+                "margin-top": header_height
+            });
+            $(".sample-header").css({
+                height: header_height - scroll_top
+            });
+        }
+        parallax_height();
+        $(window).scroll(function() {
+            parallax_height();
+        });
+        $(window).resize(function() {
+            parallax_height();
+        });
+    });
+    </script>
 </x-app-layout>
