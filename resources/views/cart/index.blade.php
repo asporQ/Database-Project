@@ -52,7 +52,6 @@
         </h2>
 
         @auth
-        @if($cartItems == [])
         <div class="  rounded-lg overflow-hidden mb-4">
             <div class="flex items-center p-4 ">
                 <!-- <div class="w-24 h-24"></div> -->
@@ -67,7 +66,6 @@
                 </div>
             </div>
         </div>
-        @endif
         <div x-data="cartHandler()">
             <ul>
                 <template x-for="item in cartItems" :key="item.id">
@@ -122,6 +120,7 @@
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
                             <div class="text-xl font-bold">Total Price: $<span x-text="totalPrice"></span></div>
                         </div>
+
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
                             <form class="inline-block">
                                 @csrf
@@ -146,8 +145,12 @@
             return {
                 cartItems: @json($cartItems),
                 get totalPrice() {
-                    return this.cartItems.reduce((total, item) => total + (item.product.price * (1 - (item.product.discount.discount_percentage / 100))  * item.quantity), 0)
-                    .toFixed(2);
+                    return this.cartItems.reduce((total, item) => {
+                    const price = item.product.discount 
+                        ? item.product.price * (1 - (item.product.discount.discount_percentage / 100)) 
+                        : item.product.price;
+                    return total + (price * item.quantity);
+                }, 0).toFixed(2);
                 },
                 alertMessage() {
                     $.ajax({

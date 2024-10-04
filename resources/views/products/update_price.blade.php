@@ -15,7 +15,7 @@
 
 <body class="bg-gray-100 p-6">
     <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 class="text-2xl font-bold mb-6">Adjust Price for {{ $product->name }}</h1>
+        <h1 class="text-2xl font-bold mb-6">Update Price for {{ $product->name }}</h1>
 
         <form action="{{ route('products.updatePrice', $product->id) }}" method="POST">
             @csrf
