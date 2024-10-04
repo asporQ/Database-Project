@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use App\Models\OrderItems;
 use App\Models\Transcript;
 use Illuminate\Http\Request;
@@ -38,13 +39,12 @@ class OrderController extends Controller
 
     public function viewTranscript(Order $order)
     {
-        $user = Auth::id();
-        $orders = Order::where('user_id', $user)->get();
-
         $transcript = Transcript::where('order_id', $order->id)->first();
 
-        $orderItems = OrderItems::with('Product')->get();
-        return view('orders.transcript', compact('order', 'orderItems', 'transcript'));
+        $user = User::where('id', Auth::id())->first();
+
+        $orderItems = OrderItems::where('order_id', $order->id)->with('Product')->get();
+        return view('orders.transcript', compact('user' ,'order', 'orderItems', 'transcript'));
     }
 
 }
