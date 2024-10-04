@@ -19,15 +19,17 @@
     @endif
 
 
-    <div class="overflow-auto" style="max-height: 800px;">
+    <div class="overflow-auto rounded" style="max-height: 800px;">
 
         <table class="text-left table-auto w-full bg-white shadow-md rounded-lg overflow-auto">
             <thead class="bg-gray-200 sticky top-0">
                 <tr>
+                    <th class="px-4 py-2">ID</th>
                     <th class="px-4 py-2">Name</th>
                     <th class="px-4 py-2">Price</th>
                     <th class="px-4 py-2">Stock</th>
                     <th class="px-4 py-2">Discount</th>
+                    <th class="px-4 py-2">Product Image</th>
                     <th class="text-right px-4 py-2">Remove Product</th>
                 </tr>
             </thead>
@@ -35,6 +37,7 @@
             <tbody>
                 @foreach ($products as $product)
                 <tr class="border-b">
+                    <td class="px-4 py-2">{{ $product->id }}</td>
                     <td class="px-4 py-2">{{ $product->name }}</td>
                     <td class="px-4 py-2">
                         <p>{{ $product->price }}</p>
@@ -50,7 +53,8 @@
                         <form action="{{ route('products.updateDiscount') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <select name="discount_id" class="border rounded px-2 py-1" onchange="this.form.submit()">
+                            <select name="discount_id" class="border rounded px-2 py-1 w-40"
+                                onchange="this.form.submit()">
                                 <option value="">No Discount</option>
                                 @foreach($discounts as $discount)
                                 <option value="{{ $discount->id }}" {{ $product->discount_id == $discount->id ?
@@ -62,6 +66,32 @@
                             </select>
                         </form>
                     </td>
+                    <td class="px-4 py-2">
+                        <div class="flex items-center space-x-4">
+                            <span>
+                                @if ($product->product_photo)
+                                <img alt="{{ $product->name }}" class="h-10 w-10 object-cover rounded-md"
+                                    src="{{ asset('storage/' . $product->product_photo) }}">
+                                @else
+                                <span class="text-center">
+                                    <p>No</p>
+                                    <p>Photo</p>
+                                </span>
+                                @endif
+                            </span>
+                            <span>
+                                <form action="{{ route('products.updateImage', $product->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="product_photo" accept="image/*"
+                                        class="border rounded px-2 py-1 mb-2 w-40">
+                                    <button class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
+                                        type="submit">Update Image</button>
+                                </form>
+                            </span>
+                        </div>
+                    </td>
+
                     <td class="text-right px-4 py-2">
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST"
                             style="display:inline;">

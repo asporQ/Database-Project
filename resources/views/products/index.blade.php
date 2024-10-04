@@ -96,13 +96,14 @@
                 @foreach ($products as $product)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
                     <div class="flex justify-end p-4">
-                        <p class="text-sm text-gray-500 font-bold">Stock: <span
-                                class="font-bold text-2xl">{{ $product->stock }}</span></p>
+                        <p class="text-sm text-gray-500 font-bold">Stock: <span class="font-bold text-2xl">{{
+                                $product->stock }}</span></p>
                     </div>
                     <div class="flex justify-center">
                         <img alt="{{ $product->name }}" class="h-44 w-36 object-cover rounded-md mt-2"
-                            src="{{ asset('storage/' . $product->product_photo) }}">
+                            src="{{ $product->product_photo ? asset('storage/' . $product->product_photo) : asset('storage/default_photo.png') }}">
                     </div>
+
                     <div class="p-4 flex-1 flex flex-col justify-between">
                         <div class="text-center">
                             <h2 class="text-2xl font-semibold text-[#474543] truncate">{{ $product->name }}</h2>
@@ -137,7 +138,7 @@
             </div>
         </div>
         <script>
-        $(document).ready(function() {
+            $(document).ready(function() {
             $('.add-to-cart-form').on('submit', function(e) {
                 e.preventDefault();
 

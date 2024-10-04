@@ -17,28 +17,30 @@
 
 <body class="h-full bg-[#FCF7EC]">
 
-    
+
 
     @auth
     <div class="container mx-auto px-[10%] py-8">
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h1 class="text-xl font-bold mb-4">Order Transcript - Order ID: {{ $order->id }}</h1>
 
-            <div class="mb-4">
-                <h3 class="text-lg font-semibold text-gray-700 mb-2">Order Items:</h3>
-                <ul class="list-disc list-inside space-y-2">
-                    @foreach ($orderItems as $item)
-                    @if ($order->id == $item->order_id)
-                    <li class="text-gray-600">- {{ $item->product->name }} (x{{ $item->quantity }})</li>
-                    @endif
-                    @endforeach
-                </ul>
-            </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <p><strong>User:</strong> <span class="text-gray-600">{{ $order->user_id }}</span>
+
+                    <p><strong>Customer:</strong> <span class="text-gray-600">{{ $user->first_name }} {{
+                            $user->last_name }}</span>
                     </p>
+                    <div class="mb-4 py-2">
+                        <p><strong>Order Items:</strong></p>
+                        <ul class="list-disc list-inside space-y-2">
+                            @foreach ($orderItems as $item)
+                            @if ($order->id == $item->order_id)
+                            <li class="text-gray-600 mx-6"> {{ $item->product->name }} (x{{ $item->quantity }})</li>
+                            @endif
+                            @endforeach
+
+                        </ul>
+                    </div>
                     <p><strong>Total Price:</strong> <span class="text-gray-600">${{
                             number_format($order->total_price, 2) }}</span></p>
                 </div>
