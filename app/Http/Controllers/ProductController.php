@@ -12,9 +12,27 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category')->get();
+        $unUpdateProducts = Product::with('category')->get();
 
-        $discounts = Discount::active()->get();
+        $discounts = Discount::active()->get()->keyBy('id');
+
+        $productsToReset = [];
+
+        foreach ($unUpdateProducts as $product) {
+            if ($product->discount_id !== null) {
+                if (!isset($discounts[$product->discount_id])) {
+                    $productsToReset[] = $product->id;
+                }
+            }
+
+            if (!empty($productsToReset)) {
+            Product::whereIn('id', $productsToReset)
+                ->update(['discount_id' => null]);
+            }
+        }
+
+        $products = Product::with('category')->get();
+        
 
         return view('products.index', compact('products', 'discounts'));
     }
