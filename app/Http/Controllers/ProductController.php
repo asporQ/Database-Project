@@ -171,34 +171,24 @@ class ProductController extends Controller
         return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
     }
 
-    public function updateProductPhoto(Request $request)
+    public function updateProductPhoto(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'discount_id' => 'nullable|exists:discounts,id',
-            'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $product = Product::findOrFail($id);
 
         $productPhoto = null;
         if ($request->hasFile('product_photo')) {
             $fileName = time() . '_' . $request->file('product_photo')->getClientOriginalName();
             $productPhoto = $request->file('product_photo')->storeAs('uploads/product_photos', $fileName, 'public');
+        
+        
+            $product->product_photo = $productPhoto;
+            $product->save();
         }
 
-        Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'discount_id' => $request->discount_id,
-            'product_photo' => $productPhoto
-        ]);
-
-        return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
+        return redirect()->route('products.manage')->with('success', 'Product image updated successfully!');
     }
 }

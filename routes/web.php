@@ -22,6 +22,8 @@ Route::middleware('admin')->group(function () {
     Route::patch('/products/{id}/stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
     Route::get('/products/{id}/price', [ProductController::class, 'showUpdatePriceForm'])->name('products.showUpdatePriceForm');
     Route::patch('/products/{id}/price', [ProductController::class, 'updatePrice'])->name('products.updatePrice');
+    Route::post('/products/{id}/updateImage', [ProductController::class, 'updateProductPhoto'])->name('products.updateImage');
+
 });
 
 // Discount
