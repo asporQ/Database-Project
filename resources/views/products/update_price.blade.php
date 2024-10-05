@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Manage</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-</head>
-
-<body class="bg-gray-100 p-6">
-    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+<x-app-layout>
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md py-24 mt-12">
         <h1 class="text-2xl font-bold mb-6">Update Price for {{ $product->name }}</h1>
 
         <form action="{{ route('products.updatePrice', $product->id) }}" method="POST">
@@ -38,6 +23,4 @@
             </div>
         </form>
     </div>
-</body>
-
-</html>
+</x-app-layout>

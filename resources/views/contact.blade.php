@@ -5,7 +5,7 @@
         </div>
     </x-slot>
 
-    <div class="container mx-auto px-4 py-12">
+    <div class="container mx-auto px-4 py-12 overflow-auto min-h-screen">
         <!-- Grid layout for map and contact info -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Google Map (Left Column) -->
@@ -31,18 +31,33 @@
                     </div>
                     <div class="flex items-center">
                         <span class="font-semibold text-lg text-gray-600 mr-4">Email:</span>
-                        <a href="mailto:info@alcoholic.com" class="text-blue-600 hover:underline">info@alcoholic.com</a>
+                        <a href="mailto:info@alcoholic.com" class="text-blue-600 hover:underline">info@sofarsogoodshop.com</a>
                     </div>
                     <div class="flex items-center">
                         <span class="font-semibold text-lg text-gray-600 mr-4">Facebook:</span>
-                        <a href="https://www.facebook.com/yourprofile" target="_blank" class="text-blue-600 hover:underline">facebook.com/alcoholic</a>
+                        <a href="https://www.facebook.com/yourprofile" target="_blank" class="text-blue-600 hover:underline">facebook.com/sofarsogoodshop</a>
                     </div>
                     <div class="flex items-center">
                         <span class="font-semibold text-lg text-gray-600 mr-4">Address:</span>
                         <span class="text-gray-700">123 Beer Street, Alcohol City, Cirrhosis</span>
                     </div>
+                    <div class="flex items-center">
+                        <span class="font-semibold text-lg text-gray-600 mr-4">Twitter:</span>
+                        <a href="https://twitter.com/yourprofile" target="_blank" class="text-blue-600 hover:underline">twitter.com/sofarsogoodshop</a>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-semibold text-lg text-gray-600 mr-4">Instagram:</span>
+                        <a href="https://www.instagram.com/in/yourprofile" target="_blank" class="text-blue-600 hover:underline">instagram.com/sofarsogoodshop</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class=" py-6 mt-12">
+        <div class="container mx-auto text-center text-black">
+            <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+        </div>
+    </footer>
 </x-app-layout>

@@ -1,28 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset=" UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Product List</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-</head>
-
-@include('layouts.navigation')
-
-<body class="h-full bg-[#FCF7EC]">
-
-
-    @auth
-    <div class="container mx-auto px-[10%] py-1">
+<x-app-layout>
+    <x-slot name="header">
         <h2 class="font-black font-inter text-4xl text-gray-800 leading-tight my-3">
             {{ __('Transcript') }}
         </h2>
+    </x-slot>
+
+    @auth
+    <div class="container mx-auto px-[10%] py-1">
         <!-- Check if any order has the status 'Awaiting payment' -->
         @php
         $hasAwaitingPayment = $orders->contains('status', 'Awaiting payment');
@@ -127,7 +111,6 @@
         @endif
     </div>
     @endauth
-
-</body>
-
-</html>
+    
+    
+</x-app-layout>

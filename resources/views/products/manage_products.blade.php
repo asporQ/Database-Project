@@ -1,122 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Manage Products') }}
+        </h2>
+    </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Manage Products</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                @if (session('success'))
+                    <div class="alert alert-success bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-<body class="bg-gray-100 p-6">
-    <h1 class="text-3xl font-bold mb-6">Manage Products</h1>
+                <div class="overflow-auto rounded" style="max-height: 800px;">
+                    <table class="text-left table-auto w-full bg-white shadow-md rounded-lg overflow-auto">
+                        <thead class="bg-gray-200 sticky top-0">
+                            <tr>
+                                <th class="px-4 py-2">ID</th>
+                                <th class="px-4 py-2">Name</th>
+                                <th class="px-4 py-2">Price</th>
+                                <th class="px-4 py-2">Stock</th>
+                                <th class="px-4 py-2">Discount</th>
+                                <th class="px-4 py-2">Product Image</th>
+                                <th class="text-right px-4 py-2">Remove Product</th>
+                            </tr>
+                        </thead>
 
-    @if (session('success'))
-    <div
-        class="alert alert-success bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-        {{ session('success') }}
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr class="border-b">
+                                    <td class="px-4 py-2">{{ $product->id }}</td>
+                                    <td class="px-4 py-2">{{ $product->name }}</td>
+                                    <td class="px-4 py-2">
+                                        <p>{{ $product->price }}</p>
+                                        <a class="text-blue-500 hover:text-blue-700" href="{{ route('products.showUpdatePriceForm', $product->id) }}">Update Price</a>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <p>{{ $product->stock }}</p>
+                                        <a class="text-yellow-500 hover:text-yellow-700" href="{{ route('products.showUpdateStockForm', $product->id) }}">Update Stock</a>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <form action="{{ route('products.updateDiscount') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <select name="discount_id" class="border rounded px-2 py-1 w-40" onchange="this.form.submit()">
+                                                <option value="">No Discount</option>
+                                                @foreach($discounts as $discount)
+                                                    <option value="{{ $discount->id }}" {{ $product->discount_id == $discount->id ? 'selected' : '' }}>
+                                                        {{ $discount->discount_percentage }}% ({{ $discount->start_date }} - {{ $discount->end_date }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </form>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <div class="flex items-center space-x-4">
+                                            <span>
+                                                @if ($product->product_photo)
+                                                    <img alt="{{ $product->name }}" class="h-10 w-10 object-cover rounded-md" src="{{ asset('storage/' . $product->product_photo) }}">
+                                                @else
+                                                    <span class="text-center">
+                                                        <p>No</p>
+                                                        <p>Photo</p>
+                                                    </span>
+                                                @endif
+                                            </span>
+                                            <span>
+                                                <form action="{{ route('products.updateImage', $product->id) }}" method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <input type="file" name="product_photo" accept="image/*" class="border rounded px-2 py-1 mb-2 w-40">
+                                                    <button class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700" type="submit">Update Image</button>
+                                                </form>
+                                            </span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-right px-4 py-2">
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="bg-red-500 text-white px-2 py-2 rounded hover:bg-red-700 ml-14" onclick="return confirm('Are you sure you want to delete this product?');" type="submit">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block" href="{{ route('products.create') }}">Add Product</a>
+                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block" href="{{ route('discounts.create') }}">Add Discount</a>
+                <div class="flex justify-end">
+                    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold" href="{{ '/products' }}">Back to Products</a>
+                </div>
+            </div>
+        </div>
     </div>
-    @endif
-
-
-    <div class="overflow-auto rounded" style="max-height: 800px;">
-
-        <table class="text-left table-auto w-full bg-white shadow-md rounded-lg overflow-auto">
-            <thead class="bg-gray-200 sticky top-0">
-                <tr>
-                    <th class="px-4 py-2">ID</th>
-                    <th class="px-4 py-2">Name</th>
-                    <th class="px-4 py-2">Price</th>
-                    <th class="px-4 py-2">Stock</th>
-                    <th class="px-4 py-2">Discount</th>
-                    <th class="px-4 py-2">Product Image</th>
-                    <th class="text-right px-4 py-2">Remove Product</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($products as $product)
-                <tr class="border-b">
-                    <td class="px-4 py-2">{{ $product->id }}</td>
-                    <td class="px-4 py-2">{{ $product->name }}</td>
-                    <td class="px-4 py-2">
-                        <p>{{ $product->price }}</p>
-                        <a class="text-blue-500 hover:text-blue-700"
-                            href="{{ route('products.showUpdatePriceForm', $product->id) }}">Update Price</a>
-                    </td>
-                    <td class="px-4 py-2">
-                        <p>{{ $product->stock }}</p>
-                        <a class="text-yellow-500 hover:text-yellow-700"
-                            href="{{ route('products.showUpdateStockForm', $product->id) }}">Update Stock</a>
-                    </td>
-                    <td class="px-4 py-2">
-                        <form action="{{ route('products.updateDiscount') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <select name="discount_id" class="border rounded px-2 py-1 w-40"
-                                onchange="this.form.submit()">
-                                <option value="">No Discount</option>
-                                @foreach($discounts as $discount)
-                                <option value="{{ $discount->id }}" {{ $product->discount_id == $discount->id ?
-                                    'selected' : '' }}>
-                                    {{ $discount->discount_percentage }}% ({{ $discount->start_date }} -
-                                    {{ $discount->end_date }})
-                                </option>
-                                @endforeach
-                            </select>
-                        </form>
-                    </td>
-                    <td class="px-4 py-2">
-                        <div class="flex items-center space-x-4">
-                            <span>
-                                @if ($product->product_photo)
-                                <img alt="{{ $product->name }}" class="h-10 w-10 object-cover rounded-md"
-                                    src="{{ asset('storage/' . $product->product_photo) }}">
-                                @else
-                                <span class="text-center">
-                                    <p>No</p>
-                                    <p>Photo</p>
-                                </span>
-                                @endif
-                            </span>
-                            <span>
-                                <form action="{{ route('products.updateImage', $product->id) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="product_photo" accept="image/*"
-                                        class="border rounded px-2 py-1 mb-2 w-40">
-                                    <button class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
-                                        type="submit">Update Image</button>
-                                </form>
-                            </span>
-                        </div>
-                    </td>
-
-                    <td class="text-right px-4 py-2">
-                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
-                            style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="bg-red-500 text-white px-2 py-2 rounded hover:bg-red-700 ml-14"
-                                onclick="return confirm('Are you sure you want to delete this product?');"
-                                type="submit">Remove</button>
-                        </form>
-                    </td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
-        href="{{ route('products.create') }}">Add Product</a>
-    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
-        href="{{ route('discounts.create') }}">Add Discount</a>
-    <div class=" flex justify-end">
-        <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold"
-            href="{{ '/products' }}">Back to Products</a>
-    </div>
-</body>
-
-</html>
+</x-app-layout>
