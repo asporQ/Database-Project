@@ -7,7 +7,7 @@
             </h1>
             <span class="text-yellowy text-xl font-light animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO FAR SO
                 GOOD</span>
-            <a href="#discover" class="mt-8 animate__animated animate__bounce animate__infinite smooth-scroll">
+                       <a href="#discover" class="mt-8 animate__animated animate__bounceIn animate__infinite smooth-scroll" onclick="event.preventDefault(); document.querySelector('#discover').scrollIntoView({ behavior: 'smooth', block: 'start' });">
                 <svg class="w-8 h-8 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>

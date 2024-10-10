@@ -55,6 +55,10 @@ Route::get('/categories', function () {
     return view('category');
 });
 
+Route::get('/stories', function () {
+    return view('story');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

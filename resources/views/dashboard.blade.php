@@ -7,7 +7,7 @@
             </h1>
             <span class="text-yellowy text-xl font-light animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO FAR SO
                 GOOD</span>
-            <a href="#discover" class="mt-8 animate__animated animate__bounceIn animate__infinite smooth-scroll">
+            <a href="#discover" class="mt-8 animate__animated animate__bounceIn animate__infinite smooth-scroll" onclick="event.preventDefault(); document.querySelector('#discover').scrollIntoView({ behavior: 'smooth', block: 'start' });">
                 <svg class="w-8 h-8 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round"
                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -52,47 +52,50 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 animate__animated animate__fadeIn">Featured Products</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div
-                    class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
-                    <img src="{{ asset('Heineken-Lager.png') }}" alt="Heineken"
-                        class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
-                    <h3 class="text-lg font-semibold mb-2">Heineken Lager</h3>
-                    <p class="text-gray-600 mb-4">A hoppy delight with citrus notes</p>
-                    <a href="{{ url('products') }}"
-                        class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
-                        to Product</a>
-                </div>
-                <div
-                    class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-1s">
-                    <img src="{{ asset('pngtree-jack-daniels-bottle-png-image_10751958.png') }}" alt="pngtree-jack"
-                        class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
-                    <h3 class="text-lg font-semibold mb-2">Jack Daniel's</h3>
-                    <p class="text-gray-600 mb-4">A classic Tennessee whiskey with a smooth and rich flavor</p>
-                    <a href="{{ url('products') }}"
-                        class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
-                        to Product</a>
-                </div>
-                <div
-                    class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
-                    <img src="{{ asset('Jose Cuervo Gold Tequila.png') }}" alt="Jose Cuervo Gold Tequila"
-                        class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
-                    <h3 class="text-lg font-semibold mb-2">Jose Cuervo Gold Tequila</h3>
-                    <p class="text-gray-600 mb-4">A smooth and rich tequila with a hint of vanilla and caramel</p>
-                    <a href="{{ url('products') }}"
-                        class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
-                        to Product</a>
-                </div>
-                <div
-                    class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-3s">
-                    <img src="{{ asset('CloudConvert 4211 4.png') }}" alt="CloudConvert 4211"
-                        class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
-                    <h3 class="text-lg font-semibold mb-2">CloudConvert 4211</h3>
-                    <p class="text-gray-600 mb-4">A premium whiskey with a rich and smoky flavor</p>
-                    <a href="{{ url('products') }}"
-                        class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
-                        to Product</a>
-                </div>
-
+            <div
+                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
+                <img src="{{ asset('Heineken-Lager.png') }}" alt="Heineken"
+                class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
+                <h3 class="text-lg font-semibold mb-2">Heineken Lager</h3>
+                <p class="text-gray-600 mb-4">A hoppy delight with citrus notes</p>
+                <a href="{{ url('products') }}"
+                class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
+                to Product</a>
+            </div>
+            <div
+                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-1s">
+                <img src="{{ asset('pngtree-jack-daniels-bottle-png-image_10751958.png') }}" alt="pngtree-jack"
+                class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
+                <h3 class="text-lg font-semibold mb-2">Jack Daniel's</h3>
+                <p class="text-gray-600 mb-4">A classic Tennessee whiskey with a smooth and rich flavor</p>
+                <a href="{{ url('products') }}"
+                class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
+                to Product</a>
+            </div>
+            <div
+                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                <img src="{{ asset('Jose Cuervo Gold Tequila.png') }}" alt="Jose Cuervo Gold Tequila"
+                class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
+                <h3 class="text-lg font-semibold mb-2">Jose Cuervo Gold Tequila</h3>
+                <p class="text-gray-600 mb-4">A smooth and rich tequila with a hint of vanilla and caramel</p>
+                <a href="{{ url('products') }}"
+                class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
+                to Product</a>
+            </div>
+            <div
+                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-3s">
+                <img src="{{ asset('CloudConvert 4211 4.png') }}" alt="CloudConvert 4211"
+                class="w-full h-48 object-cover rounded-md mb-4" style="object-fit: contain;">
+                <h3 class="text-lg font-semibold mb-2">CloudConvert 4211</h3>
+                <p class="text-gray-600 mb-4">A premium whiskey with a rich and smoky flavor</p>
+                <a href="{{ url('products') }}"
+                class="bg-yellowy text-black px-4 py-2 rounded-full hover:bg-yellow-600 transition duration-300">Go
+                to Product</a>
+            </div>
+            </div>
+            <div class="text-center mt-8">
+            <a href="{{ url('products') }}"
+                class="bg-yellowy text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-600 transition duration-300">More Products</a>
             </div>
         </div>
     </div>
@@ -203,40 +206,5 @@
         </div>
     </footer>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate__animated');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.animate__animated').forEach(element => {
-            observer.observe(element);
-        });
-
-        function parallax_height() {
-            var scroll_top = $(this).scrollTop();
-            var sample_section_top = $(".sample-section").offset().top;
-            var header_height = $(".sample-header-section").outerHeight();
-            $(".sample-section").css({
-                "margin-top": header_height
-            });
-            $(".sample-header").css({
-                height: header_height - scroll_top
-            });
-        }
-        parallax_height();
-        $(window).scroll(function() {
-            parallax_height();
-        });
-        $(window).resize(function() {
-            parallax_height();
-        });
-    });
-    </script>
+    
 </x-app-layout>
