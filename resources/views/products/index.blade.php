@@ -16,12 +16,12 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10">
 
         <div class="h-auto sm:rounded-md mt-1 pt-10">
-            <div class="mt-10 text-5xl">OUR PRODUCTS</div>
+            <div class="mt-10 text-5xl font-bold mb-8">OUR PRODUCTS</div>
 
             <div class="text-xl flex justify-end">
                 <form method="GET" action="{{ route('products.index') }}" class="flex space-x-4">
 
-                    <select name="category" class="border rounded px-10 py-1">
+                    <select name="category" class="border rounded px-2 py-1">
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category')==$category->id ? 'selected' :
@@ -31,7 +31,7 @@
                         @endforeach
                     </select>
 
-                    <select name="discount" class="border rounded px-10 py-1">
+                    <select name="discount" class="border rounded px-2 py-1">
                         <option value="">All Discounts</option>
 
                         <option value="5" {{ request('discount')==5 ? 'selected' : '' }}>5% and above
@@ -49,6 +49,18 @@
                             ? 'checked' : '' }}>
                         <label for="in_stock" class="ml-3 items-center">In Stock</label>
                     </div>
+
+                    <select name="sort" class="border rounded p-2">
+                        <option value="">Sort By</option>
+                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>Price: Low to
+                            High</option>
+                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: High to
+                            Low</option>
+                        <option value="name_asc" {{ request('sort')=='name_asc' ? 'selected' : '' }}>Name: A to Z
+                        </option>
+                        <option value="name_desc" {{ request('sort')=='name_desc' ? 'selected' : '' }}>Name: Z to A
+                        </option>
+                    </select>
 
                     <button type="submit" class="bg-blue-500 text-white rounded px-5 py-1">Filter</button>
                 </form>
@@ -166,60 +178,33 @@
                             </div>
                             @endif
                         </form>
-                        @if ($product->stock <= 0 ) <button onclick="notifyMe(this);"
-                            class="flex justify-center items-center w-15 mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
-                            NOTIFY ME WHEN AVAILABLE
-                            </button>
-
-                            <script>
-                                // Check localStorage for the button state on page load
-                                window.onload = function() {
-                                    const button = document.getElementById('notifyButton');
-                                    const isDisabled = localStorage.getItem('notifyButtonDisabled');
-                            
-                                    if (isDisabled === 'true') {
-                                        button.disabled = true;
-                                        button.textContent = 'We will notify you when we fill stock';
-                                        button.style.backgroundColor = 'grey';
-                                    }
-                                };
-                            
-                                function notifyMe(button) {
-                                    // Show alert message
-                                    alert('We will notify you when this product is back in stock!');
-                                    
-                                    // Disable the button, update the text, and change background color to grey
-                                    button.disabled = true;
-                                    button.textContent = 'We will notify you when we fill stock';
-                                    button.style.backgroundColor = 'grey';
-                            
-                                    // Save the disabled state in localStorage
-                                    localStorage.setItem('notifyButtonDisabled', 'true');
-                                }
-                            </script>
-                            @endif
-
-                            @else
-                            <a href="{{ route('login') }}" class="mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
-                                LOGIN FOR PRICE AND TO ORDER
-                            </a>
-                            @endauth
+                        @if ($product->stock <= 0 ) <div
+                            class="bg-gray-500 ml-2 mt-2 text-center text-xl rounded my-2 p-2 text-white">
+                            BACK SOON!
                     </div>
-                </div>
-                @endforeach
-            </div>
+                    @endif
 
-            <div class="mt-4">
-                {{ $products->links() }}
-                <!-- Pagination Links -->
-            </div>
-
-            <footer class=" py-6 mt-12">
-                <div class="container mx-auto text-center text-black">
-                    <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+                    @else
+                    <a href="{{ route('login') }}" class="mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
+                        LOGIN FOR PRICE AND TO ORDER
+                    </a>
+                    @endauth
                 </div>
-            </footer>
+            </div>
+            @endforeach
         </div>
+
+        <div class="mt-4">
+            {{ $products->links() }}
+            <!-- Pagination Links -->
+        </div>
+
+        <footer class=" py-6 mt-12">
+            <div class="container mx-auto text-center text-black">
+                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
