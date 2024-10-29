@@ -20,6 +20,7 @@ export default {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
                 inter: ["Inter", ...defaultTheme.fontFamily.sans],
+                Alumni: ["Alumni", ...defaultTheme.fontFamily.sans],
             },
         },
     },
