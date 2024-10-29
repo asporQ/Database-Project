@@ -21,7 +21,8 @@
                     <div class="p-4 flex-1 flex flex-col justify-between overflow-hidden">
                         <div class="text-center overflow-hidden">
                             <h2 class="text-2xl font-semibold text-[#474543] truncate">{{ $product->name }}</h2>
-                            <p class="mt-1 text-sm text-gray-600 overflow-ellipsis overflow-hidden">{{ $product->description }}</p>
+                            <p class="mt-1 text-sm text-gray-600 overflow-ellipsis overflow-hidden">{{
+                                $product->description }}</p>
                             <p class="mt-1 text-sm text-gray-600">
                                 Price: <span class="font-bold text-[#F3B917] text-2xl">${{ $product->price }}</span>
                             </p>
@@ -40,7 +41,8 @@
                             <div class="flex justify-center items-center mt-2">
                                 <input min="1" name="quantity" class="w-16 p-1 border rounded" type="number" value="1"
                                     max="{{ $product->stock }}">
-                                <button class="btn btn-primary font-bold ml-2 p-2 bg-yellowy text-black rounded" type="submit">Add to Cart</button>
+                                <button class="btn btn-primary font-bold ml-2 p-2 bg-yellowy text-black rounded"
+                                    type="submit">Add to Cart</button>
                             </div>
                         </form>
                         @else
@@ -52,13 +54,15 @@
             </div>
 
             <footer class=" py-6 mt-12">
-        <div class="container mx-auto text-center text-black">
-            <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+                <div class="container mx-auto text-center text-black">
+                    <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+                </div>
+            </footer>
         </div>
-    </footer>
-        </div>
-        <script>
-            $(document).ready(function() {
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
                 $('.add-to-cart-form').on('submit', function(e) {
                     e.preventDefault();
 
@@ -91,6 +95,6 @@
                     }
                 });
             });
-        </script>
-    </div>
+    </script>
+
 </x-app-layout>

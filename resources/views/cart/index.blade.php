@@ -27,8 +27,9 @@
                         <a class="block">
                             <div class="flex items-center p-4">
                                 <div class="w-24 h-24 bg-gray-300 rounded-md mr-4"
-                                    :style="'background-image: url(' + item.product.product_photo + '); background-size: cover; background-position: center;'">
+                                    :style="'background-image: url(' + (item.product.product_photo ? item.product.product_photo : '{{ asset('storage/default_photo.png') }}') + '); background-size: cover; background-position: center;'">
                                 </div>
+
                                 <div class="flex-1">
                                     <span class="text-xl font-semibold" x-text="item.product.name"></span>
                                     <div class="text-sm text-gray-600" x-text="item.product.description"></div>
@@ -86,9 +87,18 @@
                 </template>
             </ul>
         </div>
+        @endauth
 
-        <script>
-            function cartHandler() {
+        <footer class=" py-6 mt-96">
+            <div class="container mx-auto text-center text-black">
+                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function cartHandler() {
                 return {
                     cartItems: @json($cartItems),
                     get totalPrice() {
@@ -136,13 +146,6 @@
                     }
                 }
             }
-        </script>
-        @endauth
+    </script>
 
-                    <footer class=" py-6 mt-96">
-        <div class="container mx-auto text-center text-black">
-            <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
-        </div>
-    </footer>
-    </div>
 </x-app-layout>
