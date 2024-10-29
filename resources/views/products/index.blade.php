@@ -1,8 +1,16 @@
 <x-app-layout>
 
+    @php
+    $highestDiscount = $discounts->max('discount_percentage');
+    @endphp
+
+    @if($highestDiscount)
     <div class="fixed top-0 left-0 right-0 bg-ye text-white p-4 hidden" style="z-index: 1000;" id="scroll-bar">
-        <p>Special Offers and Discounts Now!</p>
+
+        <p>Special Offers Up to {{ $highestDiscount }}% off!</p>
+
     </div>
+    @endif
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden">
         <div class="h-auto sm:rounded-md mt-1">
@@ -18,8 +26,8 @@
                             In Stock: {{ $product->stock }}
                             @else
                             <span class="text-white px-1 rounded text-sm flex items-center justify-center">Sold
-                                Out</spaan>
-                                @endif
+                                Out</span>
+                            @endif
                         </div>
                         @endauth
                         <div class="flex justify-center">
@@ -44,7 +52,8 @@
                             </span>
                             <span style="margin-left: 10px; font-weight: bold;"
                                 class="font-Alumni  text-green text-2xl">
-                                ${{ number_format($product->price * $product->discount->discount_percentage/100, 2) }}
+                                ${{ number_format(floor($product->price * (1 -
+                                $product->discount->discount_percentage/100) * 100) / 100, 2) }}
                             </span>
                         </p>
                         <div class="mt-1 text-sm text-black pt-1">
@@ -56,7 +65,7 @@
                         </div>
 
                         <script>
-                        document.addEventListener('DOMContentLoaded', function() {
+                            document.addEventListener('DOMContentLoaded', function() {
                             var endDate = new Date("{{ $product->discount->end_date }}").getTime();
 
                             var countdownFunction = setInterval(function() {
@@ -141,7 +150,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
 
