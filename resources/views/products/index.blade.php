@@ -1,7 +1,7 @@
 <x-app-layout>
 
-    <div class="fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 hidden" style="z-index: 1000;" id="scroll-bar">
-        <p>Special Offers and Discounts!</p>
+    <div class="fixed top-0 left-0 right-0 bg-ye text-white p-4 hidden" style="z-index: 1000;" id="scroll-bar">
+        <p>Special Offers and Discounts Now!</p>
     </div>
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden">
@@ -13,7 +13,7 @@
                     <div class="relative">
                         @auth
                         <div
-                            class="absolute top-5 right-1 w-22 h-8 flex items-center justify-center bg-yellowy text-white text-sm font-bold px-1 rounded">
+                            class="absolute top-5 right-1 w-22 h-8 flex items-center justify-center bg-yellowy text-white text-sm font-Alumni px-1 rounded">
                             @if ($product->stock > 0)
                             In Stock: {{ $product->stock }}
                             @else
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="p-4 flex-1 flex flex-col justify-between overflow-hidden text-center">
-                        <h2 class="text-2xl font-semibold text-[#474543] truncate">{{ $product->name }}</h2>
+                        <h2 class="text-2xl font-Alumni text-[#474543] truncate">{{ $product->name }}</h2>
                         <p class="mt-1 text-sm text-gray-600 overflow-ellipsis overflow-hidden">{{
                             $product->description }}</p>
                         @auth
@@ -39,10 +39,11 @@
                         @if ($product->discount && isset($product->discount->discount_percentage))
                         <p class="mt-1 text-sm text-gray-600">
                             Price:
-                            <span style="text-decoration: line-through;" class="font-bold text-[#F3B917] text-2xl">
+                            <span style="text-decoration: line-through;" class="font-Alumni text-[#F3B917] text-2xl">
                                 ${{ number_format($product->price, 2) }}
                             </span>
-                            <span style="margin-left: 10px; font-weight: bold;" class="font-bold  text-green text-2xl">
+                            <span style="margin-left: 10px; font-weight: bold;"
+                                class="font-Alumni  text-green text-2xl">
                                 ${{ number_format($product->price * $product->discount->discount_percentage/100, 2) }}
                             </span>
                         </p>
@@ -55,35 +56,40 @@
                         </div>
 
                         <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var endDate = new Date("{{ $product->discount->end_date }}").getTime();
-                    
-                                var countdownFunction = setInterval(function() {
-                                    var now = new Date().getTime();
-                                    var distance = endDate - now;
-                    
-                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    
-                                    document.getElementById("countdown-{{$product->id}}").innerHTML = days + "d " + hours + "h "
-                                    + minutes + "m " + seconds + "s ";
-                    
-                                    if (distance < 0) {
-                                        clearInterval(countdownFunction);
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML = "Discount has ended";
-                                    } else if (distance < 86400000) {
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
-                                    } else {
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML = days + "d " + hours + "h ";
-                                    }
-                                }, 1000);
-                            });
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var endDate = new Date("{{ $product->discount->end_date }}").getTime();
+
+                            var countdownFunction = setInterval(function() {
+                                var now = new Date().getTime();
+                                var distance = endDate - now;
+
+                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 *
+                                    60));
+                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                document.getElementById("countdown-{{$product->id}}").innerHTML = days +
+                                    "d " + hours + "h " +
+                                    minutes + "m " + seconds + "s ";
+
+                                if (distance < 0) {
+                                    clearInterval(countdownFunction);
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        "Discount has ended";
+                                } else if (distance < 86400000) {
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        hours + "h " + minutes + "m " + seconds + "s ";
+                                } else {
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        days + "d " + hours + "h ";
+                                }
+                            }, 1000);
+                        });
                         </script>
                         @else
                         <p class="mt-1 text-sm text-gray-600">
-                            Price: <span class="font-bold text-[#F3B917] text-2xl">${{ $product->price }}</span>
+                            Price: <span class="font-Alumni text-[#F3B917] text-2xl">${{ $product->price }}</span>
                         </p>
                         @endif
 
@@ -98,7 +104,8 @@
                             <div class="flex justify-center items-center mt-2">
                                 <input min="1" name="quantity" class="w-16 p-1 border rounded" type="number" value="1"
                                     max="{{ $product->stock }}">
-                                <button class="btn btn-primary  font-bold ml-2 p-2 bg-yellowy text-black rounded"
+                                <button
+                                    class="btn btn-primary  font-Alumni font-semibold ml-2 p-2 bg-yellowy text-black rounded"
                                     type="submit">Add to Cart</button>
                             </div>
                             @else
@@ -109,7 +116,7 @@
                             @endif
                         </form>
                         @else
-                        <a href="{{ route('login') }}" class="mt-2 text-center bg-yellowy rounded m-2 font-bold"
+                        <a href="{{ route('login') }}" class="mt-2 text-center bg-yellowy rounded m-2 font-Alumni"
                             style="font-size: 16px;">
                             REGISTER AND LOGIN FOR PRICE AND TO ORDER.
                         </a>
@@ -134,39 +141,39 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-                $('.add-to-cart-form').on('submit', function(e) {
-                    e.preventDefault();
+    $(document).ready(function() {
+        $('.add-to-cart-form').on('submit', function(e) {
+            e.preventDefault();
 
-                    var form = $(this);
-                    var productId = form.data('product-id');
-                    var quantity = form.find('input[name="quantity"]').val();
+            var form = $(this);
+            var productId = form.data('product-id');
+            var quantity = form.find('input[name="quantity"]').val();
 
-                    $.ajax({
-                        url: "{{ route('cart.add') }}",
-                        method: "POST",
-                        data: {
-                            _token: $('input[name="_token"]').val(),
-                            product_id: productId,
-                            quantity: quantity
-                        },
-                        success: function(response) {
-                            alert('Product added to cart successfully!');
-                        },
-                        error: function(xhr) {
-                            alert('Failed to add product to cart.');
-                        }
-                    });
-                });
-
-                $(window).scroll(function() {
-                    if ($(this).scrollTop() > 100) {
-                        $('#scroll-bar').slideDown();
-                    } else {
-                        $('#scroll-bar').slideUp();
-                    }
-                });
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    _token: $('input[name="_token"]').val(),
+                    product_id: productId,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    alert('Product added to cart successfully!');
+                },
+                error: function(xhr) {
+                    alert('Failed to add product to cart.');
+                }
             });
+        });
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('#scroll-bar').slideDown();
+            } else {
+                $('#scroll-bar').slideUp();
+            }
+        });
+    });
     </script>
 
 </x-app-layout>
