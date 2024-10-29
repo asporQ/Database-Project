@@ -5,30 +5,79 @@
     @endphp
 
     @if($highestDiscount)
-    <div class="fixed top-0 left-0 right-0 bg-ye text-white p-4 hidden" style="z-index: 1000;" id="scroll-bar">
+    <div class="text-5xl fixed top-20 left-0 right-0 bg-ye text-white p-2 hidden" style="z-index: 1000;"
+        id="scroll-bar">
 
         <p>Special Offers Up to {{ $highestDiscount }}% off!</p>
 
     </div>
     @endif
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden">
-        <div class="h-auto sm:rounded-md mt-1">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10">
+
+        <div class="h-auto sm:rounded-md mt-1 pt-10">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 ">
+
                 @foreach ($products as $product)
-                <div class="bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+                <div class="bg-white shadow-md rounded-lg  overflow-hidden flex flex-col ">
 
                     <div class="relative">
                         @auth
-                        <div
-                            class="absolute top-5 right-1 w-22 h-8 flex items-center justify-center bg-yellowy text-white text-sm font-Alumni px-1 rounded">
+                        <div class="absolute top-5 right-3 w-22 h-8 flex items-center justify-center ">
                             @if ($product->stock > 0)
-                            In Stock: {{ $product->stock }}
+                            <div class="bg-yellowy text-black text-xl px-2 rounded">In Stock: {{ $product->stock }}
+                            </div>
                             @else
-                            <span class="text-white px-1 rounded text-sm flex items-center justify-center">Sold
-                                Out</span>
+                            <div class="bg-gray-500 text-white text-xl px-2 rounded">Out Of Stock</div>
                             @endif
                         </div>
+                        @if ($product->discount && isset($product->discount->discount_percentage))
+                        <div class="absolute top-10 mt-5 right-3 w-22 h-8 flex items-center justify-center">
+                            <div class="bg-[#F59758] text-black text-xl px-2 rounded">
+                                {{$product->discount->discount_percentage}}% Off!
+                                <span id="countdown-{{$product->id}}">00X 00X</span>
+                            </div>
+
+
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                var endDate = new Date("{{ $product->discount->end_date }}").getTime();
+    
+                                var countdownFunction = setInterval(function() {
+                                    var now = new Date().getTime();
+                                    var distance = endDate - now;
+    
+                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 *
+                                        60));
+                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML = days +
+                                        "d " + hours + "h " +
+                                        minutes + "m " + seconds + "s ";
+    
+                                    if (distance < 0) {
+                                        clearInterval(countdownFunction);
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                            "Discount has ended";
+                                    } else if (distance < 3600000) {
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                            minutes + "m " + seconds + "s ";
+                                    } else if (distance < 86400000) {
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                            hours + "h " + minutes + "m ";
+                                    } else {
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                            days + "d " + hours + "h ";
+                                    }
+                                }, 1000);
+                            });
+                            </script>
+                        </div>
+                        @endif
                         @endauth
                         <div class="flex justify-center">
                             <div class="max-h-80 min-h-80 overflow-hidden">
@@ -39,97 +88,84 @@
                     </div>
 
                     <div class="p-4 flex-1 flex flex-col justify-between overflow-hidden text-center">
-                        <h2 class="text-2xl font-Alumni text-[#474543] truncate">{{ $product->name }}</h2>
-                        <p class="mt-1 text-sm text-gray-600 overflow-ellipsis overflow-hidden">{{
+
+                        <h2 class="text-3xl  text-black truncate">{{ $product->name }}</h2>
+                        <p class="mt-1 text-xl text-gray-500 overflow-ellipsis overflow-hidden">{{
                             $product->description }}</p>
                         @auth
 
                         @if ($product->discount && isset($product->discount->discount_percentage))
-                        <p class="mt-1 text-sm text-gray-600">
+                        <p class="mt-1 text-3xl text-gray-600">
                             Price:
-                            <span style="text-decoration: line-through;" class="font-Alumni text-[#F3B917] text-2xl">
+                            <span style="text-decoration: line-through;" class="font-semibold text-[#F3B917] ">
                                 ${{ number_format($product->price, 2) }}
                             </span>
-                            <span style="margin-left: 10px; font-weight: bold;"
-                                class="font-Alumni  text-green text-2xl">
+                            <span style="margin-left: 10px;" class="font-semibold text-green-500">
                                 ${{ number_format(floor($product->price * (1 -
                                 $product->discount->discount_percentage/100) * 100) / 100, 2) }}
                             </span>
                         </p>
-                        <div class="mt-1 text-sm text-black pt-1">
-                            <span style=" background-color: #ffcc00; color: black; padding: 5px 10px; border-radius: 5px;
-                                font-weight: bold;">
-                                Discount: {{$product->discount->discount_percentage}}%
-                            </span>
-                            <p class="pt-1" id="countdown-{{$product->id}}"></p>
-                        </div>
-
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                            var endDate = new Date("{{ $product->discount->end_date }}").getTime();
-
-                            var countdownFunction = setInterval(function() {
-                                var now = new Date().getTime();
-                                var distance = endDate - now;
-
-                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 *
-                                    60));
-                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                                document.getElementById("countdown-{{$product->id}}").innerHTML = days +
-                                    "d " + hours + "h " +
-                                    minutes + "m " + seconds + "s ";
-
-                                if (distance < 0) {
-                                    clearInterval(countdownFunction);
-                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
-                                        "Discount has ended";
-                                } else if (distance < 86400000) {
-                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
-                                        hours + "h " + minutes + "m " + seconds + "s ";
-                                } else {
-                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
-                                        days + "d " + hours + "h ";
-                                }
-                            }, 1000);
-                        });
-                        </script>
                         @else
-                        <p class="mt-1 text-sm text-gray-600">
-                            Price: <span class="font-Alumni text-[#F3B917] text-2xl">${{ $product->price }}</span>
+                        <p class="mt-1 text-3xl text-gray-600">
+                            Price: <span class="font-semibold text-[#F3B917]">${{ $product->price }}</span>
                         </p>
                         @endif
 
 
-                        <p class="mt-1 text-sm text-gray-500">Category: {{ $product->category->name }}</p>
+                        <p class="mt-1 text-xl text-gray-500">Category: {{ $product->category->name }}</p>
                         @endauth
                         @auth
                         <form class="add-to-cart-form mt-2" data-product-id="{{ $product->id }}"
                             style="display: inline;">
                             @csrf
                             @if ($product->stock > 0 )
-                            <div class="flex justify-center items-center mt-2">
-                                <input min="1" name="quantity" class="w-16 p-1 border rounded" type="number" value="1"
-                                    max="{{ $product->stock }}">
+                            <div class="flex justify-center items-center">
+                                <input min="1" name="quantity" class="border rounded text-center text-xl" type="number"
+                                    value="1" max="{{ $product->stock }}">
                                 <button
-                                    class="btn btn-primary  font-Alumni font-semibold ml-2 p-2 bg-yellowy text-black rounded"
-                                    type="submit">Add to Cart</button>
-                            </div>
-                            @else
-                            <div
-                                class="flex justify-center items-center w-15 mt-2 font-bold ml-2 p-2 bg-yellowy text-black rounded">
-                                OUT OF STOCK
+                                    class="btn btn-primary ml-2 mt-2 text-center text-xl bg-yellowy rounded my-2 p-2"
+                                    type="submit">ADD TO CART</button>
                             </div>
                             @endif
                         </form>
-                        @else
-                        <a href="{{ route('login') }}" class="mt-2 text-center bg-yellowy rounded m-2 font-Alumni"
-                            style="font-size: 16px;">
-                            REGISTER AND LOGIN FOR PRICE AND TO ORDER.
-                        </a>
-                        @endauth
+                        @if ($product->stock <= 0 ) <button onclick="notifyMe(this);"
+                            class="flex justify-center items-center w-15 mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
+                            NOTIFY ME WHEN AVAILABLE
+                            </button>
+
+                            <script>
+                                // Check localStorage for the button state on page load
+                                window.onload = function() {
+                                    const button = document.getElementById('notifyButton');
+                                    const isDisabled = localStorage.getItem('notifyButtonDisabled');
+                            
+                                    if (isDisabled === 'true') {
+                                        button.disabled = true;
+                                        button.textContent = 'We will notify you when we fill stock';
+                                        button.style.backgroundColor = 'grey';
+                                    }
+                                };
+                            
+                                function notifyMe(button) {
+                                    // Show alert message
+                                    alert('We will notify you when this product is back in stock!');
+                                    
+                                    // Disable the button, update the text, and change background color to grey
+                                    button.disabled = true;
+                                    button.textContent = 'We will notify you when we fill stock';
+                                    button.style.backgroundColor = 'grey';
+                            
+                                    // Save the disabled state in localStorage
+                                    localStorage.setItem('notifyButtonDisabled', 'true');
+                                }
+                            </script>
+                            @endif
+
+                            @else
+                            <a href="{{ route('login') }}" class="mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
+                                LOGIN FOR PRICE AND TO ORDER
+                            </a>
+                            @endauth
                     </div>
                 </div>
                 @endforeach
@@ -170,13 +206,14 @@
                     alert('Product added to cart successfully!');
                 },
                 error: function(xhr) {
+                    console.log(xhr)
                     alert('Failed to add product to cart.');
                 }
             });
         });
 
         $(window).scroll(function() {
-            if ($(this).scrollTop() > 100) {
+            if ($(this).scrollTop() > 50) {
                 $('#scroll-bar').slideDown();
             } else {
                 $('#scroll-bar').slideUp();
