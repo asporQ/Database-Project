@@ -68,7 +68,7 @@
             <!-- Back to Orders Button -->
             <div class="mt-6">
                 <a href="{{ route('orders.index') }}"
-                    class="inline-block bg-black text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="inline-block bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Back to Orders
                 </a>
             </div>

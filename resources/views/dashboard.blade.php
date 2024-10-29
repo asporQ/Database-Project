@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="relative main sample-header-section">
         <img src="{{ asset('bg.png') }}" alt="Background Image" class="h-screen w-full object-cover sample-header">
-        <div class="absolute inset-0  bg-opacity-50 flex flex-col items-center mt-48 space-y-4">
+        <div class="absolute inset-0  bg-opacity-50 flex flex-col items-center justify-center mt-48 space-y-4">
             <h1 class="text-white text-5xl md:text-6xl font-bold drop-shadow-lg animate__animated animate__fadeInDown">
                 Cheers to the Good Times!
             </h1>

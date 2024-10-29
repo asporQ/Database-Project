@@ -3,79 +3,103 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-6 text-right flex justify-end">
-                <button id="switch-language" class="px-4 py-2 bg-yellowy text-white rounded hover:bg-ye transition duration-300">Switch Language</button>
+                <button id="switch-language"
+                    class="mt-16 px-4 py-2 bg-yellowy text-xl text-white rounded hover:bg-ye transition duration-300">Switch
+                    Language</button>
             </div>
             <div class="overflow-hidden sm:rounded-lg bg-white shadow-md">
-            <div class="p-6 sm:px-20 border-b border-gray-300">
-                <!-- Title -->
-                <div id="title" class="text-3xl font-extrabold mb-6 text-center text-black">
-                The Story of "So Far So Good"
+                <div class="p-6 sm:px-20 border-b border-gray-300">
+                    <!-- Title -->
+                    <div id="title" class="text-5xl font-extrabold mb-6 text-center text-black">
+                        The Story of "So Far So Good"
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Images and Text Content -->
+                        <div class="col-span-1 lg:col-span-2 flex justify-center">
+                            <img src="story1.png" alt="Uncle Joe" class="rounded-lg shadow-lg h-60 w-full object-cover">
+                        </div>
+                        <div id="text-1"
+                            class="col-span-1 lg:col-span-2 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            There once was a man named Uncle Joe, who had two great loves in life: his family and a cold
+                            beer at the end of a long day
+                        </div>
+                        <div class="col-span-1 flex justify-center lg:order-2">
+                            <img src="story2.png" alt="Beer Shop" class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-2"
+                            class="col-span-1 lg:order-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            One evening, as he sat with his favorite beer, Uncle Joe had a grand idea. He wanted to
+                            share his love for beer with the world
+                        </div>
+                        <div class="col-span-1 flex justify-center">
+                            <img src="story4.png" alt="Community"
+                                class="rounded-lg shadow-lg h-full w-full object-cover">
+                        </div>
+                        <div id="text-3" class="col-span-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            With determination, Uncle Joe opened the doors to "So Far So Good". People came from near
+                            and far to try the wide variety of beers and spirits
+                        </div>
+                        <div class="col-span-1 flex justify-center lg:order-2">
+                            <img src="story5.png" alt="Online Shop"
+                                class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-4"
+                            class="col-span-1 lg:col-span-2 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            Years went by, and Uncle Joe’s son, Mark, grew up watching his father’s passion for beer and
+                            the joy it brought to others
+                        </div>
+                        <div class="col-span-1 flex justify-center lg:order-2">
+                            <img src="story6.png" alt="Online Shop"
+                                class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-5"
+                            class="col-span-1 lg:order-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            Uncle Joe smiled, proud of his son’s vision. Together, they created an online shop for "So
+                            Far So Good"
+                        </div>
+                        <div class="col-span-1 flex justify-center">
+                            <img src="story7.png" alt="Success" class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-6" class="col-span-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            The online shop became a huge success, attracting customers from all over the country who
+                            appreciated the unique selection of beers
+                        </div>
+                        <div class="col-span-1 flex justify-center lg:order-1">
+                            <img src="story8.png" alt="Innovation"
+                                class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-7"
+                            class="col-span-1 lg:order-2 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            Mark continued to innovate, introducing new flavors and brewing techniques that kept
+                            customers coming back for more
+                        </div>
+                        <div class="col-span-1 flex justify-center">
+                            <img src="story9.png" alt="Community" class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-8" class="col-span-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            The community around "So Far So Good" grew stronger, with regular events and tastings that
+                            brought people together
+                        </div>
+                        <div class="col-span-1 flex justify-center lg:order-1">
+                            <img src="story10.png" alt="Newspaper"
+                                class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-9"
+                            class="col-span-1 lg:order-2 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            Uncle Joe and Mark's story was featured in local newspapers and magazines, inspiring others
+                            to follow their passion
+                        </div>
+                        <div class="col-span-1 flex justify-center">
+                            <img src="story11.png" alt="Household Name"
+                                class="rounded-lg shadow-lg h-64 w-full object-cover">
+                        </div>
+                        <div id="text-10" class="col-span-1 text-xl leading-relaxed mb-6 text-justify text-gray-700">
+                            Today, "So Far So Good" is a household name, known for its quality and the love that goes
+                            into every bottle
+                        </div>
+                    </div>
+
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Images and Text Content -->
-                <div class="col-span-1 lg:col-span-2 flex justify-center">
-                    <img src="story1.png" alt="Uncle Joe" class="rounded-lg shadow-lg h-60 w-full object-cover">
-                </div>
-                <div id="text-1" class="col-span-1 lg:col-span-2 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    There once was a man named Uncle Joe, who had two great loves in life: his family and a cold beer at the end of a long day
-                </div>
-                <div class="col-span-1 flex justify-center lg:order-2">
-                    <img src="story2.png" alt="Beer Shop" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-2" class="col-span-1 lg:order-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    One evening, as he sat with his favorite beer, Uncle Joe had a grand idea. He wanted to share his love for beer with the world
-                </div>
-                <div class="col-span-1 flex justify-center">
-                    <img src="story4.png" alt="Community" class="rounded-lg shadow-lg h-full w-full object-cover">
-                </div>
-                <div id="text-3" class="col-span-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    With determination, Uncle Joe opened the doors to "So Far So Good". People came from near and far to try the wide variety of beers and spirits
-                </div>
-                <div class="col-span-1 flex justify-center lg:order-2">
-                    <img src="story5.png" alt="Online Shop" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-4" class="col-span-1 lg:col-span-2 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    Years went by, and Uncle Joe’s son, Mark, grew up watching his father’s passion for beer and the joy it brought to others
-                </div>
-                <div class="col-span-1 flex justify-center lg:order-2">
-                    <img src="story6.png" alt="Online Shop" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-5" class="col-span-1 lg:order-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    Uncle Joe smiled, proud of his son’s vision. Together, they created an online shop for "So Far So Good"
-                </div>
-                <div class="col-span-1 flex justify-center">
-                    <img src="story7.png" alt="Success" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-6" class="col-span-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    The online shop became a huge success, attracting customers from all over the country who appreciated the unique selection of beers
-                </div>
-                <div class="col-span-1 flex justify-center lg:order-1">
-                    <img src="story8.png" alt="Innovation" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-7" class="col-span-1 lg:order-2 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    Mark continued to innovate, introducing new flavors and brewing techniques that kept customers coming back for more
-                </div>
-                <div class="col-span-1 flex justify-center">
-                    <img src="story9.png" alt="Community" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-8" class="col-span-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    The community around "So Far So Good" grew stronger, with regular events and tastings that brought people together
-                </div>
-                <div class="col-span-1 flex justify-center lg:order-1">
-                    <img src="story10.png" alt="Newspaper" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-9" class="col-span-1 lg:order-2 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    Uncle Joe and Mark's story was featured in local newspapers and magazines, inspiring others to follow their passion
-                </div>
-                <div class="col-span-1 flex justify-center">
-                    <img src="story11.png" alt="Household Name" class="rounded-lg shadow-lg h-64 w-full object-cover">
-                </div>
-                <div id="text-10" class="col-span-1 text-lg leading-relaxed mb-6 text-justify text-gray-700">
-                    Today, "So Far So Good" is a household name, known for its quality and the love that goes into every bottle
-                </div>
-                </div>
-                
-            </div>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
         @endif
 
         <!-- Display Orders Table -->
-        <div class="bg-white shadow-md rounded-lg overflow-fixed">
+        <div class="bg-white shadow-md rounded-lg overflow-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50 text-center">
                     <tr>
@@ -111,6 +111,6 @@
         @endif
     </div>
     @endauth
-    
-    
+
+
 </x-app-layout>
