@@ -32,9 +32,22 @@ class ProductController extends Controller
         if ($request->has('category') && $request->category != '') {
         $query->where('category_id', $request->category);
         }
+
+        if ($request->filled('in_stock')) {
+        $query->where('stock', '>', 0);
+        }
+
+        if ($request->filled('discount')) {
+            $query->whereHas('discount', function ($q) use ($request) {
+                $q->where('discount_percentage', '>=', $request->discount);
+        });
+    }
+
+        
         
         $products = $query->paginate(12);
         $categories = Category::all();
+
 
         return view('products.index', compact('products', 'discounts', 'categories'));
     }

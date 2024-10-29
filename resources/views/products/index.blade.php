@@ -16,6 +16,44 @@
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10">
 
         <div class="h-auto sm:rounded-md mt-1 pt-10">
+            <div class="mt-10 text-5xl">OUR PRODUCTS</div>
+
+            <div class="text-xl flex justify-end">
+                <form method="GET" action="{{ route('products.index') }}" class="flex space-x-4">
+
+                    <select name="category" class="border rounded px-10 py-1">
+                        <option value="">All Categories</option>
+                        @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" {{ request('category')==$category->id ? 'selected' :
+                            '' }}>
+                            {{ $category->name }}
+                        </option>
+                        @endforeach
+                    </select>
+
+                    <select name="discount" class="border rounded px-10 py-1">
+                        <option value="">All Discounts</option>
+
+                        <option value="5" {{ request('discount')==5 ? 'selected' : '' }}>5% and above
+                        </option>
+                        <option value="10" {{ request('discount')==10 ? 'selected' : '' }}>10% and above
+                        </option>
+                        <option value="20" {{ request('discount')==20 ? 'selected' : '' }}>20% and above
+                        </option>
+                        <option value="30" {{ request('discount')==30 ? 'selected' : '' }}>30% and above
+                        </option>
+                    </select>
+
+                    <div>
+                        <input type="checkbox" name="in_stock" value="1" id="in_stock" {{ request('in_stock')
+                            ? 'checked' : '' }}>
+                        <label for="in_stock" class="ml-3 items-center">In Stock</label>
+                    </div>
+
+                    <button type="submit" class="bg-blue-500 text-white rounded px-5 py-1">Filter</button>
+                </form>
+            </div>
+
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 ">
 
@@ -214,9 +252,9 @@
 
         $(window).scroll(function() {
             if ($(this).scrollTop() > 50) {
-                $('#scroll-bar').slideDown();
+                $('#scroll-bar').slideDown(100);
             } else {
-                $('#scroll-bar').slideUp();
+                $('#scroll-bar').slideUp(100);
             }
         });
     });
