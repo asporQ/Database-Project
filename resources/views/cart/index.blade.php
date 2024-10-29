@@ -27,7 +27,7 @@
                         <a class="block">
                             <div class="flex items-center p-4">
                                 <div class="w-24 h-24 bg-gray-300 rounded-md mr-4"
-                                    :style="'background-image: url(' + (item.product.product_photo ? item.product.product_photo : '{{ asset('storage/default_photo.png') }}') + '); background-size: cover; background-position: center;'">
+                                    :style="'background-image: url(' + (item.product.product_photo ? 'storage/' + item.product.product_photo : '{{ asset('storage/default_photo.png') }}') + '); background-size: cover; background-position: center;'">
                                 </div>
 
                                 <div class="flex-1">
