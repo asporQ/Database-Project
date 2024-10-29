@@ -23,7 +23,7 @@
         <div x-data="cartHandler()">
             <ul>
                 <template x-for="item in cartItems" :key="item.id">
-                    <li class="cart-item shadow-md rounded-lg overflow-hidden mb-4">
+                    <li class="cart-item shadow-md rounded-lg bg-white overflow-hidden mb-4">
                         <a class="block">
                             <div class="flex items-center p-4">
                                 <div class="w-24 h-24 bg-gray-300 rounded-md mr-4"
@@ -42,7 +42,7 @@
                                     </template>
                                 </div>
                                 <div class="w-24 text-center">
-                                    <div class="text-gray-600" x-text="'$' + item.product.price"></div>
+                                    <div class="text-gray-600" x-text="'$' + discountedPrice(item)"></div>
                                 </div>
                                 <div class="w-24 text-center">
                                     <input min="1" :max="item.product.stock" type="number" x-model="item.quantity"
@@ -102,12 +102,21 @@
                 return {
                     cartItems: @json($cartItems),
                     get totalPrice() {
-                        return this.cartItems.reduce((total, item) => {
-                            const price = item.product.discount 
-                                ? item.product.price * (1 - (item.product.discount.discount_percentage / 100)) 
-                                : item.product.price;
+                        return total = this.cartItems.reduce((total, item) => {
+                        const price = item.product.discount 
+                            ? Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100
+                            : item.product.price;
                             return total + (price * item.quantity);
                         }, 0).toFixed(2);
+
+                    },
+                    discountedPrice(item) {
+                        const discount = item.product.discount;
+                        const price = item.product.price;
+                        if (discount) {
+                            return Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100;
+                        }
+                        return price.toFixed(2);
                     },
                     alertMessage() {
                         $.ajax({
