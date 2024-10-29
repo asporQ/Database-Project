@@ -10,31 +10,33 @@ use App\Models\Discount;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $unUpdateProducts = Product::with('category')->get();
-
         $discounts = Discount::active()->get()->keyBy('id');
 
         $productsToReset = [];
+        $unUpdateProducts = Product::with('category')->get();
 
         foreach ($unUpdateProducts as $product) {
-            if ($product->discount_id !== null) {
-                if (!isset($discounts[$product->discount_id])) {
-                    $productsToReset[] = $product->id;
-                }
-            }
-
-            if (!empty($productsToReset)) {
-            Product::whereIn('id', $productsToReset)
-                ->update(['discount_id' => null]);
-            }
+        if ($product->discount_id !== null && !isset($discounts[$product->discount_id])) {
+            $productsToReset[] = $product->id;
+        }
         }
 
-        $products = Product::with('category')->get();
-        
+        if (!empty($productsToReset)) {
+        Product::whereIn('id', $productsToReset)->update(['discount_id' => null]);
+        }
 
-        return view('products.index', compact('products', 'discounts'));
+        $query = Product::with('category');
+
+        if ($request->has('category') && $request->category != '') {
+        $query->where('category_id', $request->category);
+        }
+        
+        $products = $query->paginate(12);
+        $categories = Category::all();
+
+        return view('products.index', compact('products', 'discounts', 'categories'));
     }
 
     public function create()

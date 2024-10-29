@@ -15,7 +15,7 @@
                         <div
                             class="absolute top-5 right-1 w-22 h-8 flex items-center justify-center bg-yellowy text-white text-sm font-bold px-1 rounded">
                             @if ($product->stock > 0)
-                            In Stock: <span class="font-bold text-sm">{{ $product->stock }}</span>
+                            In Stock: {{ $product->stock }}
                             @else
                             <span class="text-white px-1 rounded text-sm flex items-center justify-center">Sold
                                 Out</spaan>
@@ -35,15 +35,59 @@
                         <p class="mt-1 text-sm text-gray-600 overflow-ellipsis overflow-hidden">{{
                             $product->description }}</p>
                         @auth
+
+                        @if ($product->discount && isset($product->discount->discount_percentage))
+                        <p class="mt-1 text-sm text-gray-600">
+                            Price:
+                            <span style="text-decoration: line-through;" class="font-bold text-[#F3B917] text-2xl">
+                                ${{ number_format($product->price, 2) }}
+                            </span>
+                            <span style="margin-left: 10px; font-weight: bold;" class="font-bold  text-green text-2xl">
+                                ${{ number_format($product->price * $product->discount->discount_percentage/100, 2) }}
+                            </span>
+                        </p>
+                        <div class="mt-1 text-sm text-black pt-1">
+                            <span style=" background-color: #ffcc00; color: black; padding: 5px 10px; border-radius: 5px;
+                                font-weight: bold;">
+                                Discount: {{$product->discount->discount_percentage}}%
+                            </span>
+                            <p class="pt-1" id="countdown-{{$product->id}}"></p>
+                        </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var endDate = new Date("{{ $product->discount->end_date }}").getTime();
+                    
+                                var countdownFunction = setInterval(function() {
+                                    var now = new Date().getTime();
+                                    var distance = endDate - now;
+                    
+                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML = days + "d " + hours + "h "
+                                    + minutes + "m " + seconds + "s ";
+                    
+                                    if (distance < 0) {
+                                        clearInterval(countdownFunction);
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML = "Discount has ended";
+                                    } else if (distance < 86400000) {
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                                    } else {
+                                        document.getElementById("countdown-{{$product->id}}").innerHTML = days + "d " + hours + "h ";
+                                    }
+                                }, 1000);
+                            });
+                        </script>
+                        @else
                         <p class="mt-1 text-sm text-gray-600">
                             Price: <span class="font-bold text-[#F3B917] text-2xl">${{ $product->price }}</span>
                         </p>
-                        @if ($product->discount && isset($product->discount->discount_percentage))
-                        <div class="mt-1 text-sm text-black">
-                            Discount: {{$product->discount->discount_percentage}}%
-                            ({{$product->discount->start_date}} - {{$product->discount->end_date}})
-                        </div>
                         @endif
+
+
                         <p class="mt-1 text-sm text-gray-500">Category: {{ $product->category->name }}</p>
                         @endauth
                         @auth
@@ -75,6 +119,11 @@
                 @endforeach
             </div>
 
+            <div class="mt-4">
+                {{ $products->links() }}
+                <!-- Pagination Links -->
+            </div>
+
             <footer class=" py-6 mt-12">
                 <div class="container mx-auto text-center text-black">
                     <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
@@ -82,6 +131,7 @@
             </footer>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
