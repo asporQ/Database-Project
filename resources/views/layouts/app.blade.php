@@ -49,7 +49,7 @@
 
     </div>
 
-    <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
+    {{-- <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
         <div class="container mx-auto text-center text-black ">
             <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
         </div>
@@ -72,43 +72,54 @@
             </svg>
 
         </span>
+    </footer> --}}
+
+    <footer class="alumni-sans-500 bg-[#FCF7EC] text-black"
+        style="font-size: 100%; background-image: url('{{ asset('halloween-footer.png') }}'); background-size: 100% auto; background-position: top; background-repeat: no-repeat;">
+        <div class="container mx-auto text-center py-64">
+            <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
+        </div>
     </footer>
 
 
     <!-- Inline CSS for SVG styling -->
     <style>
-    .svg-container {
-        position: relative;
-        width: 100%;
-        height: 200px;
-        /* Match SVG height */
-    }
+        footer {
+            min-height: 680px
+        }
 
-    .svg-container2 {
-        position: inherit;
-        width: 100%;
-        height: 100px;
-        /* Match SVG height */
-    }
+        .svg-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            /* Match SVG height */
+        }
 
-    .wave1 {
-        fill: #F3B917;
-    }
+        .svg-container2 {
+            position: inherit;
+            width: 100%;
+            height: 100px;
+            /* Match SVG height */
+        }
 
-    .wave2 {
-        fill: #F4C612;
-        opacity: 0.8;
-    }
+        .wave1 {
+            fill: #F3B917;
+        }
 
-    .wave3 {
-        fill: #F4C612;
-        opacity: 0.5;
-    }
+        .wave2 {
+            fill: #F4C612;
+            opacity: 0.8;
+        }
 
-    .wave4 {
-        fill: #F3B917;
-        opacity: 0.3;
-    }
+        .wave3 {
+            fill: #F4C612;
+            opacity: 0.5;
+        }
+
+        .wave4 {
+            fill: #F3B917;
+            opacity: 0.3;
+        }
     </style>
 
 </body>
