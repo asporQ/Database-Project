@@ -8,7 +8,7 @@
         </div>
 
         <!-- Navigation Links -->
-        <div class="hidden sm:flex sm:items-center sm:gap-8 gap-8 text-3xl font-smooth">
+        <div class="hidden sm:flex sm:items-center sm:gap-40 gap-40 text-3xl font-smooth">
             @foreach (['products' => 'PRODUCT', 'categories' => 'CATEGORY', 'stories' => 'STORY', 'contact' =>
             'CONTACT'] as $url => $label)
             <a href="{{ url($url) }}" class="text-white hover:text-[#F3B917]">{{ $label }}</a>
