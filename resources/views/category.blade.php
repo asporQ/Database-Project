@@ -86,12 +86,6 @@
             </div>
         </div>
     </div>
-    <!-- Footer -->
-    <footer class=" py-6 mt-12">
-        <div class="container mx-auto text-center text-black">
-            <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
-        </div>
-    </footer>
 </x-app-layout>
 
 <style>

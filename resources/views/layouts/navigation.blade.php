@@ -42,13 +42,21 @@
         <!-- User Links -->
         <div class="flex items-center gap-4">
             @auth
-            <a href="{{ route('cart.index') }}" class="text-white hover:text-[#F3B917]">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.6 8M17 13l1.6 8M9 21h6"></path>
-                </svg>
-            </a>
+            <div class="relative">
+                <a href="{{ route('cart.index') }}" class="text-white hover:text-[#F3B917]">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-1.6 8M17 13l1.6 8M9 21h6"></path>
+                    </svg>
+                    @if ( app('App\Http\Controllers\CartController')->getCartItemCount() > 0 )
+                    <span
+                        class="absolute top-0 right-0 -mr-1 -mt-1 rounded-full bg-red-500 text-white text-xs h-4 w-4 flex items-center justify-center">
+                        {{ app('App\Http\Controllers\CartController')->getCartItemCount() }}
+                    </span>
+                    @endif
+                </a>
+            </div>
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
