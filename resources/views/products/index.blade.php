@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    <!-- <img src="{{ asset('Discount.png') }}" alt="so far so good" class="w-fit h-fit mx-auto mb-0 mt-0 relative"> -->
     @php
     $highestDiscount = $discounts->max('discount_percentage');
     @endphp
@@ -33,43 +33,60 @@
                 </button>
 
                 <!-- Desktop Form -->
-                <form method="GET" action="{{ route('products.index') }}" class="hidden md:flex space-x-4">
-                    <select name="category" class="border rounded px-2 py-1 text-xl">
-                        <option value="">All Categories</option>
-                        @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ request('category')==$category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
-                        </option>
-                        @endforeach
-                    </select>
-
-                    <select name="discount" class="border rounded px-2 py-1 text-xl">
-                        <option value="">All Discounts</option>
-                        <option value="5" {{ request('discount')==5 ? 'selected' : '' }}>5% and above</option>
-                        <option value="10" {{ request('discount')==10 ? 'selected' : '' }}>10% and above</option>
-                        <option value="20" {{ request('discount')==20 ? 'selected' : '' }}>20% and above</option>
-                        <option value="30" {{ request('discount')==30 ? 'selected' : '' }}>30% and above</option>
-                    </select>
-
-                    <div class="flex items-center text-xl">
-                        <input type="checkbox" name="in_stock" value="1" id="in_stock" {{ request('in_stock')
-                            ? 'checked' : '' }}>
-                        <label for="in_stock" class="ml-2">In Stock</label>
+                <form method="GET" action="{{ route('products.index') }}"
+                    class="hidden md:flex space-x-4 items-center p-4 rounded-lg border bg-white shadow-md">
+                    <div class="flex flex-col">
+                        <label for="category" class="text-lg font-medium mb-1">Category</label>
+                        <select name="category" id="category"
+                            class="border border-gray-300 rounded px-8 py-1 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">All Categories</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ request('category')==$category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
 
-                    <select name="sort" class="border rounded px-2 py-1 text-xl">
-                        <option value="">Sort By</option>
-                        <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>Price: Low to
-                            High</option>
-                        <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: High to
-                            Low</option>
-                        <option value="name_asc" {{ request('sort')=='name_asc' ? 'selected' : '' }}>Name: A to Z
-                        </option>
-                        <option value="name_desc" {{ request('sort')=='name_desc' ? 'selected' : '' }}>Name: Z to A
-                        </option>
-                    </select>
+                    <div class="flex flex-col">
+                        <label for="discount" class="text-lg font-medium mb-1">Discount</label>
+                        <select name="discount" id="discount"
+                            class="border rounded px-6 py-1 text-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">All Discounts</option>
+                            <option value="5" {{ request('discount')==5 ? 'selected' : '' }}>5% and above</option>
+                            <option value="10" {{ request('discount')==10 ? 'selected' : '' }}>10% and above</option>
+                            <option value="20" {{ request('discount')==20 ? 'selected' : '' }}>20% and above</option>
+                            <option value="30" {{ request('discount')==30 ? 'selected' : '' }}>30% and above</option>
+                        </select>
+                    </div>
 
-                    <button type="submit" class="bg-blue-500  text-xl text-white rounded px-5 py-1 hover:bg-blue-600">
+
+
+                    <div class="flex flex-col">
+                        <label for="sort" class="text-lg font-medium mb-1">Sort By</label>
+                        <select name="sort" id="sort"
+                            class="border border-gray-300 rounded px-2 py-1 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Sort By</option>
+                            <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>Price: Low to
+                                High</option>
+                            <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Price: High
+                                to Low</option>
+                            <option value="name_asc" {{ request('sort')=='name_asc' ? 'selected' : '' }}>Name: A to Z
+                            </option>
+                            <option value="name_desc" {{ request('sort')=='name_desc' ? 'selected' : '' }}>Name: Z to A
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" name="in_stock" value="1" id="in_stock"
+                            {{ request('in_stock') ? 'checked' : '' }} class="mr-2 focus: to-yellowy focus: bg-ye">
+                        <label for="in_stock" class="text-lg font-medium">In Stock</label>
+                    </div>
+
+                    <button type="submit"
+                        class="bg-ye text-xl text-white font-Alumni font-bold rounded px-5 py-2 hover:bg-yellowy focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Apply Filters
                     </button>
                 </form>
@@ -138,7 +155,8 @@
                         <div class="absolute top-5 right-3 w-22 h-8 flex items-center justify-center"
                             style="z-index: 10">
                             @if ($product->stock > 0)
-                            <div class="bg-yellowy text-black text-xl px-2 rounded">In Stock: {{ $product->stock }}
+                            <div class="bg-yellowy text-black text-xl font-medium px-2 rounded">In Stock:
+                                {{ $product->stock }}
                             </div>
                             @else
                             <div class="bg-gray-500 text-white text-xl px-2 rounded">Out Of Stock</div>
@@ -155,35 +173,42 @@
 
 
                             <script>
-                                document.addEventListener('DOMContentLoaded', function() {
+                            document.addEventListener('DOMContentLoaded', function() {
                                 var endDate = new Date("{{ $product->discount->end_date }}").getTime();
-    
+
                                 var countdownFunction = setInterval(function() {
                                     var now = new Date().getTime();
                                     var distance = endDate - now;
-    
+
                                     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 *
+                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 *
+                                        60 *
                                         60));
-                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 *
+                                        60));
                                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-                                    document.getElementById("countdown-{{$product->id}}").innerHTML = days +
+
+                                    document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        days +
                                         "d " + hours + "h " +
                                         minutes + "m " + seconds + "s ";
-    
+
                                     if (distance < 0) {
                                         clearInterval(countdownFunction);
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        document.getElementById("countdown-{{$product->id}}")
+                                            .innerHTML =
                                             "Discount has ended";
                                     } else if (distance < 3600000) {
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        document.getElementById("countdown-{{$product->id}}")
+                                            .innerHTML =
                                             minutes + "m " + seconds + "s ";
                                     } else if (distance < 86400000) {
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        document.getElementById("countdown-{{$product->id}}")
+                                            .innerHTML =
                                             hours + "h " + minutes + "m ";
                                     } else {
-                                        document.getElementById("countdown-{{$product->id}}").innerHTML =
+                                        document.getElementById("countdown-{{$product->id}}")
+                                            .innerHTML =
                                             days + "d " + hours + "h ";
                                     }
                                 }, 1000);
@@ -276,7 +301,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
 

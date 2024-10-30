@@ -22,6 +22,9 @@ export default {
                 inter: ["Inter", ...defaultTheme.fontFamily.sans],
                 Alumni: ["Alumni", ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                sphere: "url('public/sphere.png')",
+            },
         },
     },
 
