@@ -5,7 +5,7 @@
     @endphp
 
     @if($highestDiscount)
-    <div class="text-4xl pt-4 w-full fixed top-16  left-0 right-0 text-white" style="z-index: 1000;" id="scroll-bar">
+    <div class="text-4xl pt-4 w-full fixed top-16  left-0 right-0 text-white" style="z-index: 100;" id="scroll-bar">
         <img src="{{asset('halloween.png')}}" alt="" class="h-fit w-screen">
     </div>
     @endif
@@ -328,9 +328,9 @@
 
         $(window).scroll(function() {
             if ($(this).scrollTop() > 50) {
-                $('#scroll-bar').slideDown(100);
-            } else {
                 $('#scroll-bar').slideUp(100);
+            } else {
+                $('#scroll-bar').slideDown(100);
             }
         });
     });

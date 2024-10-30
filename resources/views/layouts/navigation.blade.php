@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="bg-[#292827] border-b border-gray-100 h-20 shadow-md navbar-sticky-top">
+<nav x-data="{ open: false }" class="bg-[#292827] border-b border-gray-100 h-20 shadow-md navbar-sticky-top"
+    style="z-index: 1000">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full">
         <!-- Logo -->
         <div class="shrink-0 flex items-center">
