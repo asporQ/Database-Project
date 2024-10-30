@@ -1,5 +1,5 @@
 <x-app-layout>
-
+    <img src="{{ asset('Discount.png') }}" alt="so far so good" class="w-fit h-fit mx-auto mb-0 mt-0 relative">
     @php
     $highestDiscount = $discounts->max('discount_percentage');
     @endphp
@@ -13,6 +13,7 @@
     @endif
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden">
+
         <div class="h-auto sm:rounded-md mt-1">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
                 @foreach ($products as $product)
@@ -65,7 +66,7 @@
                         </div>
 
                         <script>
-                            document.addEventListener('DOMContentLoaded', function() {
+                        document.addEventListener('DOMContentLoaded', function() {
                             var endDate = new Date("{{ $product->discount->end_date }}").getTime();
 
                             var countdownFunction = setInterval(function() {
@@ -125,7 +126,8 @@
                             @endif
                         </form>
                         @else
-                        <a href="{{ route('login') }}" class="mt-2 text-center bg-yellowy rounded m-2 font-Alumni"
+                        <a href="{{ route('login') }}"
+                            class="mt-2 text-center bg-yellowy rounded m-2 font-Alumni px-4 py-2 text-black hover:bg-yellow-600 transition duration-300 ease-in-out"
                             style="font-size: 16px;">
                             REGISTER AND LOGIN FOR PRICE AND TO ORDER.
                         </a>
@@ -150,7 +152,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
 

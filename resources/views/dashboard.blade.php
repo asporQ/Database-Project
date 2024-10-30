@@ -25,21 +25,21 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div
-                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInLeft">
+                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInLeft bg-white">
                     <h3 class="text-xl font-semibold mb-4">Craft Beers</h3>
                     <p class="text-gray-600">Explore our wide range of artisanal brews from local and international
                         craft breweries. From hoppy IPAs to smooth stouts, we have something for every beer enthusiast.
                     </p>
                 </div>
                 <div
-                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInUp animate__delay-1s">
+                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInUp animate__delay-1s bg-white ">
                     <h3 class="text-xl font-semibold mb-4">Fine Wines</h3>
                     <p class="text-gray-600">Indulge in our carefully curated selection of wines from renowned vineyards
                         around the world. Whether you prefer red, black, or sparkling, we have the perfect bottle for
                         your palate.</p>
                 </div>
                 <div
-                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInRight animate__delay-2s">
+                    class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInRight animate__delay-2s bg-white">
                     <h3 class="text-xl font-semibold mb-4">Premium Spirits</h3>
                     <p class="text-gray-600">Discover our collection of top-shelf spirits, including rare whiskeys,
                         smooth vodkas, and artisanal gins. Elevate your cocktail game or enjoy them neat – the choice is
