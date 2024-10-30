@@ -11,7 +11,8 @@ use App\Http\Controllers\DiscountController;
 Route::resource('orders', OrderController::class);
 
 // Product
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
 
 Route::middleware('admin')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
