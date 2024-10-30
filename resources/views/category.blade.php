@@ -30,7 +30,7 @@
                                     alt="pngtree-jack" class="w-full h-64 object-cover rounded-md mb-4"
                                     style="object-fit: contain;">
                                 <div class="p-4">
-                                    <h3 class="text-3xl text-lg font-semibold mb-2">Jack Daniel's</h3>
+                                    <h3 class="text-3xl font-semibold mb-2">Jack Daniel's</h3>
                                     <p class="text-xl text-gray-600 mb-4">A classic Tennessee whiskey with a smooth and
                                         rich
                                         flavor</p>

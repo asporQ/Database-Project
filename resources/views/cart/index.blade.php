@@ -15,7 +15,7 @@
                 <div class="w-24 text-center">
                     <span class="text-3xl font-semibold">Price</span>
                 </div>
-                <div class="w-24 text-center">
+                <div class="w-23 text-center">
                     <span class="text-3xl font-semibold">Quantity</span>
                 </div>
             </div>
@@ -97,65 +97,69 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function cartHandler() {
-                return {
-                    cartItems: @json($cartItems),
-                    get totalPrice() {
-                        return total = this.cartItems.reduce((total, item) => {
-                        const price = item.product.discount 
-                            ? Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100
-                            : item.product.price;
-                            return total + (price * item.quantity);
-                        }, 0).toFixed(2);
+    function cartHandler() {
+        return {
+            cartItems: @json($cartItems),
+            get totalPrice() {
+                return total = this.cartItems.reduce((total, item) => {
+                    const price = item.product.discount ?
+                        Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage /
+                            100)) * 100) / 100 :
+                        item.product.price;
+                    return total + (price * item.quantity);
+                }, 0).toFixed(2);
 
-                    },
-                    discountedPrice(item) {
-                        const discount = item.product.discount;
-                        const price = item.product.price;
-                        if (discount) {
-                            return Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100;
-                        }else{
-                            return item.product.price
-                        }
-                        return price.toFixed(2);
-                    },
-                    alertMessage() {
-                        $.ajax({
-                            url: '{{ route('cart.placeOrder') }}', 
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    alert(response.message);
-                                    window.location.href = '/orders'; 
-                                }
-                            },
-                            error: function(response) {
-                                alert(response.responseJSON.message);
-                            }
-                        });
-                    },
-                    updateQuantity(itemId, newQuantity) {
-                        $.ajax({
-                            url: `{{ url('cart/update') }}/${itemId}`,
-                            method: 'PUT',
-                            data: {
-                                quantity: newQuantity,
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: (response) => {
-                                // console.log(response);
-                            },
-                            error: (xhr) => {
-                                console.error(xhr.responseText);
-                                alert('Error updating quantity: ' + xhr.responseJSON.message);
-                            }
-                        });
-                    }
+            },
+            discountedPrice(item) {
+                const discount = item.product.discount;
+                const price = item.product.price;
+                if (discount) {
+                    return Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) *
+                        100) / 100;
+                } else {
+                    return item.product.price
                 }
+                return price.toFixed(2);
+            },
+            alertMessage() {
+                $.ajax({
+
+                    url: `{{ url('
+                    cart.placeOrder ') }}`,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.href = '/orders';
+                        }
+                    },
+                    error: function(response) {
+                        alert(response.responseJSON.message);
+                    }
+                });
+            },
+            updateQuantity(itemId, newQuantity) {
+                $.ajax({
+                    url: `{{ url('cart/update') }}/${itemId}`,
+                    method: 'PUT',
+                    data: {
+                        quantity: newQuantity,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: (response) => {
+                        // console.log(response);
+                    },
+                    error: (xhr) => {
+                        console.error(xhr.responseText);
+                        alert('Error updating quantity: ' + xhr.responseJSON.message);
+                    }
+                });
             }
+        }
+    }
     </script>
 
 </x-app-layout>
