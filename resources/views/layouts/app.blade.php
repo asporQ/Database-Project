@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="alumni-sans-500 antialiased">
     <div class="min-h-screen bg-[#FCF7EC] ">
         @include('layouts.navigation')
 
@@ -32,7 +32,6 @@
         <!-- Page Heading -->
         @isset($header)
         <header class="  ">
-
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
@@ -46,6 +45,14 @@
             {{ $slot }}
         </main>
 
+
+
+    </div>
+
+    <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
+        <div class="container mx-auto text-center text-black ">
+            <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
+        </div>
         <span class=" svg-container">
 
             <svg viewBox="200 70 1080 200" class=" top-0 w-screen h-full">
@@ -65,14 +72,8 @@
             </svg>
 
         </span>
-
-    </div>
-
-    <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
-        <div class="container mx-auto text-center text-black ">
-            <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
-        </div>
     </footer>
+
 
     <!-- Inline CSS for SVG styling -->
     <style>
