@@ -10,13 +10,61 @@ use App\Models\Discount;
 class ProductController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->get();
+        $discounts = Discount::active()->get()->keyBy('id');
 
-        $discounts = Discount::active()->get();
+        $productsToReset = [];
+        $unUpdateProducts = Product::with('category')->get();
 
-        return view('products.index', compact('products', 'discounts'));
+        foreach ($unUpdateProducts as $product) {
+        if ($product->discount_id !== null && !isset($discounts[$product->discount_id])) {
+            $productsToReset[] = $product->id;
+        }
+        }
+
+        if (!empty($productsToReset)) {
+        Product::whereIn('id', $productsToReset)->update(['discount_id' => null]);
+        }
+
+        $query = Product::with('category');
+
+        if ($request->has('category') && $request->category != '') {
+        $query->where('category_id', $request->category);
+        }
+
+        if ($request->filled('in_stock')) {
+        $query->where('stock', '>', 0);
+        }
+
+        if ($request->filled('discount')) {
+            $query->whereHas('discount', function ($q) use ($request) {
+                $q->where('discount_percentage', '>=', $request->discount);
+            });
+        }
+
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+            }
+        }
+        
+        $products = $query->paginate(12);
+        $categories = Category::all();
+
+
+        return view('products.index', compact('products', 'discounts', 'categories'));
     }
 
     public function create()

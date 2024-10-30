@@ -1,36 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-app-layout>
 
-<head>
-    <meta charset=" UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Product List</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-</head>
-
-@include('layouts.navigation')
-
-<body class="h-full bg-[#FCF7EC]">
 
 
 
     @auth
     <div class="container mx-auto px-[10%] py-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h1 class="text-xl font-bold mb-4">Order Transcript - Order ID: {{ $order->id }}</h1>
+        <div class="mt-20 bg-white p-6 rounded-lg shadow-md">
+            <h1 class="text-3xl font-bold mb-4">Transcript - Order ID: {{ $order->id }}</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
 
-                    <p><strong>Customer:</strong> <span class="text-gray-600">{{ $user->first_name }} {{
+                    <p class="text-xl"><strong>Customer:</strong> <span class="text-gray-600">{{ $user->first_name }} {{
                             $user->last_name }}</span>
                     </p>
-                    <div class="mb-4 py-2">
+                    <div class="mb-4 py-2 text-xl">
                         <p><strong>Order Items:</strong></p>
                         <ul class="list-disc list-inside space-y-2">
                             @foreach ($orderItems as $item)
@@ -41,40 +25,44 @@
 
                         </ul>
                     </div>
-                    <p><strong>Total Price:</strong> <span class="text-gray-600">${{
+                    <p class="text-xl"><strong>Total Price:</strong> <span class="text-gray-600">${{
                             number_format($order->total_price, 2) }}</span></p>
                 </div>
                 <div>
-                    <p><strong>Status:</strong>
-                        <span
-                            class="px-2 py-1 text-xs font-semibold {{ $order->status == 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }} rounded-full">{{
-                            $order->status }}</span>
-                    </p>
-                    <p><strong>Order Date:</strong> <span class="text-gray-600">{{ $order->created_at->format('d M
-                            Y, h:i A') }}</span></p>
+
+                    @if ($order->status == 'Completed' && $transcript)
+                    <div class="mt-6 ">
+                        <h3 class="text-2xl font-semibold mb-2">Payment Information:</h3>
+                        <p class="text-xl"><strong>Status:</strong>
+                            <span
+                                class="px-2 py-1 font-bold {{ $order->status == 'Completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' }} rounded-full">{{
+                                $order->status }}</span>
+                        </p>
+                        <p class="text-xl"><strong>Payment Method:</strong> <span class="text-gray-600">{{
+                                $transcript->payment_method
+                                }}</span></p>
+                        <p class="text-xl"><strong>Payment Date:</strong> {{ $order->created_at }}</p>
+                    </div>
+                    @endif
                 </div>
             </div>
 
             <!-- Payment Information -->
-            @if ($order->status == 'Completed' && $transcript)
-            <div class="mt-6">
-                <h3 class="text-lg font-semibold text-gray-700 mb-2">Payment Information:</h3>
-                <p><strong>Payment Method:</strong> <span class="text-gray-600">{{ $transcript->payment_method
-                        }}</span></p>
-                <p><strong>Payment Date:</strong> {{ $order->created_at }}</p>
-            </div>
-            @endif
+
+
+            <p class="text-xl"><strong>Order Date:</strong> <span class="text-gray-600">{{
+                    $order->created_at->format('d M
+                    Y, h:i A') }}</span></p>
 
             <!-- Back to Orders Button -->
-            <div class="mt-6">
+            <div class="mt-6 text-xl">
                 <a href="{{ route('orders.index') }}"
-                    class="inline-block bg-black text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="inline-block bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Back to Orders
                 </a>
             </div>
         </div>
     </div>
     @endauth
-</body>
 
-</html>
+</x-app-layout>

@@ -11,7 +11,8 @@ use App\Http\Controllers\DiscountController;
 Route::resource('orders', OrderController::class);
 
 // Product
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
 
 Route::middleware('admin')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -35,10 +36,6 @@ Route::middleware('admin')->group(function () {
 
 });
 
-// order
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -51,7 +48,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/contact', function () {
+    return view('contact');
+});
 
+Route::get('/categories', function () {
+    return view('category');
+});
+
+Route::get('/stories', function () {
+    return view('story');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

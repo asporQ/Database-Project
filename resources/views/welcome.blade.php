@@ -1,120 +1,165 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head class=" fixed">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Paytone+One&display=swap"
+        rel="stylesheet">
+    <title>SOFARSOGOOD SHOP</title>
     <style>
-    body {
-        background-color: rgba(252, 247, 236, 0.42);
-        font-family: 'Figtree', sans-serif;
-    }
+        .alumni-sans-500 {
+            font-family: "Alumni Sans", serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+        }
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
+        body {
+            background-image: url('{{ asset("bg.png") }}');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Figtree', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-    .header {
-        display: flex;
-        justify-content: flex-end;
-        padding: 1rem;
-    }
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+        }
 
-    .content {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .txt-lg {
+            font-size: 1.25rem;
+            margin: 0 20px 1rem;
+            font-weight: inherit;
+            line-height: 1.4;
+        }
 
-    .message {
-        font-size: 2rem;
-        text-align: center;
-    }
+        .txt-xl {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-weight: bolder;
+            padding-top: 1.5rem;
+        }
 
-    .nav-link {
-        margin-left: 1rem;
-        text-decoration: none;
-        color: #000;
-    }
+        .btn {
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bolder;
+            width: 90%;
+            max-width: 300px;
+        }
 
-    .centered-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+        .btn-yes {
+            background-color: #f3b917;
+            color: black;
+        }
 
-    .custom-buttonYes {
-        background-color: #f3b917;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 8px;
-        font-weight: bold;
-    }
+        .btn-no {
+            background-color: #686868;
+            color: white;
+        }
 
-    .custom-buttonNo {
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 8px;
-        background: #ABABAB;
-        opacity: 32%;
-    }
+        .image-container {
+            width: 100%;
+        }
+
+        .age-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .container {
+                display: flex;
+                height: 380px;
+            }
+
+            .image-container {
+                flex: 1;
+            }
+
+            .age-image {
+                height: 100%;
+                object-fit: cover;
+                border-end-start-radius: 8px;
+                border-start-start-radius: 8px;
+            }
+
+            .form-container {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .txt-xl {
+                font-size: 2rem;
+            }
+
+            .txt-lg {
+                font-size: 1.5rem;
+                margin: 0 50px 1rem;
+            }
+        }
+
+        /* Additional Media Query for very small screens */
+        @media (max-width: 380px) {
+            .txt-xl {
+                font-size: 1.5rem;
+            }
+
+            .txt-lg {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
-<body className=" fixed">
-    <div class="container fixed">
-        <header class="header">
-            @if (Route::has('login'))
-            <nav>
-                @auth
-                <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
-                @else
-                <a href="{{ route('login') }}" class="nav-link">Log in</a>
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="nav-link">Register</a>
-                @endif
-                @endauth
-            </nav>
-            @endif
-        </header>
-
-        <main class="content">
-            <div class="centered-content">
-                <div>
-                    <h1 class="message">This website is for 20 and over</h1>
-                    <h2 class="message">Are you 20 or over yet?</h2>
-                    <button class="custom-buttonNo">No</button>
-                    <a href="{{ url('/guest-content') }}" class="custom-buttonYes">Yes</a>
-                </div>
-            </div>
-        </main>
+<body class="alumni-sans-500" style="font-size: 100%">
+    <div class="container">
+        <div class="image-container">
+            <img src="{{ asset('age-check-page.png') }}" alt="Age Verification" class="age-image">
+        </div>
+        <div class="form-container">
+            <h1 class="txt-xl">ARE YOU OLD ENOUGH? (20+)</h1>
+            <h2 class="txt-lg">Please verify that your age is 20+ to buy & consume alcohol within Global Regulations.
+            </h2>
+            <a href="/guest-content"><button class="btn btn-yes">YES I AM OLD ENOUGH!</button></a>
+            <a href="https://www.youtube.com/watch?v=j8z7UjET1Is&t=3s"><button class="btn btn-no">I'M TOO YOUNG
+                    :)</button></a>
+        </div>
     </div>
-
 </body>
 
 </html>
