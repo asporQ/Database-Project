@@ -2,7 +2,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="mt-20 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container mx-auto px-4 py-24 overflow-auto">
                         <h2 class="text-3xl font-bold mb-8 text-center">Top 4 Best Sales</h2>
@@ -12,8 +12,8 @@
                                 <img src="{{ asset('Heineken-Lager.png') }}" alt="Heineken"
                                     class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Heineken Lager</h3>
-                                    <p class="text-gray-600 mb-4">A hoppy delight with citrus notes</p>
+                                    <h3 class="text-3xl font-semibold mb-2">Heineken Lager</h3>
+                                    <p class="text-xl text-gray-600 mb-4">A hoppy delight with citrus notes</p>
                                     <div class="heineken-lager">
                                         <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Classic
                                             Choice</h2>
@@ -30,8 +30,9 @@
                                     alt="pngtree-jack" class="w-full h-64 object-cover rounded-md mb-4"
                                     style="object-fit: contain;">
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Jack Daniel's</h3>
-                                    <p class="text-gray-600 mb-4">A classic Tennessee whiskey with a smooth and rich
+                                    <h3 class="text-3xl text-lg font-semibold mb-2">Jack Daniel's</h3>
+                                    <p class="text-xl text-gray-600 mb-4">A classic Tennessee whiskey with a smooth and
+                                        rich
                                         flavor</p>
                                     <div class="jack-daniels">
                                         <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Tennessee
@@ -47,8 +48,9 @@
                                 <img src="{{ asset('Jose Cuervo Gold Tequila.png') }}" alt="Jose Cuervo Gold Tequila"
                                     class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold mb-2">Jose Cuervo Gold Tequila</h3>
-                                    <p class="text-gray-600 mb-4">A smooth and rich tequila with a hint of vanilla and
+                                    <h3 class="text-3xl font-semibold mb-2">Jose Cuervo Gold Tequila</h3>
+                                    <p class="text-xl text-gray-600 mb-4">A smooth and rich tequila with a hint of
+                                        vanilla and
                                         caramel</p>
                                     <div class="jose-cuervo">
                                         <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Spirit of
@@ -65,8 +67,9 @@
                                 <img src="{{ asset('CloudConvert 4211 4.png') }}" alt="CloudConvert 4211"
                                     class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
                                 <div class="p-4">
-                                    <h3 class="text-lg font-semibold mb-2">CloudConvert 4211</h3>
-                                    <p class="text-gray-600 mb-4">A premium whiskey with a rich and smoky flavor</p>
+                                    <h3 class="text-3xl font-semibold mb-2">CloudConvert 4211</h3>
+                                    <p class="text-xl text-gray-600 mb-4">A premium whiskey with a rich and smoky flavor
+                                    </p>
                                     <div class="cloudconvert">
                                         <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Premium
                                             Whiskey</h2>
