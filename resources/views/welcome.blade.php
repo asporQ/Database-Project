@@ -156,7 +156,7 @@
             <h2 class="txt-lg">Please verify that your age is 20+ to buy & consume alcohol within Global Regulations.
             </h2>
             <a href="/guest-content"><button class="btn btn-yes">YES I AM OLD ENOUGH!</button></a>
-            <a href="https://www.youtube.com/watch?v=j8z7UjET1Is&t=6s"><button class="btn btn-no">I'M TOO YOUNG
+            <a href="https://www.youtube.com/watch?v=j8z7UjET1Is&t=3s"><button class="btn btn-no">I'M TOO YOUNG
                     :)</button></a>
         </div>
     </div>
