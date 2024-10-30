@@ -12,13 +12,14 @@
         $hasAwaitingPayment = $orders->contains('status', 'Awaiting payment');
         @endphp
 
-        @if (!$hasAwaitingPayment)
+        @if ($hasAwaitingPayment)
         <div class="mb-6 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4">
-            <p class="text-2xl">All your orders have been processed. No pending payments!</p>
+            <p class="text-2xl">You have orders have to pay. Please make payment.</p>
         </div>
         @endif
 
         <!-- Display Orders Table -->
+        @if(!$orders->isEmpty())
         <div class="bg-white shadow-md rounded-lg overflow-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50 text-center">
@@ -100,6 +101,7 @@
                 </tbody>
             </table>
         </div>
+        @endif
 
         @if($orders->isEmpty())
         <div class="mt-6 text-center ">

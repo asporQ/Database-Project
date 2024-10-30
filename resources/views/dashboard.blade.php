@@ -207,7 +207,6 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-800 text-center text-black animate__animated animate__fadeIn">
-                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
             </div>
         </div>
     </footer>

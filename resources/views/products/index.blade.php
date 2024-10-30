@@ -8,12 +8,12 @@
     <div class="text-4xl py-3 fixed top-20 left-0 right-0 bg-ye text-white p-2 hidden" style="z-index: 1000;"
         id="scroll-bar">
 
-        <p>Special Offers Up to {{ $highestDiscount }}% off!</p>
+        <a href="/products?category=&discount=30">Special Offers Up to {{ $highestDiscount }}% off!</a>
 
     </div>
     @endif
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10">
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10 ">
 
         <div class="h-auto sm:rounded-md mt-1 pt-10">
             <div class="pl-3 mt-10 text-5xl font-bold mb-8">OUR PRODUCTS</div>
@@ -148,11 +148,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 ">
 
                 @foreach ($products as $product)
-                <div class="bg-white shadow-md rounded-lg  overflow-hidden flex flex-col ">
+                <div class="bg-white shadow-md rounded-lg  overflow-hidden flex flex-col">
 
                     <div class="relative">
                         @auth
-                        <div class="absolute top-5 right-3 w-22 h-8 flex items-center justify-center ">
+                        <div class="absolute top-5 right-3 w-22 h-8 flex items-center justify-center"
+                            style="z-index: 10">
                             @if ($product->stock > 0)
                             <div class="bg-yellowy text-black text-xl font-medium px-2 rounded">In Stock:
                                 {{ $product->stock }}
@@ -162,7 +163,8 @@
                             @endif
                         </div>
                         @if ($product->discount && isset($product->discount->discount_percentage))
-                        <div class="absolute top-10 mt-5 right-3 w-22 h-8 flex items-center justify-center">
+                        <div class="absolute top-10 mt-5 right-3 w-22 h-8 flex items-center justify-center"
+                            style="z-index: 10">
                             <div class="bg-[#F59758] text-black text-xl px-2 rounded">
                                 {{$product->discount->discount_percentage}}% Off!
                                 <span id="countdown-{{$product->id}}">00X 00X</span>
@@ -216,8 +218,10 @@
                         @endif
                         @endauth
                         <div class="flex justify-center">
-                            <div class="max-h-80 min-h-80 flex items-center justify-center overflow-hidden">
-                                <img alt="{{ $product->name }}" class="w-auto h-full object-contain"
+                            <div
+                                class="max-h-80 min-h-80 flex items-center justify-center overflow-hidden transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn animate__delay-2s">
+
+                                <img alt="{{ $product->name }}" class="w-auto h-80 object-contain"
                                     src="{{ $product->product_photo ? asset('storage/' . $product->product_photo) : asset('storage/default_photo.png') }}">
                             </div>
                         </div>
@@ -279,17 +283,19 @@
             </div>
             @endforeach
         </div>
-
+        @if ($products->isEmpty())
+        <div class="flex justify-center items-center p-4">
+            <div class="mt-6 text-center ">
+                <div class="text-gray-600 text-2xl">0 product found for the filters.
+                </div>
+                <a href="{{ url('products') }}" class="text-blue-600 hover:underline text-2xl">Clear Filter</a>
+            </div>
+        </div>
+        @endif
         <div class="mt-4">
-            {{ $products->links() }}
-            <!-- Pagination Links -->
+            {{ $products->appends(request()->query())->links() }}
         </div>
 
-        <footer class=" py-6 mt-12">
-            <div class="container mx-auto text-center text-black">
-                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
-            </div>
-        </footer>
     </div>
     </div>
 

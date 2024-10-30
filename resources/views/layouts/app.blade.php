@@ -68,6 +68,12 @@
 
     </div>
 
+    <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
+        <div class="container mx-auto text-center text-black ">
+            <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
     <!-- Inline CSS for SVG styling -->
     <style>
     .svg-container {
@@ -105,5 +111,7 @@
     </style>
 
 </body>
+
+
 
 </html>
