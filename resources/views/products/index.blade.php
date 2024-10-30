@@ -4,18 +4,19 @@
     $highestDiscount = $discounts->max('discount_percentage');
     @endphp
 
-    @if($highestDiscount)
-    <div class="text-4xl pt-4 w-full fixed top-16  left-0 right-0 text-white" style="z-index: 100;" id="scroll-bar">
+
+    <div class="text-4xl pt-2 w-full fixed top-16  left-0 right-0 text-white opacity-80" style="z-index: 100;"
+        id="scroll-bar">
         <img src="{{asset('halloween.png')}}" alt="" class="h-fit w-screen">
     </div>
-    @endif
+
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 mt-0 overflow-x-hidden pt-10 ">
 
         <div class="h-auto sm:rounded-md mt-1 pt-72 pb-60"
-            style="background-image: url('{{ asset('Beer Bottles Group.png') }}'); background-size: cover; background-position: center; opacity: 0.89;">
+            style="background-image: url('{{ asset('Beer Bottles Group.png') }}'); background-size: cover; background-position: center; opacity: 0.79;">
             <span
-                class="pl-3 mt-10 text-2xl font-bold mb-8 text-center text-black animate__animated animate__fadeInDown shadow-2xl">
+                class="pl-3 mt-10 text-2xl font-bold mb-8 text-center animate__animated animate__fadeInDown shadow-2xl">
                 <div class=" py-6 px-4 text-[90px] bg-white h-[90px] bg-opacity-5">
                     <span>Our Products</span>
                 </div>
@@ -82,8 +83,8 @@
                 </div>
 
                 <div class="flex items-center">
-                    <input type="checkbox" name="in_stock" value="1" id="in_stock" {{ request('in_stock') ? 'checked'
-                        : '' }} class="mr-2 focus: to-yellowy focus: bg-ye">
+                    <input type="checkbox" name="in_stock" value="1" id="in_stock"
+                        {{ request('in_stock') ? 'checked' : '' }} class="mr-2 focus: to-yellowy focus: bg-ye">
                     <label for="in_stock" class="text-lg font-medium">In Stock</label>
                 </div>
 
@@ -102,7 +103,7 @@
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category')==$category->id ? 'selected' : ''
-                            }}>
+                                }}>
                             {{ $category->name }}
                         </option>
                         @endforeach
@@ -122,7 +123,7 @@
 
                 <div class="flex items-center text-xl">
                     <input type="checkbox" name="in_stock" value="1" id="mobile_in_stock" {{ request('in_stock')
-                        ? 'checked' : '' }}>
+                            ? 'checked' : '' }}>
                     <label for="mobile_in_stock" class="ml-2">In Stock</label>
                 </div>
 
@@ -174,7 +175,7 @@
 
 
                         <script>
-                            document.addEventListener('DOMContentLoaded', function() {
+                        document.addEventListener('DOMContentLoaded', function() {
                             var endDate = new Date("{{ $product->discount->end_date }}").getTime();
 
                             var countdownFunction = setInterval(function() {
@@ -232,7 +233,7 @@
 
                     <h2 class="text-3xl  text-black truncate">{{ $product->name }}</h2>
                     <p class="mt-1 text-xl text-gray-500 overflow-ellipsis overflow-hidden">{{
-                        $product->description }}</p>
+                            $product->description }}</p>
                     @auth
 
                     @if ($product->discount && isset($product->discount->discount_percentage))
@@ -243,7 +244,7 @@
                         </span>
                         <span style="margin-left: 10px;" class="font-semibold text-green-500">
                             ${{ number_format(floor($product->price * (1 -
-                            $product->discount->discount_percentage/100) * 100) / 100, 2) }}
+                                $product->discount->discount_percentage/100) * 100) / 100, 2) }}
                         </span>
                     </p>
                     @else
@@ -300,7 +301,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
 
