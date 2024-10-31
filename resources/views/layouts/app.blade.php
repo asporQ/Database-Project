@@ -8,6 +8,9 @@
 
     <title>SO FAR SO GOOD SHOP</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="{{  asset('Logo.png') }}" type="image/x-icon">
+
     <!-- Fonts -->
     {{--
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -123,7 +126,5 @@
     </style>
 
 </body>
-
-
 
 </html>
