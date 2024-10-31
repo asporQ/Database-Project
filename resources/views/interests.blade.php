@@ -143,6 +143,71 @@
                             </div>
                         </div>
                     </div>
+                    <div class="container mx-auto px-4 py-24 overflow-auto">
+                        <h2 class="text-3xl font-bold mb-8 text-center"> Vodka recommended </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                            <div
+                                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
+                                <img src="{{ asset('Absolut Vodka.png') }}" alt="Chateau Margaux 2016"
+                                    class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold mb-2">Absolut Vodka
+                                    </h3>
+                                    <p class="text-gray-600 mb-4">Swedish vodka with a smooth finish</p>
+                                    <div class="heineken-lager">
+                                        <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Swedish
+                                            Classic</h2>
+                                        <p class="font-size: 16px; color: #666; margin-bottom: 20px;">Absolut Vodka is
+                                            a Swedish vodka known for its purity and smooth finish. Made from natural
+                                            ingredients, it has a rich, full-bodied flavor that is perfect for mixing
+                                            into cocktails or enjoying on its own.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
+                                <img src="{{ asset('Belvedere Vodka.png') }}" alt="Corona Bottle HD"
+                                    class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold mb-2">Belvedere Vodka</h3>
+                                    <p class="text-gray-600 mb-4">Polish rye vodka.</p>
+                                    <div class="heineken-lager">
+                                        <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The Polish Rye
+                                            Vodka</h2>
+                                        <p class="font-size: 16px; color: #666; margin-bottom: 20px;">Belvedere Vodka is
+                                            a
+                                            Polish rye vodka known for its smooth and clean taste. Crafted from premium
+                                            Polish rye and purified water, it offers a rich, velvety texture and a
+                                            distinctive character that stands out in any cocktail.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white-700 p-4 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeIn">
+                                <img src="{{ asset('TitoVodka.png') }}" alt="Captain Morgan Dark Rum"
+                                    class="w-full h-64 object-cover rounded-md mb-4" style="object-fit: contain;">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold mb-2">Tito's Handmade Vodka</h3>
+                                    <p class="text-gray-600 mb-4">American craft vodka.
+                                    </p>
+                                    <div class="heineken-lager">
+                                        <h2 class="font-size: 24px; font-weight: bold; margin-top: 10px;">The American
+                                            Craft Vodka good choice
+                                        </h2>
+                                        <p class="font-size: 16px; color: #666; margin-bottom: 20px;">Tito's Handmade
+                                            Vodka is
+                                            an American craft vodka known for its smooth and clean taste. Made in small
+                                            batches
+                                            in Texas, it offers a rich, full-bodied flavor that is perfect for mixing
+                                            into cocktails
+                                            or enjoying on its own. Tito's is a favorite among vodka enthusiasts for its
+                                            quality
+                                            and craftsmanship.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
 
         <!-- Navigation Links -->
         <div class="hidden sm:flex sm:items-center sm:gap-40 gap-40 text-3xl font-smooth">
-            @foreach (['products' => 'PRODUCT', 'categories' => 'CATEGORY', 'stories' => 'STORY', 'contact' =>
+            @foreach (['products' => 'PRODUCT', 'interests' => 'TRY ON!', 'stories' => 'STORY', 'contact' =>
             'CONTACT'] as $url => $label)
             <a href="{{ url($url) }}" class="text-white hover:text-[#F3B917]">{{ $label }}</a>
             @endforeach
@@ -30,7 +30,7 @@
                     </button>
                 </x-slot>
                 <x-slot name="content">
-                    @foreach (['products' => 'PRODUCT', 'categories' => 'CATEGORY', 'stories' => 'STORY', 'contact' =>
+                    @foreach (['products' => 'PRODUCT', 'interests' => 'TRY ON!', 'stories' => 'STORY', 'contact' =>
                     'CONTACT'] as $url => $label)
                     <x-dropdown-link :href="url($url)" class="block px-4 py-2 text-xl text-gray-700 hover:bg-gray-100">
                         {{ __($label) }}

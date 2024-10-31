@@ -52,8 +52,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/categories', function () {
-    return view('category');
+Route::get('/interests', function () {
+    return view('interests');
 });
 
 Route::get('/stories', function () {
