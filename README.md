@@ -30,5 +30,4 @@ For contributors:
         TRUNCATE TABLE laravel.products;
         SET FOREIGN_KEY_CHECKS = 1;
         
-   • admin need to change status by manual on database directly to admin
             
