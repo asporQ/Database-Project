@@ -129,8 +129,7 @@
             alertMessage() {
                 $.ajax({
 
-                    url: `{{ url('
-                    cart.placeOrder ') }}`,
+                    url: `{{ url('cart.placeOrder') }}`,
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
