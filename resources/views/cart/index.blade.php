@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-black font-inter text-5xl text-gray-800 leading-tight">
-            {{ __('Carts') }}
+        <h2 class="font-black mt-20 text-5xl text-gray-800 leading-tight">
+            {{ __('CART') }}
         </h2>
     </x-slot>
 
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8" x-data="cartHandler()">
+    <div class="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8" x-data="cartHandler()">
         @auth
         <template x-if="cartItems.length > 0">
             <div class="rounded-lg overflow-hidden mb-4">

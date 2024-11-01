@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Discount;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -63,8 +64,9 @@ class ProductController extends Controller
         
         $products = $query->paginate(12);
         $categories = Category::all();
+        $user = Auth::user();
 
-        return view('products.index', compact('products', 'discounts', 'categories'));
+        return view('products.index', compact('user','products', 'discounts', 'categories'));
     }
 
     public function create()
