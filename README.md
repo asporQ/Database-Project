@@ -21,9 +21,14 @@ Include 1 more feature by selecting from this:
     • Rating System: a star-based rating system (e.g., 1 to 5 stars) for users to rate products
     • Presentation: 10-15 mins (idea, database schema design, app demo)
 
-For contributors:
+For contributors: 
 
-    Note:
-        • migrate and seed first if first clone
-        • admin need to change on database directly
+   • migrate and seed first if first clone
+    if not first time run below on database sql to clear old data first
+
+        SET FOREIGN_KEY_CHECKS = 0;
+        TRUNCATE TABLE laravel.products;
+        SET FOREIGN_KEY_CHECKS = 1;
+        
+   • admin need to change status by manual on database directly to admin
             
