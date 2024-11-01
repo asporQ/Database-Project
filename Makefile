@@ -11,3 +11,8 @@ artisan-seed:
 run:
 	./vendor/bin/sail up -d
 	./vendor/bin/sail npm run dev
+
+clearcache:
+	./vendor/bin/sail artisan config:cache
+	./vendor/bin/sail artisan route:cache
+	

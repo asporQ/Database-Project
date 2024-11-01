@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Discount;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -63,7 +64,6 @@ class ProductController extends Controller
         $products = $query->paginate(12);
         $categories = Category::all();
 
-
         return view('products.index', compact('products', 'discounts', 'categories'));
     }
 
@@ -107,7 +107,7 @@ class ProductController extends Controller
 
         $productPhoto = null;
         if ($request->hasFile('product_photo')) {
-            $fileName = time() . '_' . $request->file('product_photo')->getClientOriginalName();
+            $fileName = time() . '_' . str_replace(' ', '-', $request->file('product_photo')->getClientOriginalName());
             $productPhoto = $request->file('product_photo')->storeAs('uploads/product_photos', $fileName, 'public');
         }
 
@@ -124,12 +124,22 @@ class ProductController extends Controller
         return redirect()->route('products.manage')->with('success', $request->name . ' created successfully!');
     }
 
-    public function manageProducts()
+    public function manageProducts(Request $request)
     {
-        $products = Product::with('discount')->get();
+        $search = $request->input('search');
+
+        $products = Product::with('discount')
+            ->when($search, function ($query) use ($search) {
+                return $query->where('name', 'LIKE', "%{$search}%");
+            })
+            ->get();
+
+
         $discounts = Discount::active()->get();
+
         return view('products.manage_products', compact('products', 'discounts'));
     }
+
 
     public function showUpdateStockForm($id)
     {
@@ -201,24 +211,30 @@ class ProductController extends Controller
         return redirect()->route('products.manage')->with('success', 'Discount updated for product!');
     }
 
+
     public function updateProductPhoto(Request $request, $id)
     {
         $request->validate([
-        'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
 
-        $productPhoto = null;
+        $oldProductPhoto = $product->product_photo;
+
         if ($request->hasFile('product_photo')) {
-            $fileName = time() . '_' . $request->file('product_photo')->getClientOriginalName();
+            $fileName = time() . '_' . str_replace(' ', '-', $request->file('product_photo')->getClientOriginalName());
             $productPhoto = $request->file('product_photo')->storeAs('uploads/product_photos', $fileName, 'public');
-        
-        
+
+            if ($oldProductPhoto) {
+                Storage::disk('public')->delete($oldProductPhoto);
+            }
+
             $product->product_photo = $productPhoto;
             $product->save();
         }
 
         return redirect()->route('products.manage')->with('success', 'Product image updated successfully!');
     }
+
 }

@@ -5,7 +5,7 @@
             <h1 class="text-white text-5xl md:text-6xl font-bold drop-shadow-lg animate__animated animate__fadeInDown">
                 Cheers to the Good Times!
             </h1>
-            <span class="text-yellowy text-3xl animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO
+            <span class="text-yellowy text-6xl animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO
                 FAR SO
                 GOOD</span>
             <a href="#discover" class="mt-8 animate__animated animate__bounceIn animate__infinite smooth-scroll"
@@ -27,25 +27,22 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div
                     class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInLeft">
-                    <h3 class="text-3xl font-semibold mb-4">Craft Beers</h3>
-                    <p class="text-gray-600 text-2xl">Explore our wide range of artisanal brews from local and
-                        international
+                    <h3 class="text-xl font-semibold mb-4">Craft Beers</h3>
+                    <p class="text-gray-600">Explore our wide range of artisanal brews from local and international
                         craft breweries. From hoppy IPAs to smooth stouts, we have something for every beer enthusiast.
                     </p>
                 </div>
                 <div
                     class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInUp animate__delay-1s">
-                    <h3 class="text-3xl font-semibold mb-4 ">Fine Wines</h3>
-                    <p class="text-gray-600 text-2xl">Indulge in our carefully curated selection of wines from renowned
-                        vineyards
+                    <h3 class="text-xl font-semibold mb-4">Fine Wines</h3>
+                    <p class="text-gray-600">Indulge in our carefully curated selection of wines from renowned vineyards
                         around the world. Whether you prefer red, black, or sparkling, we have the perfect bottle for
                         your palate.</p>
                 </div>
                 <div
                     class=" p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 animate__animated animate__fadeInRight animate__delay-2s">
-                    <h3 class="text-3xl font-semibold mb-4">Premium Spirits</h3>
-                    <p class="text-gray-600 text-2xl">Discover our collection of top-shelf spirits, including rare
-                        whiskeys,
+                    <h3 class="text-xl font-semibold mb-4">Premium Spirits</h3>
+                    <p class="text-gray-600">Discover our collection of top-shelf spirits, including rare whiskeys,
                         smooth vodkas, and artisanal gins. Elevate your cocktail game or enjoy them neat – the choice is
                         yours.</p>
                 </div>
@@ -210,7 +207,6 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-800 text-center text-black animate__animated animate__fadeIn">
-                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
             </div>
         </div>
     </footer>

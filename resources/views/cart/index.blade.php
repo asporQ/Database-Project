@@ -5,29 +5,35 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8" x-data="cartHandler()">
         @auth
-        <div class="rounded-lg overflow-hidden mb-4">
-            <div class="flex items-center p-4">
-                <div class="flex-1">
-                    <span class="text-3xl font-semibold">Product</span>
-                </div>
-                <div class="w-24 text-center">
-                    <span class="text-3xl font-semibold">Price</span>
-                </div>
-                <div class="w-24 text-center">
-                    <span class="text-3xl font-semibold">Quantity</span>
+        <template x-if="cartItems.length > 0">
+            <div class="rounded-lg overflow-hidden mb-4">
+                <div class="flex items-center p-4">
+                    <div class="flex-1">
+                        <span class="text-3xl font-semibold">Product</span>
+                    </div>
+                    <div class="w-24 text-center">
+                        <span class="text-3xl font-semibold">Price</span>
+                    </div>
+                    <div class="w-24 text-center">
+                        <span class="text-3xl font-semibold">Quantity</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div x-data="cartHandler()">
+        </template>
+        <div>
             <ul>
                 <template x-for="item in cartItems" :key="item.id">
                     <li class="cart-item shadow-md rounded-lg bg-white overflow-hidden mb-4">
                         <a class="block">
                             <div class="flex items-center p-4">
-                                <div class="w-24 h-24 bg-gray-300 rounded-md mr-4"
-                                    :style="'background-image: url(' + (item.product.product_photo ? 'storage/' + item.product.product_photo : '{{ asset('storage/default_photo.png') }}') + '); background-size: cover; background-position: center;'">
+
+                                <div class="flex-shrink-0 w-24 pt-5 flex items-center justify-center mb-4">
+                                    <img class="h-24 object-contain"
+                                        :src="item.product.product_photo ? 'storage/' + item.product.product_photo : '{{ asset('storage/default_photo.png') }}'"
+                                        alt="Product Image">
                                 </div>
 
                                 <div class="flex-1">
@@ -63,6 +69,7 @@
                     </li>
                 </template>
 
+
                 <template x-if="cartItems.length > 0">
                     <div>
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
@@ -72,90 +79,92 @@
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
                             <form class="inline-block">
                                 @csrf
-                                <button @click.prevent="alertMessage($event)"
+                                <button @click.prevent="placeOrder($event)"
                                     class="btn btn-primary bg-blue-500 text-2xl text-white px-4 py-2 rounded-md font-semibold"
                                     type="submit">Place Order</button>
                             </form>
                         </div>
                     </div>
                 </template>
-                <template x-if="cartItems.length === 0">
-                    <div class="flex items-center p-4">
-                        <p class="text-gray-800 mt-4 text-bold">Your cart is empty.</p>
+                <template x-if="cartItems.length <= 0">
+                    <div class="flex justify-center items-center p-4">
+                        <div class="mt-6 text-center ">
+                            <p class="text-gray-600 text-2xl">You have no product in cart yet.</p>
+                            <a href="{{ url('products') }}" class="text-blue-600 hover:underline text-2xl">Continue
+                                Shopping</a>
+                        </div>
                     </div>
                 </template>
             </ul>
         </div>
         @endauth
-
-        <footer class=" py-6 mt-96">
-            <div class="container mx-auto text-center text-black">
-                <p>&copy; 2024 so far so good Shop. All rights reserved.</p>
-            </div>
-        </footer>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function cartHandler() {
-                return {
-                    cartItems: @json($cartItems),
-                    get totalPrice() {
-                        return total = this.cartItems.reduce((total, item) => {
-                        const price = item.product.discount 
-                            ? Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100
-                            : item.product.price;
-                            return total + (price * item.quantity);
-                        }, 0).toFixed(2);
+        return {
+            cartItems: @json($cartItems),
+            get totalPrice() {
+                return total = this.cartItems.reduce((total, item) => {
+                    const price = item.product.discount ?
+                        Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage /
+                            100)) * 100) / 100 :
+                        item.product.price;
+                    return total + (price * item.quantity);
+                }, 0).toFixed(2);
 
-                    },
-                    discountedPrice(item) {
-                        const discount = item.product.discount;
-                        const price = item.product.price;
-                        if (discount) {
-                            return Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) * 100 ) / 100;
-                        }else{
-                            return item.product.price
-                        }
-                        return price.toFixed(2);
-                    },
-                    alertMessage() {
-                        $.ajax({
-                            url: '{{ route('cart.placeOrder') }}', 
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    alert(response.message);
-                                    window.location.href = '/orders'; 
-                                }
-                            },
-                            error: function(response) {
-                                alert(response.responseJSON.message);
-                            }
-                        });
-                    },
-                    updateQuantity(itemId, newQuantity) {
-                        $.ajax({
-                            url: `{{ url('cart/update') }}/${itemId}`,
-                            method: 'PUT',
-                            data: {
-                                quantity: newQuantity,
-                                _token: '{{ csrf_token() }}'
-                            },
-                            success: (response) => {
-                                // console.log(response);
-                            },
-                            error: (xhr) => {
-                                console.error(xhr.responseText);
-                                alert('Error updating quantity: ' + xhr.responseJSON.message);
-                            }
-                        });
-                    }
+            },
+            discountedPrice(item) {
+                const discount = item.product.discount;
+                const price = item.product.price;
+                if (discount) {
+                    return Math.floor(item.product.price * (1 - (item.product.discount.discount_percentage / 100)) *
+                        100) / 100;
+                } else {
+                    return item.product.price
                 }
+                return price.toFixed(2);
+            },
+            placeOrder() {
+                $.ajax({
+
+                    url: `{{ route('cart.placeOrder') }}`,
+
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.href = '/orders';
+                        }
+                    },
+                    error: function(response) {
+                        alert(response.responseJSON.message);
+                    }
+                });
+            },
+            updateQuantity(itemId, newQuantity) {
+                $.ajax({
+                    url: `{{ url('cart/update') }}/${itemId}`,
+                    method: 'PUT',
+                    data: {
+                        quantity: newQuantity,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: (response) => {
+                        // console.log(response);
+                    },
+                    error: (xhr) => {
+                        console.error(xhr.responseText);
+                        alert('Error updating quantity: ' + xhr.responseJSON.message);
+                    }
+                });
             }
+        }
+    }
     </script>
 
 </x-app-layout>

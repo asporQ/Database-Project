@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'status',
+        'profile_verified_at',
     ];
 
     /**
@@ -45,7 +46,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'profile_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
 
