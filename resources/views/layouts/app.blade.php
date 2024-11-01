@@ -8,6 +8,9 @@
 
     <title>SO FAR SO GOOD SHOP</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="{{  asset('Logo.png') }}" type="image/x-icon">
+
     <!-- Fonts -->
     {{--
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -24,7 +27,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="alumni-sans-500 antialiased">
     <div class="min-h-screen bg-[#FCF7EC] ">
         @include('layouts.navigation')
 
@@ -32,7 +35,6 @@
         <!-- Page Heading -->
         @isset($header)
         <header class="  ">
-
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
@@ -46,6 +48,14 @@
             {{ $slot }}
         </main>
 
+
+
+    </div>
+
+    {{-- <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
+        <div class="container mx-auto text-center text-black ">
+            <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
+        </div>
         <span class=" svg-container">
 
             <svg viewBox="200 70 1080 200" class=" top-0 w-screen h-full">
@@ -65,17 +75,22 @@
             </svg>
 
         </span>
+    </footer> --}}
 
-    </div>
-
-    <footer class=" alumni-sans-500 bg-[#FCF7EC]    " style="font-size: 100%">
-        <div class="container mx-auto text-center text-black ">
+    <footer class="alumni-sans-500 bg-[#FCF7EC] text-black"
+        style="font-size: 100%; background-image: url('{{ asset('halloween-footer.png') }}'); background-size: cover; background-position: top; background-repeat: no-repeat; opacity: 0.8;">
+        <div class="container mx-auto text-center py-64">
             <p>&copy; 2024 SO FAR SO GOOD Shop. All rights reserved.</p>
         </div>
     </footer>
 
+
     <!-- Inline CSS for SVG styling -->
     <style>
+    footer {
+        min-height: 680px
+    }
+
     .svg-container {
         position: relative;
         width: 100%;
@@ -111,7 +126,5 @@
     </style>
 
 </body>
-
-
 
 </html>

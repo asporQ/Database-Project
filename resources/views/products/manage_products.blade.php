@@ -28,7 +28,7 @@
 
                 <div class="overflow-auto rounded" style="max-height: 800px;">
                     <table class="text-left table-auto w-full bg-white shadow-md rounded-lg overflow-auto">
-                        <thead class="bg-gray-200 sticky top-0 text-xl">
+                        <thead class="bg-gray-200 sticky top-0 text-2xl">
                             <tr>
                                 <th class="px-4 py-2">ID</th>
                                 <th class="px-4 py-2">Name</th>
@@ -43,23 +43,23 @@
                         <tbody>
                             @if ($products->isEmpty())
                             <tr>
-                                <td colspan="7" class="px-4 py-2 text-center text-xl text-red-500">
+                                <td colspan="7" class="px-4 py-2 text-center text-2xl text-red-500">
                                     No products found for "{{ request('search') }}"
                                 </td>
                             </tr>
                             @else
                             @foreach ($products as $product)
                             <tr class="">
-                                <td class="px-4 py-2">{{ $product->id }}</td>
-                                <td class="px-4 py-2">{{ $product->name }}</td>
+                                <td class="px-4 py-2 text-xl">{{ $product->id }}</td>
+                                <td class="px-4 py-2 text-xl">{{ $product->name }}</td>
                                 <td class="px-4 py-2">
-                                    <p>{{ $product->price }}</p>
-                                    <a class="text-blue-500 hover:text-blue-700"
+                                    <p class=" text-xl">{{ $product->price }}</p>
+                                    <a class="text-blue-500 hover:text-blue-700 "
                                         href="{{ route('products.showUpdatePriceForm', $product->id) }}">Update
                                         Price</a>
                                 </td>
                                 <td class="px-4 py-2">
-                                    <p>{{ $product->stock }}</p>
+                                    <p class=" text-xl">{{ $product->stock }}</p>
                                     <a class="text-yellow-500 hover:text-yellow-700"
                                         href="{{ route('products.showUpdateStockForm', $product->id) }}">Update
                                         Stock</a>
@@ -181,12 +181,12 @@
                     </table>
                 </div>
 
-                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
+                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block text-xl"
                     href="{{ route('products.create') }}">Add Product</a>
-                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block"
+                <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block text-xl"
                     href="{{ route('discounts.create') }}">Add Discount</a>
                 <div class="flex justify-end">
-                    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold"
+                    <a class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 mt-4 inline-block font-bold "
                         href="{{ '/products' }}">Back to Products</a>
                 </div>
             </div>
@@ -194,31 +194,31 @@
     </div>
 
     <script>
-        function openDiscountModal(productId) {
-            document.getElementById(`discount-modal-${productId}`).classList.remove('hidden');
-        }
-    
-        function closeDiscountModal(productId) {
-            document.getElementById(`discount-modal-${productId}`).classList.add('hidden');
-        }
+    function openDiscountModal(productId) {
+        document.getElementById(`discount-modal-${productId}`).classList.remove('hidden');
+    }
+
+    function closeDiscountModal(productId) {
+        document.getElementById(`discount-modal-${productId}`).classList.add('hidden');
+    }
     </script>
 
     <script>
-        function openModal(productId) {
-            document.getElementById(`modal-${productId}`).classList.remove('hidden');
-        }
-    
-        function closeModal(productId) {
-            document.getElementById(`modal-${productId}`).classList.add('hidden');
-        }
+    function openModal(productId) {
+        document.getElementById(`modal-${productId}`).classList.remove('hidden');
+    }
+
+    function closeModal(productId) {
+        document.getElementById(`modal-${productId}`).classList.add('hidden');
+    }
     </script>
 
     <script>
-        function previewImage(event, productId) {
+    function previewImage(event, productId) {
         const input = event.target;
         const currentImage = document.getElementById(`current-image-${productId}`);
         const noPhoto = document.getElementById(`no-photo-${productId}`);
-        
+
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {

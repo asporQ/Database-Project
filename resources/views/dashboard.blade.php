@@ -5,7 +5,7 @@
             <h1 class="text-white text-5xl md:text-6xl font-bold drop-shadow-lg animate__animated animate__fadeInDown">
                 Cheers to the Good Times!
             </h1>
-            <span class="text-yellowy text-3xl animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO
+            <span class="text-yellowy text-6xl animate__animated animate__fadeInUp animate__delay-1s font-semibold">SO
                 FAR SO
                 GOOD</span>
             <a href="#discover" class="mt-8 animate__animated animate__bounceIn animate__infinite smooth-scroll"

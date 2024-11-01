@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header" class="top-32">
         <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex justify-center">
-            <h2 class="mt-16 font-bold font-inter text-5xl text-center text-gray-800">CONTACT US</h2>
+            <h2 class="mt-16 alumni-sans-500 font-semibold text-5xl text-center text-gray-800">CONTACT US</h2>
         </div>
     </x-slot>
 
