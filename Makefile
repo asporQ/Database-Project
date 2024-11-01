@@ -15,4 +15,6 @@ run:
 clearcache:
 	./vendor/bin/sail artisan config:cache
 	./vendor/bin/sail artisan route:cache
-	
+
+seedproduct:
+	./vendor/bin/sail artisan db:seed --class=ProductSeeder

@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
         // Array of products to seed
         $products = [
             // Beer category  Cabernet Sauvignon.png
-            ['name' => 'Heineken', 'price' => 3.99, 'stock' => 100,'product_photo' => 'temp/product_photo/Amstel Light.png', 'description' => 'A pale lager beer brewed by Heineken.', 'category_id' => $beer->id],
+            ['name' => 'Heineken', 'price' => 3.99, 'stock' => 100,'product_photo' => 'temp/product_photo/Heineken.png', 'description' => 'A pale lager beer brewed by Heineken.', 'category_id' => $beer->id],
             ['name' => 'Corona Extra', 'price' => 4.50, 'stock' => 80, 'product_photo' => 'temp/product_photo/CoronaExtra.png', 'description' => 'A pale lager produced by Cervecería Modelo in Mexico.', 'category_id' => $beer->id],
             ['name' => 'Budweiser', 'price' => 3.75, 'stock' => 120, 'product_photo' => 'temp/product_photo/Budweiser.png', 'description' => 'American-style pale lager.', 'category_id' => $beer->id],
             ['name' => 'Coors Light', 'price' => 3.50, 'stock' => 100, 'product_photo' => 'temp/product_photo/Coors Light.png', 'description' => 'Popular American light beer.', 'category_id' => $beer->id],
@@ -67,40 +67,40 @@ class ProductSeeder extends Seeder
             ['name' => 'Merlot', 'price' => 18.99, 'stock' => 60, 'product_photo' => 'temp/product_photo/Merlot.png', 'description' => 'Soft, round red wine.', 'category_id' => $wine->id],
             ['name' => 'Sauvignon Blanc', 'price' => 16.99, 'stock' => 55, 'product_photo' => 'temp/product_photo/Sauvignon Blanc.png', 'description' => 'Crisp, refreshing white wine.', 'category_id' => $wine->id],
             ['name' => 'Riesling', 'price' => 14.99, 'stock' => 45, 'product_photo' => 'temp/product_photo/Riesling.png', 'description' => 'Sweet white wine.', 'category_id' => $wine->id],
-            ['name' => 'Chardonnay', 'price' => 21.99, 'stock' => 40, 'description' => 'Popular white wine.', 'category_id' => $wine->id],
-            ['name' => 'Zinfandel', 'price' => 22.99, 'stock' => 50, 'description' => 'Bold red wine.', 'category_id' => $wine->id],
+            ['name' => 'Chardonnay', 'price' => 21.99, 'stock' => 40, 'product_photo' => 'temp/product_photo/Chardonnay.png', 'description' => 'Popular white wine.', 'category_id' => $wine->id],
+            ['name' => 'Zinfandel', 'price' => 22.99, 'stock' => 50, 'product_photo' => 'temp/product_photo/Zinfandel.png', 'description' => 'Bold red wine.', 'category_id' => $wine->id],
 
             // Whiskey category
-            ['name' => 'Jack Daniel\'s', 'price' => 29.99, 'stock' => 50, 'description' => 'Tennessee whiskey with a smooth flavor.', 'category_id' => $whiskey->id],
-            ['name' => 'Glenfiddich 12', 'price' => 42.99, 'stock' => 25, 'description' => 'Single malt Scotch whisky.', 'category_id' => $whiskey->id],
-            ['name' => 'Chivas Regal', 'price' => 35.99, 'stock' => 70, 'description' => 'Blended Scotch whisky.', 'category_id' => $whiskey->id],
-            ['name' => 'Jameson Irish Whiskey', 'price' => 27.99, 'stock' => 65, 'description' => 'Popular Irish whiskey.', 'category_id' => $whiskey->id],
-            ['name' => 'Maker\'s Mark', 'price' => 31.99, 'stock' => 55, 'description' => 'Handcrafted bourbon whiskey.', 'category_id' => $whiskey->id],
-            ['name' => 'Buffalo Trace', 'price' => 29.99, 'stock' => 35, 'description' => 'Kentucky bourbon.', 'category_id' => $whiskey->id],
-            ['name' => 'Crown Royal', 'price' => 32.99, 'stock' => 45, 'description' => 'Canadian blended whisky.', 'category_id' => $whiskey->id],
-            ['name' => 'Johnnie Walker Black Label', 'price' => 39.99, 'stock' => 40, 'description' => 'Smooth Scotch whisky.', 'category_id' => $whiskey->id],
-            ['name' => 'Bulleit Bourbon', 'price' => 33.99, 'stock' => 50, 'description' => 'Spicy bourbon whiskey.', 'category_id' => $whiskey->id],
-            ['name' => 'Redbreast 12 Year', 'price' => 49.99, 'stock' => 30, 'description' => 'Rich Irish whiskey.', 'category_id' => $whiskey->id],
+            ['name' => 'Jack Daniel\'s', 'price' => 29.99, 'stock' => 50, 'product_photo' => 'temp/product_photo/Jack Daniel\'s.png', 'description' => 'Tennessee whiskey with a smooth flavor.', 'category_id' => $whiskey->id],
+            ['name' => 'Glenfiddich 12', 'price' => 42.99, 'stock' => 25, 'product_photo' => 'temp/product_photo/Glenfiddich 12.png', 'description' => 'Single malt Scotch whisky.', 'category_id' => $whiskey->id],
+            ['name' => 'Chivas Regal', 'price' => 35.99, 'stock' => 70, 'product_photo' => 'temp/product_photo/Chivas Regal.png', 'description' => 'Blended Scotch whisky.', 'category_id' => $whiskey->id],
+            ['name' => 'Jameson Irish Whiskey', 'price' => 27.99, 'stock' => 65, 'product_photo' => 'temp/product_photo/Jameson Irish Whiskey.png', 'description' => 'Popular Irish whiskey.', 'category_id' => $whiskey->id],
+            ['name' => 'Maker\'s Mark', 'price' => 31.99, 'stock' => 55, 'product_photo' => 'temp/product_photo/Maker\'s Mark.png', 'description' => 'Handcrafted bourbon whiskey.', 'category_id' => $whiskey->id],
+            ['name' => 'Buffalo Trace', 'price' => 29.99, 'stock' => 35, 'product_photo' => 'temp/product_photo/Buffalo Trace.png', 'description' => 'Kentucky bourbon.', 'category_id' => $whiskey->id],
+            ['name' => 'Crown Royal', 'price' => 32.99, 'stock' => 45, 'product_photo' => 'temp/product_photo/Crown Royal.png', 'description' => 'Canadian blended whisky.', 'category_id' => $whiskey->id],
+            ['name' => 'Johnnie Walker Black Label', 'price' => 39.99, 'product_photo' => 'temp/product_photo/Johnnie Walker Black Label.png', 'stock' => 40, 'description' => 'Smooth Scotch whisky.', 'category_id' => $whiskey->id],
+            ['name' => 'Bulleit Bourbon', 'price' => 33.99, 'stock' => 50, 'product_photo' => 'temp/product_photo/Bulleit Bourbon.png', 'description' => 'Spicy bourbon whiskey.', 'category_id' => $whiskey->id],
+            ['name' => 'Redbreast 12 Year', 'price' => 49.99, 'stock' => 30, 'product_photo' => 'temp/product_photo/Redbreast 12 Year.png', 'description' => 'Rich Irish whiskey.', 'category_id' => $whiskey->id],
 
             // Vodka category
-            ['name' => 'Smirnoff Vodka', 'price' => 19.99, 'stock' => 75, 'description' => 'Triple distilled vodka, known for its purity.', 'category_id' => $vodka->id],
-            ['name' => 'Absolut Vodka', 'price' => 22.99, 'stock' => 80, 'description' => 'Swedish vodka with a smooth finish.', 'category_id' => $vodka->id],
-            ['name' => 'Grey Goose', 'price' => 34.99, 'stock' => 60, 'description' => 'French vodka known for its quality.', 'category_id' => $vodka->id],
-            ['name' => 'Belvedere Vodka', 'price' => 39.99, 'stock' => 55, 'description' => 'Polish rye vodka.', 'category_id' => $vodka->id],
-            ['name' => 'Tito\'s Handmade Vodka', 'price' => 28.99, 'stock' => 75, 'description' => 'American craft vodka.', 'category_id' => $vodka->id],
+            ['name' => 'Smirnoff Vodka', 'price' => 19.99, 'stock' => 75, 'product_photo' => 'temp/product_photo/Smirnoff Vodka.png', 'description' => 'Triple distilled vodka, known for its purity.', 'category_id' => $vodka->id],
+            ['name' => 'Absolut Vodka', 'price' => 22.99, 'stock' => 80, 'product_photo' => 'temp/product_photo/Absolut Vodka.png', 'description' => 'Swedish vodka with a smooth finish.', 'category_id' => $vodka->id],
+            ['name' => 'Grey Goose', 'price' => 34.99, 'stock' => 60, 'product_photo' => 'temp/product_photo/Grey Goose.png', 'description' => 'French vodka known for its quality.', 'category_id' => $vodka->id],
+            ['name' => 'Belvedere Vodka', 'price' => 39.99, 'stock' => 55, 'product_photo' => 'temp/product_photo/Belvedere Vodka.png', 'description' => 'Polish rye vodka.', 'category_id' => $vodka->id],
+            ['name' => 'Tito\'s Handmade Vodka', 'price' => 28.99, 'stock' => 75, 'product_photo' => 'temp/product_photo/Tito\'s Handmade Vodka.png', 'description' => 'American craft vodka.', 'category_id' => $vodka->id],
 
             // Rum category
-            ['name' => 'Captain Morgan', 'price' => 25.99, 'stock' => 40, 'description' => 'Spiced rum with a smooth, rich taste.', 'category_id' => $rum->id],
-            ['name' => 'Bacardi Superior', 'price' => 18.99, 'stock' => 90, 'description' => 'Popular white rum.', 'category_id' => $rum->id],
-            ['name' => 'Malibu Coconut Rum', 'price' => 15.99, 'stock' => 70, 'description' => 'Rum with a coconut flavor.', 'category_id' => $rum->id],
+            ['name' => 'Captain Morgan', 'price' => 25.99, 'stock' => 40, 'product_photo' => 'temp/product_photo/Captain Morgan.png', 'description' => 'Spiced rum with a smooth, rich taste.', 'category_id' => $rum->id],
+            ['name' => 'Bacardi Superior', 'price' => 18.99, 'stock' => 90, 'product_photo' => 'temp/product_photo/Bacardi Superior.png', 'description' => 'Popular white rum.', 'category_id' => $rum->id],
+            ['name' => 'Malibu Coconut Rum', 'price' => 15.99, 'stock' => 70, 'product_photo' => 'temp/product_photo/Malibu Coconut Rum.png', 'description' => 'Rum with a coconut flavor.', 'category_id' => $rum->id],
 
             // Tequila category
-            ['name' => 'Jose Cuervo', 'price' => 21.99, 'stock' => 60, 'description' => 'Well-known brand for smooth tequila.', 'category_id' => $tequila->id],
-            ['name' => 'Patron Silver', 'price' => 39.99, 'stock' => 45, 'description' => 'Premium silver tequila.', 'category_id' => $tequila->id],
+            ['name' => 'Jose Cuervo', 'price' => 21.99, 'stock' => 60, 'product_photo' => 'temp/product_photo/Jose Cuervo.png', 'description' => 'Well-known brand for smooth tequila.', 'category_id' => $tequila->id],
+            ['name' => 'Patron Silver', 'price' => 39.99, 'stock' => 45, 'product_photo' => 'temp/product_photo/Patron Silver.png', 'description' => 'Premium silver tequila.', 'category_id' => $tequila->id],
 
             // Gin category
-            ['name' => 'Bombay Sapphire', 'price' => 27.99, 'stock' => 55, 'description' => 'Popular gin with a hint of citrus.', 'category_id' => $gin->id],
-            ['name' => 'Tanqueray', 'price' => 26.99, 'stock' => 60, 'description' => 'London Dry Gin with a classic flavor.', 'category_id' => $gin->id]
+            ['name' => 'Bombay Sapphire', 'price' => 27.99, 'stock' => 55, 'product_photo' => 'temp/product_photo/Bombay Sapphire.png', 'description' => 'Popular gin with a hint of citrus.', 'category_id' => $gin->id],
+            ['name' => 'Tanqueray', 'price' => 26.99, 'stock' => 60, 'product_photo' => 'temp/product_photo/Tanqueray.png', 'description' => 'London Dry Gin with a classic flavor.', 'category_id' => $gin->id]
         ];
 
         // Insert each product into the database
