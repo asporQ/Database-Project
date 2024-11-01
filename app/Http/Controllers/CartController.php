@@ -85,7 +85,7 @@ class CartController extends Controller
     }
 
 
-    public function placeOrder(Request $request)
+    public function placeOrder()
     {
         $user = Auth::id();
         $cart = Cart::where('user_id', $user)->first();

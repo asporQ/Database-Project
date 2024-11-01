@@ -79,7 +79,7 @@
                         <div class="rounded-lg p-4 mt-4 flex justify-end">
                             <form class="inline-block">
                                 @csrf
-                                <button @click.prevent="alertMessage($event)"
+                                <button @click.prevent="placeOrder($event)"
                                     class="btn btn-primary bg-blue-500 text-2xl text-white px-4 py-2 rounded-md font-semibold"
                                     type="submit">Place Order</button>
                             </form>
@@ -102,7 +102,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    function cartHandler() {
+        function cartHandler() {
         return {
             cartItems: @json($cartItems),
             get totalPrice() {
@@ -126,11 +126,11 @@
                 }
                 return price.toFixed(2);
             },
-            alertMessage() {
+            placeOrder() {
                 $.ajax({
 
-                    url: `{{ url('
-                    cart.placeOrder ') }}`,
+                    url: `{{ route('cart.placeOrder') }}`,
+
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
