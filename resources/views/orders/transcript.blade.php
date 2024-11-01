@@ -41,7 +41,9 @@
                         <p class="text-xl"><strong>Payment Method:</strong> <span class="text-gray-600">{{
                                 $transcript->payment_method
                                 }}</span></p>
-                        <p class="text-xl"><strong>Payment Date:</strong> {{ $order->created_at }}</p>
+                        <p class="text-xl"><strong>Payment Date:</strong>
+                            {{ \Carbon\Carbon::parse($transcript->payment_date)->format('d M Y, h:i A') }}
+                        </p>
                     </div>
                     @endif
                 </div>

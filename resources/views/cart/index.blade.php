@@ -42,7 +42,11 @@
                                     <template x-if="item.product.discount">
                                         <div class="text-xl text-gray-600">
                                             Discount: <span x-text="item.product.discount.discount_percentage"></span>%
-                                            Expire date: <span x-text="item.product.discount.end_date"></span>
+                                            Expire date: <span x-text="new Date(item.product.discount.end_date).toLocaleDateString('en-GB', {
+                                                day: '2-digit', month: 'short', year: 'numeric'
+                                            }) + ', ' + new Date(item.product.discount.end_date).toLocaleTimeString('en-GB', {
+                                                hour: '2-digit', minute: '2-digit', hour12: true
+                                            })"></span>
                                         </div>
                                     </template>
                                 </div>
