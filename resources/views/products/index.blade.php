@@ -15,16 +15,17 @@
 
         <div class="h-auto sm:rounded-md mt-1 pt-72 pb-60"
             style="background-image: url('{{ asset('Beer Bottles Group.png') }}'); background-size: cover; background-position: center; opacity: 0.79;">
-            <span
-                class="pl-3 mt-10 text-2xl font-bold mb-8 text-center animate__animated animate__fadeInDown shadow-2xl">
-                <div class=" py-6 px-4 text-[90px] bg-white h-[90px] bg-opacity-5">
-                    <span>Our Products</span>
+            <span class="pl-3 mt-10 text-2xl font-bold mb-8 text-center animate__animated animate__fadeInDown">
+                <div class=" py-6 px-4 text-[90px] bg-white h-[90px] bg-opacity-5 ">
+                    <span class="shadow-2xl shadow-white">Our Products</span>
                 </div>
             </span>
 
         </div>
 
         <div x-data="{ isOpen: false }" class="relative flex justify-end pr-3">
+
+
             <!-- Mobile Hamburger Button -->
             <button @click="isOpen = !isOpen"
                 class="md:hidden ml-auto flex items-center p-2 rounded-lg hover:bg-gray-100" type="button">
@@ -83,13 +84,13 @@
                 </div>
 
                 <div class="flex items-center">
-                    <input type="checkbox" name="in_stock" value="1" id="in_stock"
-                        {{ request('in_stock') ? 'checked' : '' }} class="mr-2 focus: to-yellowy focus: bg-ye">
+                    <input type="checkbox" name="in_stock" value="1" id="in_stock" {{ request('in_stock') ? 'checked'
+                        : '' }} class="mr-2 focus: to-yellowy focus: bg-ye">
                     <label for="in_stock" class="text-lg font-medium">In Stock</label>
                 </div>
 
                 <button type="submit"
-                    class="bg-ye text-xl text-white font-bold rounded px-5 py-2 hover:bg-yellowy focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="bg-ye text-xl text-black rounded px-5 py-2 hover:bg-yellowy focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Apply Filters
                 </button>
             </form>
@@ -103,7 +104,7 @@
                         <option value="">All Categories</option>
                         @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category')==$category->id ? 'selected' : ''
-                                }}>
+                            }}>
                             {{ $category->name }}
                         </option>
                         @endforeach
@@ -123,7 +124,7 @@
 
                 <div class="flex items-center text-xl">
                     <input type="checkbox" name="in_stock" value="1" id="mobile_in_stock" {{ request('in_stock')
-                            ? 'checked' : '' }}>
+                        ? 'checked' : '' }}>
                     <label for="mobile_in_stock" class="ml-2">In Stock</label>
                 </div>
 
@@ -175,7 +176,7 @@
 
 
                         <script>
-                        document.addEventListener('DOMContentLoaded', function() {
+                            document.addEventListener('DOMContentLoaded', function() {
                             var endDate = new Date("{{ $product->discount->end_date }}").getTime();
 
                             var countdownFunction = setInterval(function() {
@@ -233,7 +234,7 @@
 
                     <h2 class="text-3xl  text-black truncate">{{ $product->name }}</h2>
                     <p class="mt-1 text-xl text-gray-500 overflow-ellipsis overflow-hidden">{{
-                            $product->description }}</p>
+                        $product->description }}</p>
                     @auth
 
                     @if ($product->discount && isset($product->discount->discount_percentage))
@@ -244,7 +245,7 @@
                         </span>
                         <span style="margin-left: 10px;" class="font-semibold text-green-500">
                             ${{ number_format(floor($product->price * (1 -
-                                $product->discount->discount_percentage/100) * 100) / 100, 2) }}
+                            $product->discount->discount_percentage/100) * 100) / 100, 2) }}
                         </span>
                     </p>
                     @else
@@ -257,6 +258,11 @@
                     <p class="mt-1 text-xl text-gray-500">Category: {{ $product->category->name }}</p>
                     @endauth
                     @auth
+                    @if($user->profile_verified_at == null)
+                    <a href="/profile" class="mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
+                        PLEASE VERIFY YOUR AGE TO PURCHASE
+                    </a>
+                    @else
                     <form class="add-to-cart-form mt-2" data-product-id="{{ $product->id }}" style="display: inline;">
                         @csrf
                         @if ($product->stock > 0 )
@@ -268,12 +274,13 @@
                         </div>
                         @endif
                     </form>
+
                     @if ($product->stock <= 0 ) <div
                         class="bg-gray-500 ml-2 mt-2 text-center text-xl rounded my-2 p-2 text-white">
                         BACK SOON!
                 </div>
                 @endif
-
+                @endif
                 @else
                 <a href="{{ route('login') }}" class="mt-2 text-center text-xl bg-yellowy rounded my-2 p-2">
                     LOGIN FOR PRICE AND TO ORDER
@@ -301,7 +308,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
         $('.add-to-cart-form').on('submit', function(e) {
             e.preventDefault();
 
@@ -329,9 +336,9 @@
 
         $(window).scroll(function() {
             if ($(this).scrollTop() > 50) {
-                $('#scroll-bar').slideUp(100);
+                $('#scroll-bar').slideUp(200);
             } else {
-                $('#scroll-bar').slideDown(100);
+                $('#scroll-bar').slideDown(300);
             }
         });
     });
