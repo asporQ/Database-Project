@@ -20,3 +20,10 @@ Include 1 more feature by selecting from this:
     • Comments: textual reviews
     • Rating System: a star-based rating system (e.g., 1 to 5 stars) for users to rate products
     • Presentation: 10-15 mins (idea, database schema design, app demo)
+
+For contributors:
+
+    Note:
+        • migrate and seed first if first clone
+        • admin need to change on database directly
+            
